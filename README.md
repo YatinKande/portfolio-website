@@ -2,8 +2,7 @@
 
 A professional, high-performance portfolio website built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**. Designed to showcase expertise in AI, Data Science, and Full Stack Engineering with a premium "Data Analyst" aesthetic.
 
-![Portfolio Preview](public/projects/ev-finder.png) 
-*(Note: Replace with a comprehensive screenshot of the landing page if available)*
+![Portfolio Preview](public/projects/dataset-bot.png)
 
 ## 🚀 Features
 
