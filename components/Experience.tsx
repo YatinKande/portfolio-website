@@ -34,10 +34,24 @@ export default function Experience() {
                             <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-background border-2 border-primary" />
                             <div className="mb-1 text-sm text-primary font-mono">{item.period}</div>
                             <h3 className="text-xl font-bold">{item.role}</h3>
-                            <div className="text-muted-foreground mb-4">{item.company}</div>
-                            <p className="text-muted-foreground/80 leading-relaxed">
-                                {item.description}
-                            </p>
+                            <div className="text-muted-foreground mb-2 flex justify-between items-center">
+                                <span>{item.company}</span>
+                                <span className="text-sm">{item.location}</span>
+                            </div>
+
+                            {item.description && (
+                                <p className="text-muted-foreground/80 leading-relaxed mb-4">
+                                    {item.description}
+                                </p>
+                            )}
+
+                            {item.highlights && item.highlights.length > 0 && (
+                                <ul className="list-disc list-outside ml-4 space-y-2 text-muted-foreground/80 leading-relaxed">
+                                    {item.highlights.map((point: string, i: number) => (
+                                        <li key={i}>{point}</li>
+                                    ))}
+                                </ul>
+                            )}
                         </motion.div>
                     ))}
                 </div>

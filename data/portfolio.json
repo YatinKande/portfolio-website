@@ -1,19 +1,20 @@
 {
     "personalInfo": {
         "name": "Yatin Kande",
-        "title": "AI & Data Engineer | Full Stack Developer",
+        "title": "Data Scientist | Computer Vision & AI Engineer",
         "email": "yatink@umich.edu",
-        "bio": "Building end to end data and AI solutions, from data cleaning and analytics dashboards to ML models and a multi modal RAG assistant using FastAPI and FAISS. Experienced in machine learning pipelines, computer vision (YOLO), and scalable data workflows on AWS. Passionate about turning complex ideas into working demos, such as serverless chatbots and visual speech recognition models.",
+        "bio": "Results-driven Data Scientist specializing in machine learning, computer vision, and AI solutions with strong analytics foundation. Proficient in Python and SQL with hands-on experience building end-to-end pipelines from preprocessing through deployment. Skilled at translating complex data insights into actionable recommendations and executive dashboards for cross-functional stakeholders. Proven track record in model optimization and delivering measurable business impact.",
+        "location": "Dearborn, MI, USA",
         "socials": [
+            {
+                "name": "LinkedIn",
+                "url": "https://www.linkedin.com/in/yatin-kande",
+                "icon": "Linkedin"
+            },
             {
                 "name": "GitHub",
                 "url": "https://github.com/YatinKande",
                 "icon": "Github"
-            },
-            {
-                "name": "LinkedIn",
-                "url": "https://linkedin.com/in/yatinkande",
-                "icon": "Linkedin"
             },
             {
                 "name": "Email",
@@ -25,17 +26,17 @@
     "hero": {
         "roles": [
             "Data Scientist",
-            "ML Engineer",
-            "Data Analyst",
-            "Data Engineer"
+            "Computer Vision Engineer",
+            "AI Engineer",
+            "Data Analyst"
         ]
     },
     "about": {
         "coreCompetencies": [
-            "System Design",
-            "MLOps",
-            "Data Engineering",
-            "Full Stack Dev"
+            "Machine Learning",
+            "Computer Vision",
+            "Data Analytics",
+            "System Design"
         ],
         "additionalStats": [
             {
@@ -55,41 +56,59 @@
     "skills": {
         "Languages": [
             "Python",
-            "JavaScript",
-            "TypeScript",
-            "R",
             "SQL",
-            "Bash"
+            "R"
+        ],
+        "Databases": [
+            "PostgreSQL",
+            "MySQL",
+            "SQLite",
+            "MongoDB"
+        ],
+        "Data Analytics": [
+            "Exploratory Analysis",
+            "Data Validation",
+            "Feature Engineering",
+            "Hypothesis Testing",
+            "A/B Testing"
         ],
         "AI/ML": [
+            "Classification",
+            "Regression",
+            "Clustering",
+            "Model Evaluation",
+            "Hyperparameter Tuning"
+        ],
+        "Deep Learning": [
+            "CNNs",
+            "RNNs",
+            "LSTMs",
+            "Transformers",
+            "YOLO",
+            "Object Detection"
+        ],
+        "Visualization": [
+            "Tableau",
+            "Power BI",
+            "Qlik Sense",
+            "Plotly",
+            "Dash",
+            "Matplotlib",
+            "Excel"
+        ],
+        "Frameworks": [
+            "Pandas",
+            "NumPy",
+            "Scikit-learn",
             "PyTorch",
             "TensorFlow",
-            "Scikit-learn",
             "OpenCV",
-            "YOLO",
-            "LLMs (Llama 3)",
-            "RAG",
-            "FAISS"
+            "FastAPI"
         ],
-        "Backend": [
-            "FastAPI",
-            "Flask",
-            "Node.js",
+        "Cloud & Tools": [
+            "AWS (S3, Lambda, DynamoDB)",
             "Docker",
-            "PostgreSQL",
-            "DynamoDB"
-        ],
-        "Frontend": [
-            "React",
-            "Next.js",
-            "Tailwind CSS",
-            "Plotly",
-            "Streamlit"
-        ],
-        "Cloud": [
-            "AWS (Lambda, S3, DynamoDB)",
-            "Google Cloud",
-            "Git/GitHub"
+            "Git"
         ]
     },
     "projects": [
@@ -180,16 +199,64 @@
     ],
     "experience": [
         {
-            "role": "AI Engineer / Data Scientist",
-            "company": "Example Company",
-            "period": "2023 - Present",
-            "description": "Please update this section with your specific experience details from your resume."
+            "role": "Data Analyst Intern (AI/ML)",
+            "company": "DataZymes Inc",
+            "period": "Feb 2024 - July 2024",
+            "location": "Bengaluru, India",
+            "description": "",
+            "highlights": [
+                "Trained YOLO-based vision models on 1,000+ multispectral images to distinguish crops from weeds in real field conditions.",
+                "Assembled end-to-end computer vision pipelines in Python and OpenCV, covering preprocessing, GPU training, validation checks, and performance tracking.",
+                "Applied augmentation and normalization to reduce false positives and improve generalization across diverse field scenarios.",
+                "Created Plotly Dash dashboards summarizing precision, recall, and error trends for deployment readiness reviews."
+            ]
         },
         {
-            "role": "Software Engineer Intern",
-            "company": "Another Company",
-            "period": "2022 - 2023",
-            "description": "Worked on full stack development and cloud infrastructure deployment."
+            "role": "Machine Learning Intern",
+            "company": "SmartKnower",
+            "period": "Mar 2022 - June 2022",
+            "location": "Bengaluru, India",
+            "description": "",
+            "highlights": [
+                "Implemented supervised learning pipelines on datasets exceeding 32,000 records using Python, Pandas, and Scikit-learn.",
+                "Conducted exploratory data analysis to identify trends, key drivers, and data quality gaps before modeling.",
+                "Assessed multiple models using accuracy, precision, recall, F1-score, and ROC-AUC metrics consistently."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "institution": "University of Michigan Dearborn",
+            "location": "Dearborn, MI",
+            "degree": "Master of Science",
+            "field": "Data Science",
+            "period": "Present"
+        },
+        {
+            "institution": "Vellore Institute of Technology",
+            "location": "One of the Top Institutes in India",
+            "degree": "Post Graduate Program",
+            "field": "Data Science",
+            "period": ""
+        },
+        {
+            "institution": "Jain University",
+            "location": "Bangalore, India",
+            "degree": "Bachelor of Science Honors",
+            "field": "Data Science",
+            "period": ""
+        }
+    ],
+    "certifications": [
+        {
+            "name": "Oracle Cloud Infrastructure AI Foundations Associate",
+            "issuer": "Oracle",
+            "year": "2025"
+        },
+        {
+            "name": "Google Data Analytics Professional Certificate",
+            "issuer": "Coursera",
+            "year": ""
         }
     ]
 }

@@ -37,3 +37,5 @@ export const aboutData = {
 export const skills = portfolioData.skills;
 export const projects = portfolioData.projects;
 export const experience = portfolioData.experience;
+export const education = portfolioData.education;
+export const certifications = portfolioData.certifications;
