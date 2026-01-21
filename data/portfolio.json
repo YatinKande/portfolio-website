@@ -1,0 +1,195 @@
+{
+    "personalInfo": {
+        "name": "Yatin Kande",
+        "title": "AI & Data Engineer | Full Stack Developer",
+        "email": "yatink@umich.edu",
+        "bio": "Building end to end data and AI solutions, from data cleaning and analytics dashboards to ML models and a multi modal RAG assistant using FastAPI and FAISS. Experienced in machine learning pipelines, computer vision (YOLO), and scalable data workflows on AWS. Passionate about turning complex ideas into working demos, such as serverless chatbots and visual speech recognition models.",
+        "socials": [
+            {
+                "name": "GitHub",
+                "url": "https://github.com/YatinKande",
+                "icon": "Github"
+            },
+            {
+                "name": "LinkedIn",
+                "url": "https://linkedin.com/in/yatinkande",
+                "icon": "Linkedin"
+            },
+            {
+                "name": "Email",
+                "url": "mailto:yatink@umich.edu",
+                "icon": "Mail"
+            }
+        ]
+    },
+    "hero": {
+        "roles": [
+            "Data Scientist",
+            "ML Engineer",
+            "Data Analyst",
+            "Data Engineer"
+        ]
+    },
+    "about": {
+        "coreCompetencies": [
+            "System Design",
+            "MLOps",
+            "Data Engineering",
+            "Full Stack Dev"
+        ],
+        "additionalStats": [
+            {
+                "label": "Models Trained",
+                "value": "50+",
+                "icon": "Brain",
+                "color": "text-purple-400"
+            },
+            {
+                "label": "Coffee Consumed",
+                "value": "∞",
+                "icon": "Coffee",
+                "color": "text-yellow-400"
+            }
+        ]
+    },
+    "skills": {
+        "Languages": [
+            "Python",
+            "JavaScript",
+            "TypeScript",
+            "R",
+            "SQL",
+            "Bash"
+        ],
+        "AI/ML": [
+            "PyTorch",
+            "TensorFlow",
+            "Scikit-learn",
+            "OpenCV",
+            "YOLO",
+            "LLMs (Llama 3)",
+            "RAG",
+            "FAISS"
+        ],
+        "Backend": [
+            "FastAPI",
+            "Flask",
+            "Node.js",
+            "Docker",
+            "PostgreSQL",
+            "DynamoDB"
+        ],
+        "Frontend": [
+            "React",
+            "Next.js",
+            "Tailwind CSS",
+            "Plotly",
+            "Streamlit"
+        ],
+        "Cloud": [
+            "AWS (Lambda, S3, DynamoDB)",
+            "Google Cloud",
+            "Git/GitHub"
+        ]
+    },
+    "projects": [
+        {
+            "title": "Smart EV Finder",
+            "description": "A conversational AI assistant that helps drivers locate EV charging stations. Leverages Llama 3 for intent understanding and real-time geolocation to suggest fast chargers along your route, mimicking a human co-pilot experience.",
+            "tags": [
+                "GenAI",
+                "Llama 3",
+                "Google Maps API",
+                "React"
+            ],
+            "link": "https://github.com/YatinKande/smart-ev-finder",
+            "image": "/projects/ev-finder.png"
+        },
+        {
+            "title": "Auto Multimodal RAG",
+            "description": "An intelligent diagnostic tool for the automotive industry. Ingests complex technical manuals and uses multimodal AI to answer mechanic queries, combining text retrieval with visual understanding of car parts and diagrams.",
+            "tags": [
+                "RAG",
+                "Multi-modal",
+                "Vector DB",
+                "FastAPI"
+            ],
+            "link": "https://github.com/YatinKande/auto-multimodal-rag",
+            "image": "/projects/rag-bot.png"
+        },
+        {
+            "title": "Kinesis Key Entry",
+            "description": "A real-time security system utilizing facial recognition and AWS Kinesis. Processes live video streams to instantly authenticate authorized personnel, creating a seamless, touchless access control solution for high-security zones.",
+            "tags": [
+                "AWS Kinesis",
+                "Rekognition",
+                "IoT",
+                "DynamoDB"
+            ],
+            "link": "https://github.com/YatinKande/KinesisKeyEntry",
+            "image": "/projects/kinesis-key.png"
+        },
+        {
+            "title": "Dataset Concierge Bot",
+            "description": "Your personal data librarian powered by LLMs. Helps researchers find, clean, and retrieve datasets using natural language, featuring persistent memory and smart slot-filling to understand complex data requirements.",
+            "tags": [
+                "Chatbot",
+                "AWS Lambda",
+                "NLP",
+                "Python"
+            ],
+            "link": "https://github.com/YatinKande/Dataset-Concierge-Bot",
+            "image": "/projects/dataset-bot.png"
+        },
+        {
+            "title": "SmartSoil Crop Recommender",
+            "description": "A data-driven agricultural dashboard that recommends the best crops for specific regions. Analyzes soil nutrients and climate data to forecast yields, visualizing trends with interactive Plotly charts to help farmers make informed decisions.",
+            "tags": [
+                "Machine Learning",
+                "Data Viz",
+                "Plotly",
+                "Streamlit"
+            ],
+            "link": "https://github.com/YatinKande/Smartsoil-Crop-Recommender",
+            "image": "/projects/smart-soil.png"
+        },
+        {
+            "title": "AI Car Simulation (NEAT)",
+            "description": "An evolutionary reinforcement learning experiment where a population of AI agents learns to drive a car on a complex track. Implements the NEAT (NeuroEvolution of Augmenting Topologies) algorithm to evolve neural networks from scratch.",
+            "tags": [
+                "Reinforcement Learning",
+                "NEAT",
+                "Genetics",
+                "Python"
+            ],
+            "link": "https://github.com/YatinKande/AI-Car-Simulation-using-NEAT-Algorithm",
+            "image": "/projects/neat-car.png"
+        },
+        {
+            "title": "Lip Read AI",
+            "description": "Breaking communication barriers with deep learning. A LipNet-based model that translates lip movements into text, trained on the GRID dataset to enable silent speech recognition for accessibility and surveillance applications.",
+            "tags": [
+                "Deep Learning",
+                "Computer Vision",
+                "PyTorch",
+                "CNN"
+            ],
+            "link": "https://github.com/YatinKande/Lip-Read-AI-using-LipNet",
+            "image": "/projects/lip-read.png"
+        }
+    ],
+    "experience": [
+        {
+            "role": "AI Engineer / Data Scientist",
+            "company": "Example Company",
+            "period": "2023 - Present",
+            "description": "Please update this section with your specific experience details from your resume."
+        },
+        {
+            "role": "Software Engineer Intern",
+            "company": "Another Company",
+            "period": "2022 - 2023",
+            "description": "Worked on full stack development and cloud infrastructure deployment."
+        }
+    ]
+}

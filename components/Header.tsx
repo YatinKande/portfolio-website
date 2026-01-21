@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Code2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { personalInfo } from "@/lib/data";
 
 const navItems = [
     { name: "About", href: "#about" },
@@ -39,7 +40,7 @@ export default function Header() {
                         <Code2 className="text-primary size-6" />
                     </div>
                     <span className="font-heading font-bold text-xl tracking-tight">
-                        Yatin<span className="text-primary">.dev</span>
+                        {personalInfo.name.split(" ")[0]}<span className="text-primary">.dev</span>
                     </span>
                 </Link>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { personalInfo, projects, skills } from "@/lib/data";
+import { personalInfo, projects, skills, aboutData } from "@/lib/data";
 import { Code2, Database, Brain, Coffee, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 
@@ -9,8 +9,7 @@ export default function About() {
     const stats = [
         { label: "Projects Completed", value: projects.length, icon: CheckCircle2, color: "text-green-400" },
         { label: "Tech Stack Items", value: Object.values(skills).flat().length, icon: Code2, color: "text-blue-400" },
-        { label: "Models Trained", value: "50+", icon: Brain, color: "text-purple-400" },
-        { label: "Coffee Consumed", value: "∞", icon: Coffee, color: "text-yellow-400" },
+        ...aboutData.additionalStats
     ];
 
     return (
@@ -51,7 +50,7 @@ export default function About() {
                         <div className="pt-6">
                             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Core Competencies</h3>
                             <div className="flex flex-wrap gap-2">
-                                {["System Design", "MLOps", "Data Engineering", "Full Stack Dev"].map((tag) => (
+                                {aboutData.coreCompetencies.map((tag) => (
                                     <span key={tag} className="px-3 py-1 bg-white/5 border border-white/10 rounded-md text-sm text-muted-foreground">
                                         {tag}
                                     </span>

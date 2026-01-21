@@ -25,7 +25,7 @@ export default function Contact() {
         // Construct mailto link
         const subject = `Portfolio Contact from ${formData.name}`;
         const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-        window.location.href = `mailto:yatink@umich.edu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = `mailto:${personalInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
         setIsSubmitting(false);
         setIsSent(true);
@@ -65,8 +65,8 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <div className="font-medium">Email</div>
-                                    <Link href="mailto:yatink@umich.edu" className="text-muted-foreground hover:text-primary transition-colors">
-                                        yatink@umich.edu
+                                    <Link href={`mailto:${personalInfo.email}`} className="text-muted-foreground hover:text-primary transition-colors">
+                                        {personalInfo.email}
                                     </Link>
                                 </div>
                             </div>
