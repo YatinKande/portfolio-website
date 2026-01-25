@@ -1,42 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { projects } from "@/lib/data";
 import { Github, ExternalLink, Star } from "lucide-react";
+import BackButton from "@/components/BackButton";
+import { projects } from "@/lib/data";
 import Link from "next/link";
 
-export default function Projects() {
-    const featuredProjects = projects.filter(p => p.featured);
-
+export default function ProjectsPage() {
     return (
-        <section id="projects" className="py-24 bg-secondary/10 relative overflow-hidden">
-            <div className="container mx-auto px-4 md:px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-sm text-primary font-medium mb-4">
-                        <Star className="size-4" />
-                        <span>Featured Work</span>
+        <div className="min-h-screen bg-background py-12 px-4">
+            <div className="container mx-auto max-w-6xl">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-12">
+                    <div>
+                        <h1 className="text-4xl md:text-5xl font-heading font-bold mb-2">
+                            Projects & <span className="text-primary">Portfolio</span>
+                        </h1>
+                        <p className="text-muted-foreground">
+                            Real-world applications of ML, CV, and Data Analytics
+                        </p>
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-                        Projects & Portfolio 💼
-                    </h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto">
-                        Showcasing real-world applications of AI, data engineering, and full-stack development
-                    </p>
-                </motion.div>
+                    <BackButton />
+                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                    {featuredProjects.map((project, idx) => (
+                {/* Projects Grid */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {projects.map((project, idx) => (
                         <motion.div
                             key={project.title}
                             initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: idx * 0.1 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: idx * 0.1, duration: 0.5 }}
                             className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-primary/30 transition-all group"
                         >
                             {/* Project Image Placeholder */}
@@ -44,11 +38,17 @@ export default function Projects() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
                                 <div className="absolute bottom-4 left-4 right-4">
                                     <h3 className="font-heading font-bold text-xl mb-1">{project.title}</h3>
+                                    {project.featured && (
+                                        <div className="inline-flex items-center gap-1 px-2 py-1 bg-primary/20 rounded text-xs text-primary">
+                                            <Star className="size-3" />
+                                            Featured
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
                             <div className="p-6">
-                                <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                                     {project.description}
                                 </p>
 
@@ -69,7 +69,7 @@ export default function Projects() {
                                     )}
                                 </div>
 
-                                {/* Links */}
+                                {/* Links with GitHub cat emoji */}
                                 <div className="flex items-center gap-3">
                                     {project.github && (
                                         <Link
@@ -78,7 +78,7 @@ export default function Projects() {
                                             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                                         >
                                             <Github className="size-4" />
-                                            <span>Code</span>
+                                            <span>Code 🐱</span>
                                         </Link>
                                     )}
                                     {project.demo && (
@@ -96,23 +96,7 @@ export default function Projects() {
                         </motion.div>
                     ))}
                 </div>
-
-                {/* View All Projects Link */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-12"
-                >
-                    <Link
-                        href="#projects"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/30 rounded-full transition-all text-sm font-medium"
-                    >
-                        View All Projects
-                        <ExternalLink className="size-4" />
-                    </Link>
-                </motion.div>
             </div>
-        </section>
+        </div>
     );
 }

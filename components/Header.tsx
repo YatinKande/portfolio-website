@@ -5,19 +5,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Code2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { personalInfo } from "@/lib/data";
+import { usePathname } from "next/navigation";
 
 const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
+    { name: "Dashboard", href: "/dashboard" },
 ];
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
+
+    // Hide header on intro and about pages
+    if (pathname === "/" || pathname === "/about") {
+        return null;
+    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -35,12 +37,12 @@ export default function Header() {
             )}
         >
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-2 group">
+                <Link href="/dashboard" className="flex items-center gap-2 group">
                     <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
                         <Code2 className="text-primary size-6" />
                     </div>
-                    <span className="font-heading font-bold text-xl tracking-tight">
-                        {personalInfo.name.split(" ")[0]}<span className="text-primary">.dev</span>
+                    <span className="font-heading font-bold text-lg md:text-xl tracking-tight">
+                        Yatin Kande <span className="text-primary hidden sm:inline">| Portfolio Dashboard</span>
                     </span>
                 </Link>
 

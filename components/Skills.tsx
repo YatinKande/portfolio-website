@@ -2,68 +2,63 @@
 
 import { motion } from "framer-motion";
 import { skills } from "@/lib/data";
-
-const skillList = Object.values(skills).flat();
+import { Code2, Sparkles } from "lucide-react";
 
 export default function Skills() {
+    // Get top skills from each category for preview
+    const topSkills = Object.entries(skills).slice(0, 3).flatMap(([category, items]) =>
+        items.slice(0, 3).map(skill => ({ skill, category }))
+    );
+
     return (
-        <section id="skills" className="py-24 overflow-hidden">
-            <div className="container mx-auto px-4 md:px-6 mb-12 text-center">
-                <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-                    Tech Stack
-                </h2>
-                <p className="text-muted-foreground">
-                    The tools I use to build the future.
-                </p>
-            </div>
-
-            <div className="relative flex w-full flex-col gap-8">
-                {/* Row 1: Left to Right */}
-                <div className="flex overflow-hidden group">
-                    <motion.div
-                        animate={{ x: [0, -1000] }}
-                        transition={{
-                            duration: 20,
-                            repeat: Infinity,
-                            ease: "linear",
-                            repeatType: "loop",
-                        }}
-                        className="flex gap-8 whitespace-nowrap px-8"
-                    >
-                        {[...skillList, ...skillList].map((skill, i) => (
-                            <div
-                                key={i}
-                                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white/5 border border-white/10 text-lg font-medium text-muted-foreground hover:border-primary/50 hover:text-primary transition-colors cursor-default backdrop-blur-sm"
-                            >
-                                {skill}
-                            </div>
-                        ))}
-                    </motion.div>
-                    <motion.div
-                        animate={{ x: [0, -1000] }}
-                        transition={{
-                            duration: 20,
-                            repeat: Infinity,
-                            ease: "linear",
-                            repeatType: "loop",
-                        }}
-                        className="flex gap-8 whitespace-nowrap px-8"
-                    >
-                        {[...skillList, ...skillList].map((skill, i) => (
-                            <div
-                                key={i}
-                                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white/5 border border-white/10 text-lg font-medium text-muted-foreground hover:border-primary/50 hover:text-primary transition-colors cursor-default backdrop-blur-sm"
-                            >
-                                {skill}
-                            </div>
-                        ))}
-                    </motion.div>
+        <div className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-primary/20 transition-all h-full">
+            {/* Header */}
+            <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                    <Code2 className="size-5" />
                 </div>
-
-                {/* Overlay Gradients */}
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-background to-transparent z-10" />
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-background to-transparent z-10" />
+                <div>
+                    <h3 className="font-heading font-bold text-lg">Tech Stack</h3>
+                    <p className="text-xs text-muted-foreground">{Object.values(skills).flat().length}+ Technologies</p>
+                </div>
             </div>
-        </section>
+
+            {/* Skills Preview */}
+            <div className="mb-6">
+                <div className="flex flex-wrap gap-2">
+                    {topSkills.map(({ skill, category }, idx) => (
+                        <motion.span
+                            key={`${category}-${skill}`}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: idx * 0.05 }}
+                            viewport={{ once: true }}
+                            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all cursor-default"
+                        >
+                            {skill}
+                        </motion.span>
+                    ))}
+                    <span className="px-3 py-1 text-xs text-primary flex items-center gap-1">
+                        <Sparkles className="size-3" />
+                        +{Object.values(skills).flat().length - topSkills.length} more
+                    </span>
+                </div>
+            </div>
+
+            {/* Categories */}
+            <div className="space-y-3 pt-4 border-t border-white/5">
+                {Object.entries(skills).slice(0, 4).map(([category, items]) => (
+                    <div key={category} className="flex items-center justify-between">
+                        <span className="text-sm font-medium">{category}</span>
+                        <span className="text-xs text-muted-foreground font-mono">{items.length} skills</span>
+                    </div>
+                ))}
+                {Object.keys(skills).length > 4 && (
+                    <div className="text-xs text-primary text-center pt-2">
+                        +{Object.keys(skills).length - 4} more categories
+                    </div>
+                )}
+            </div>
+        </div>
     );
 }

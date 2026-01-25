@@ -4,10 +4,10 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { personalInfo, heroData } from "@/lib/data";
+import { personalInfo } from "@/lib/data";
 
 export default function Hero() {
-    const roles = heroData.roles;
+    const roles = ["Data Scientist", "ML Engineer", "Data Analyst", "Data Engineer"];
     const [roleIndex, setRoleIndex] = useState(0);
     const [displayedRole, setDisplayedRole] = useState("");
     const [isDeleting, setIsDeleting] = useState(false);

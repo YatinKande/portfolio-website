@@ -1,0 +1,23 @@
+
+> yatin-portfolio@0.1.0 dev
+> next dev
+
+ ⚠ Port 3000 is in use, trying 3001 instead.
+ ⚠ Port 3001 is in use, trying 3002 instead.
+   ▲ Next.js 14.1.0
+   - Local:        http://localhost:3002
+
+ ✓ Ready in 1128ms
+ ○ Compiling / ...
+
+warn - The class `duration-[250ms]` is ambiguous and matches multiple utilities.
+warn - If this is content and not a class, replace it with `duration-&lsqb;250ms&rsqb;` to silence this warning.
+ ✓ Compiled / in 1797ms (1324 modules)
+ ✓ Compiled in 239ms (668 modules)
+ ✓ Compiled in 198ms (1322 modules)
+ ✓ Compiled in 100ms (1322 modules)
+ ✓ Compiled in 93ms (1322 modules)
+ ✓ Compiled in 272ms (1322 modules)
+ ✓ Compiled in 100ms (1322 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/Users/yatinkande/Documents/Portfolio Website/.next/cache/webpack/server-development/1.pack.gz_' -> '/Users/yatinkande/Documents/Portfolio Website/.next/cache/webpack/server-development/1.pack.gz'
+ ○ Compiling / ...
