@@ -8,7 +8,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-    { name: "Dashboard", href: "/dashboard" },
+    { name: "Home", href: "/dashboard" },
+    { name: "Analytics", href: "/analytics" },
 ];
 
 export default function Header() {
@@ -17,7 +18,7 @@ export default function Header() {
     const pathname = usePathname();
 
     // Hide header on intro and about pages
-    if (pathname === "/" || pathname === "/about") {
+    if (pathname === "/") {
         return null;
     }
 
