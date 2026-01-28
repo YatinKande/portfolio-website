@@ -163,7 +163,7 @@ export default function AboutPage() {
                         onClick={() => router.push("/dashboard")}
                         className="group relative px-12 py-5 bg-white text-black font-bold rounded-full overflow-hidden hover:pr-16 transition-all duration-300"
                     >
-                        <span className="relative z-10">Continue to Dashboard</span>
+                        <span className="relative z-10">Explore My Dashboard</span>
                         <ArrowRight className="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                     </button>
                 </motion.div>

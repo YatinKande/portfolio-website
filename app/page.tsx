@@ -118,7 +118,7 @@ export default function IntroPage() {
                     onClick={handleEnter}
                     className="px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:shadow-[0_0_40px_-10px_hsl(var(--primary))] transition-all flex items-center gap-2 mx-auto group"
                 >
-                    Welcome
+                    Meet the Scientist
                     <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
                 </motion.button>
             </div>
