@@ -7,7 +7,7 @@ import { Code2, Sparkles } from "lucide-react";
 export default function Skills() {
     // Get top skills from each category for preview
     const topSkills = Object.entries(skills).slice(0, 3).flatMap(([category, items]) =>
-        items.slice(0, 3).map(skill => ({ skill, category }))
+        (items as any[]).slice(0, 3).map(skill => ({ skill, category }))
     );
 
     return (
@@ -28,14 +28,14 @@ export default function Skills() {
                 <div className="flex flex-wrap gap-2">
                     {topSkills.map(({ skill, category }, idx) => (
                         <motion.span
-                            key={`${category}-${skill}`}
+                            key={`${category}-${skill.name}`}
                             initial={{ opacity: 0, scale: 0.8 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: idx * 0.05 }}
                             viewport={{ once: true }}
                             className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all cursor-default"
                         >
-                            {skill}
+                            {skill.name}
                         </motion.span>
                     ))}
                     <span className="px-3 py-1 text-xs text-primary flex items-center gap-1">

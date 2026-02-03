@@ -3,10 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Github, X, Calendar, MapPin, CheckCircle2, ArrowLeft } from "lucide-react";
+import { Github, X, Calendar, CheckCircle2, ArrowLeft } from "lucide-react";
 import NeuralBackground from "@/components/NeuralBackground";
 
-// Project Data
 const PROJECTS_DATA = [
     {
         id: "autorag",
@@ -266,12 +265,10 @@ export default function ProjectsPage() {
         <div className="min-h-screen relative overflow-x-hidden pt-12 pb-20">
             <NeuralBackground />
 
-            {/* Background Overlay */}
             <div className="fixed inset-0 pointer-events-none z-[1] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,17,40,0.4)_100%)]" />
 
             <div className="max-w-[1200px] mx-auto relative z-10 px-6 sm:px-10">
 
-                {/* PAGE HEADER */}
                 <motion.header
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -293,16 +290,13 @@ export default function ProjectsPage() {
                     </div>
                 </motion.header>
 
-                {/* PROJECTS GRID */}
                 <motion.div
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[28px]"
                     initial="visible"
                     animate="visible"
                     variants={{
                         visible: {
-                            transition: {
-                                staggerChildren: 0.05
-                            }
+                            transition: { staggerChildren: 0.05 }
                         }
                     }}
                 >
@@ -314,30 +308,28 @@ export default function ProjectsPage() {
                                 visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
                             }}
                             onClick={() => setSelectedProject(project)}
-                            className={`project-card relative h-[320px] rounded-[16px] border border-primary/30 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:border-primary/70 hover:shadow-[0_8px_30px_rgba(6,182,212,0.2)] ${project.class}`}
-                            style={{ position: 'relative' }} // ensure relative for z-index
+                            className={`project-card relative h-[320px] rounded-[16px] border border-primary/30 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:border-primary/70 hover:shadow-[0_8px_30px_rgba(6,182,212,0.2)] bg-primary/[0.03]`}
                         >
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-50" />
+                            <div className="project-card-overlay absolute inset-0 z-[2]" />
 
-                            {/* Internship Badge */}
                             {project.isInternship && (
-                                <div className="absolute top-[14px] left-[14px] px-[8px] py-[3px] bg-blue-500/30 border border-blue-500/50 text-[#60A5FA] text-[9px] font-bold uppercase rounded-[12px] z-[5]">
+                                <div className="absolute top-[14px] left-[14px] px-[8px] py-[3px] bg-blue-500/30 border border-blue-500/50 text-[#60A5FA] text-[9px] font-bold uppercase rounded-[12px] z-[10]">
                                     INTERNSHIP
                                 </div>
                             )}
 
-                            {/* GitHub Button */}
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     window.open(project.github, '_blank');
                                 }}
-                                className="absolute top-[14px] right-[14px] w-[38px] h-[38px] rounded-full bg-black/60 border border-white/25 flex items-center justify-center text-white hover:bg-black/85 hover:border-white transition-all z-[5]"
+                                className="absolute top-[14px] right-[14px] w-[38px] h-[38px] rounded-full bg-black/60 border border-white/25 flex items-center justify-center text-white hover:bg-black/85 hover:border-white transition-all z-[10]"
                             >
                                 <Github size={18} />
                             </button>
 
-                            {/* Bottom Glassmorphism Area */}
-                            <div className="absolute bottom-0 left-0 right-0 h-[58%] p-[24px] flex flex-col justify-end bg-gradient-to-t from-[#0A1128] via-[#0A1128]/90 to-transparent z-[5]">
+                            <div className="absolute bottom-0 left-0 right-0 h-[65%] p-[24px] flex flex-col justify-end bg-gradient-to-t from-[#0A1128] via-[#0A1128]/90 to-transparent z-[10]">
                                 <h2 className="text-[19px] font-bold text-white mb-[8px] font-heading drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">{project.title}</h2>
                                 <p className="text-[13px] font-medium text-white/90 mb-[12px] line-clamp-2 leading-relaxed">{project.intro}</p>
                                 <div className="flex flex-wrap gap-[6px]">
@@ -353,21 +345,17 @@ export default function ProjectsPage() {
                 </motion.div>
             </div>
 
-            {/* PROJECT MODAL */}
             <AnimatePresence>
                 {selectedProject && (
                     <div className="fixed inset-0 z-[1000] flex items-center justify-center p-6 sm:p-10">
-                        {/* Modal Overlay */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
                             onClick={() => setSelectedProject(null)}
                             className="absolute inset-0 bg-black/75 backdrop-blur-sm"
                         />
 
-                        {/* Modal Panel */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -375,7 +363,6 @@ export default function ProjectsPage() {
                             transition={{ duration: 0.3, ease: "easeOut" }}
                             className="relative w-full max-w-[680px] max-h-[85vh] overflow-y-auto bg-gradient-to-br from-[#0a1628] to-[#122240] border border-primary/40 rounded-[20px] p-[36px] shadow-2xl custom-scrollbar"
                         >
-                            {/* Close Button */}
                             <button
                                 onClick={() => setSelectedProject(null)}
                                 className="absolute top-6 right-6 text-white hover:text-primary transition-colors"
@@ -383,7 +370,6 @@ export default function ProjectsPage() {
                                 <X size={28} />
                             </button>
 
-                            {/* Modal Content */}
                             <div className="flex flex-col gap-6">
                                 <div>
                                     <h2 className="text-[26px] font-bold text-white mb-2 font-heading">{selectedProject.title}</h2>
@@ -467,43 +453,19 @@ export default function ProjectsPage() {
             </AnimatePresence>
 
             <style jsx global>{`
-        .project-card::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image: 
-            linear-gradient(rgba(6,182,212,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(6,182,212,0.03) 1px, transparent 1px);
-          background-size: 40px 40px;
-          z-index: 1;
-          pointer-events: none;
+        .project-card-overlay {
+          background: linear-gradient(
+            to top, 
+            rgba(10, 17, 40, 0.95) 0%, 
+            rgba(10, 17, 40, 0.75) 40%,
+            rgba(10, 17, 40, 0.4) 70%,
+            transparent 100%
+          );
         }
-        .card-autorag { background: linear-gradient(135deg, #0a1128 0%, #0d2f5a 40%, #1a4a7a 100%); }
-        .card-lipread { background: linear-gradient(135deg, #0a1128 0%, #2d1b69 40%, #4a2d8a 100%); }
-        .card-dataset-bot { background: linear-gradient(135deg, #0a1128 0%, #0d4f4f 40%, #1a6b6b 100%); }
-        .card-ai-car { background: linear-gradient(135deg, #0a1128 0%, #3d2b1f 40%, #5a4a30 100%); }
-        .card-covid { background: linear-gradient(135deg, #0a1128 0%, #4a1942 40%, #6b2d5c 100%); }
-        .card-kinesis { background: linear-gradient(135deg, #0a1128 0%, #1b4332 40%, #2d6b52 100%); }
-        .card-ev-finder { background: linear-gradient(135deg, #0a1128 0%, #1a4a2a 40%, #2d7a45 100%); }
-        .card-smartsoil { background: linear-gradient(135deg, #0a1128 0%, #3a5a1b 40%, #5a8a2d 100%); }
-        .card-license { background: linear-gradient(135deg, #0a1128 0%, #4a3b1b 40%, #6b5a2d 100%); }
-        .card-yolo-crop { background: linear-gradient(135deg, #0a1128 0%, #2a5a1b 40%, #3d7a2d 100%); }
-        .card-ml-pipeline { background: linear-gradient(135deg, #0a1128 0%, #1b3a6b 40%, #2d5a9a 100%); }
 
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(0, 0, 0, 0.2);
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(6, 182, 212, 0.3);
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(6, 182, 212, 0.5);
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(6, 182, 212, 0.3); border-radius: 10px; }
       `}</style>
         </div>
     );

@@ -37,14 +37,68 @@ export const personalInfo = {
 };
 
 export const skills = {
-    "Programming Languages": ["Python", "SQL", "R"],
-    "Data Analysis": ["Exploratory Data Analysis (EDA)", "Data Cleaning", "Feature Engineering", "Statistical Analysis", "A/B Testing"],
-    "Machine Learning": ["Supervised Learning", "Unsupervised Learning", "Classification", "Regression", "Clustering", "Model Evaluation"],
-    "Deep Learning & CV": ["CNNs", "RNNs", "LSTM", "Transformers", "YOLO", "Computer Vision Pipelines"],
-    "Visualization & BI": ["Tableau", "Power BI", "Plotly", "Dash", "Matplotlib", "Seaborn", "Excel"],
-    "Libraries & Frameworks": ["Pandas", "NumPy", "Scikit-learn", "PyTorch", "TensorFlow", "OpenCV", "FastAPI"],
-    "Databases": ["PostgreSQL", "MySQL", "SQLite", "MongoDB"],
-    "Cloud & DevOps": ["AWS S3", "AWS Lambda", "AWS API Gateway", "Docker", "Git", "REST APIs"],
+    "Programming Languages": [
+        { name: "Python", level: 95, icon: "🐍" },
+        { name: "SQL", level: 85, icon: "📊" },
+        { name: "R", level: 75, icon: "📉" },
+        { name: "JavaScript", level: 70, icon: "📜" }
+    ],
+    "Databases": [
+        { name: "PostgreSQL", level: 80, icon: "🐘" },
+        { name: "MySQL", level: 80, icon: "🐬" },
+        { name: "SQLite", level: 85, icon: "🪶" },
+        { name: "MongoDB", level: 75, icon: "🍃" },
+        { name: "DynamoDB", level: 78, icon: "⚡" }
+    ],
+    "Machine Learning": [
+        { name: "Classification", level: 90, icon: "🏷️" },
+        { name: "Regression", level: 90, icon: "📈" },
+        { name: "Clustering", level: 85, icon: "🧩" },
+        { name: "Model Evaluation", level: 92, icon: "🧪" },
+        { name: "Hyperparameter Tuning", level: 88, icon: "⚙️" }
+    ],
+    "Deep Learning": [
+        { name: "CNNs", level: 90, icon: "🖼️" },
+        { name: "RNNs", level: 85, icon: "🔄" },
+        { name: "LSTMs", level: 88, icon: "🧠" },
+        { name: "Transformers", level: 85, icon: "🤖" },
+        { name: "YOLO", level: 95, icon: "👁️" },
+        { name: "Object Detection", level: 92, icon: "🎯" }
+    ],
+    "Data Analytics": [
+        { name: "Exploratory Analysis", level: 92, icon: "🔎" },
+        { name: "Data Validation", level: 90, icon: "✅" },
+        { name: "Feature Engineering", level: 88, icon: "🛠️" },
+        { name: "Hypothesis Testing", level: 85, icon: "📊" },
+        { name: "A/B Testing", level: 82, icon: "🅰️" }
+    ],
+    "Visualization & BI": [
+        { name: "Tableau", level: 82, icon: "📊" },
+        { name: "Power BI", level: 80, icon: "📉" },
+        { name: "Qlik Sense", level: 75, icon: "📈" },
+        { name: "Plotly", level: 85, icon: "🎨" },
+        { name: "Dash", level: 82, icon: "📉" },
+        { name: "Matplotlib", level: 88, icon: "📊" },
+        { name: "Excel", level: 85, icon: "📂" }
+    ],
+    "Libraries & Frameworks": [
+        { name: "Pandas", level: 95, icon: "🐼" },
+        { name: "NumPy", level: 92, icon: "🔢" },
+        { name: "Scikit-learn", level: 92, icon: "🤖" },
+        { name: "PyTorch", level: 90, icon: "🔥" },
+        { name: "TensorFlow", level: 85, icon: "🧠" },
+        { name: "OpenCV", level: 90, icon: "📷" },
+        { name: "FastAPI", level: 85, icon: "🚀" }
+    ],
+    "Cloud & DevOps": [
+        { name: "AWS S3", level: 82, icon: "☁️" },
+        { name: "AWS Lambda", level: 80, icon: "ƛ" },
+        { name: "AWS Lex", level: 85, icon: "💬" },
+        { name: "AWS DynamoDB", level: 78, icon: "⚡" },
+        { name: "AWS Rekognition", level: 80, icon: "👁️" },
+        { name: "Docker", level: 75, icon: "🐳" },
+        { name: "Git", level: 88, icon: "📁" }
+    ],
 };
 
 export const projects = [
@@ -118,11 +172,25 @@ export const experience = [
 
 export const education = [
     {
-        institution: "University of Michigan–Dearborn",
+        institution: "University of Michigan Dearborn",
         degree: "MS in Data Science",
         field: "Data Science",
         location: "Dearborn, MI, USA",
-        year: null
+        year: "2024 - 2026 (Expected)"
+    },
+    {
+        institution: "Vellore Institute of Technology",
+        degree: "PG Program in Data Science",
+        field: "Data Science",
+        location: "Bangalore, India",
+        year: "2023 - 2024"
+    },
+    {
+        institution: "Jain University",
+        degree: "BSc Honors in Data Science",
+        field: "Data Science",
+        location: "Bangalore, India",
+        year: "2019 - 2022"
     }
 ];
 
@@ -135,7 +203,7 @@ export const certifications = [
     {
         name: "Google Data Analytics Professional Certificate",
         issuer: "Coursera",
-        year: null,
+        year: "2024",
     },
 ];
 

@@ -9,18 +9,12 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
     { name: "Home", href: "/dashboard" },
-    { name: "Analytics", href: "/analytics" },
 ];
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const pathname = usePathname();
-
-    // Hide header on intro and about pages
-    if (pathname === "/") {
-        return null;
-    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -38,7 +32,7 @@ export default function Header() {
             )}
         >
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-                <Link href="/dashboard" className="flex items-center gap-2 group">
+                <Link href="/" className="flex items-center gap-2 group">
                     <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20 transition-colors">
                         <Code2 className="text-primary size-6" />
                     </div>
