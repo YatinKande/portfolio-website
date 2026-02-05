@@ -24,6 +24,7 @@ import {
 import NeuralBackground from "@/components/NeuralBackground";
 import GlitchText from "@/components/GlitchText";
 import { skills, education, experience, certifications, personalInfo } from "@/lib/data";
+// Removed InteractiveSkillsPie import
 
 // --- Helper Components ---
 
@@ -158,24 +159,34 @@ export default function DashboardPage() {
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                             className="absolute inset-0 rounded-full bg-primary/40 blur-3xl"
                         />
-                        <div className="w-[160px] h-[160px] md:w-[180px] md:h-[180px] rounded-full overflow-hidden border-2 border-primary/60 relative shadow-[0_0_40px_rgba(6,182,212,0.5)] z-10">
+                        <div className="w-[150px] h-[150px] md:w-[170px] md:h-[170px] rounded-full overflow-hidden border-2 border-primary/60 relative shadow-[0_0_40px_rgba(6,182,212,0.4)] z-10">
                             <Image src="/me.jpg" alt="Yatin Kande" fill className="object-cover" priority />
                         </div>
                     </div>
 
                     <div className="flex-1 text-center md:text-left">
-                        <h1 className="text-[40px] md:text-[56px] font-bold text-white mb-2 font-heading tracking-tight leading-none drop-shadow-sm">
-                            Yatin Kande
-                        </h1>
-                        <div className="h-10 mb-6 flex items-center justify-center md:justify-start">
-                            <GlitchText startTime={800} />
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
+                            <div>
+                                <h1 className="text-[36px] md:text-[48px] font-bold text-white mb-1 font-heading tracking-tight leading-none">
+                                    {personalInfo.name}
+                                </h1>
+                                <div className="h-8 flex items-center justify-center md:justify-start overflow-hidden">
+                                    <GlitchText startTime={500} />
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => router.push('mailto:' + personalInfo.email)}
+                                className="px-6 py-2.5 bg-primary/20 hover:bg-primary/30 border border-primary/40 rounded-full text-white text-[14px] font-bold flex items-center gap-2 transition-all mx-auto md:mx-0 shrink-0"
+                            >
+                                <Mail size={16} /> CONTACT ME
+                            </button>
                         </div>
 
-                        <p className="max-w-[700px] text-[15px] md:text-[16px] text-white/90 font-inter leading-[1.8] mb-10">
-                            {personalInfo.bio}
+                        <p className="max-w-[700px] text-[15px] text-white/80 font-inter leading-[1.7] mb-8">
+                            {personalInfo.bio.split('\n\n')[0]}
                         </p>
 
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 border-t border-primary/10 pt-8">
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 border-t border-primary/10 pt-8 mt-auto">
                             <StatCounter value={11} suffix="+" label="PROJECTS" delay={0.4} />
                             <StatCounter value={32} suffix="K+" label="RECORDS ANALYZED" delay={0.5} />
                             <StatCounter value={94} suffix="%" label="SYSTEM UPTIME" delay={0.6} />
@@ -184,59 +195,44 @@ export default function DashboardPage() {
                     </div>
                 </motion.section>
 
-                {/* --- TECHNICAL SKILLS SECTION --- */}
-                <motion.section variants={itemVariants} className="glass-card p-8">
-                    <SectionHeader icon={Settings} title="TECHNICAL SKILLS" />
-
-                    <div className="flex overflow-x-auto gap-2 mb-8 pb-2 no-scrollbar border-b border-primary/10">
-                        {Object.keys(skills).map((category) => (
-                            <button
-                                key={category}
-                                onClick={() => setActiveCategory(category)}
-                                className={`px-4 py-2 text-[13px] font-bold uppercase tracking-wider rounded-t-lg transition-all duration-300 border-b-2 whitespace-nowrap ${activeCategory === category
-                                    ? "bg-primary/15 border-primary text-white"
-                                    : "bg-transparent border-transparent text-white/40 hover:text-white/70"
-                                    }`}
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
-
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeCategory}
-                            initial={{ opacity: 0, x: 10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -10 }}
-                            transition={{ duration: 0.3 }}
-                            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-                        >
-                            {(skills as any)[activeCategory].map((skill: any, idx: number) => (
-                                <motion.div
-                                    key={skill.name}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: idx * 0.05 }}
-                                    className="bg-primary/5 border border-primary/20 p-4 rounded-xl flex flex-col justify-between h-[100px]"
-                                >
-                                    <div className="flex justify-between items-center mb-2">
-                                        <span className="text-[13px] font-bold text-white uppercase">{skill.name}</span>
-                                        <span className="text-[14px] font-bold text-primary">{skill.level}%</span>
-                                    </div>
-                                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                                        <motion.div
-                                            initial={{ width: 0 }}
-                                            animate={{ width: `${skill.level}%` }}
-                                            transition={{ duration: 1.2, delay: 0.2 + idx * 0.1, ease: "easeOut" }}
-                                            className="h-full bg-gradient-to-r from-blue-600 to-cyan-400"
-                                        />
-                                    </div>
-                                </motion.div>
+                {/* --- ABOUT & SKILLS SECTION --- */}
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8">
+                    {/* LEFT COLUMN: ABOUT ME */}
+                    <motion.section variants={itemVariants} className="glass-card p-8 md:p-10">
+                        <SectionHeader icon={User} title="MY JOURNEY" />
+                        <div className="space-y-6">
+                            {(personalInfo as any).journey.map((paragraph: string, idx: number) => (
+                                <p key={idx} className="text-[15px] md:text-[16px] text-white/70 leading-[1.8] font-inter">
+                                    {paragraph}
+                                </p>
                             ))}
-                        </motion.div>
-                    </AnimatePresence>
-                </motion.section>
+                        </div>
+                    </motion.section>
+
+                    {/* RIGHT COLUMN: CONDENSED SKILLS */}
+                    <motion.section variants={itemVariants} className="glass-card p-8 flex flex-col">
+                        <SectionHeader icon={Settings} title="SKILLS" />
+                        <div className="space-y-6 flex-grow">
+                            {Object.entries(skills).map(([category, items]: [string, any]) => (
+                                <div key={category} className="space-y-3">
+                                    <h4 className="text-[11px] font-bold text-primary uppercase tracking-[2px] opacity-70">
+                                        {category}
+                                    </h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        {items.map((skill: any) => (
+                                            <span
+                                                key={skill.name}
+                                                className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[12px] text-white/80 font-medium hover:border-primary/40 hover:bg-primary/5 transition-all"
+                                            >
+                                                {skill.name}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.section>
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* --- EDUCATION SECTION --- */}
@@ -308,19 +304,25 @@ export default function DashboardPage() {
                         <motion.div
                             variants={itemVariants}
                             onClick={() => router.push('/projects')}
-                            className="project-card project-card-1 bg-gradient-to-br from-[#0a1128] via-[#0d2f5a] to-[#1a4a7a]"
+                            className="project-card project-card-1 overflow-hidden relative"
                         >
-                            <div className="timeline-badge">Nov 2025 - Present</div>
-                            <h3 className="project-title">Auto Multimodal RAG</h3>
-                            <p className="project-subtitle">Multimodal AI Assistant</p>
-                            <p className="project-description">
-                                RAG system for automotive domain using Google GenAI and FAISS. Supports document ingestion, vector search, and grounded Q&A over manuals and OBD data with 94% availability.
-                            </p>
-                            <div className="tech-badges">
-                                <span className="badge">PYTHON</span>
-                                <span className="badge">FASTAPI</span>
-                                <span className="badge">FAISS</span>
-                                <span className="badge">GOOGLE GENAI</span>
+                            <div className="absolute inset-0 z-0">
+                                <img src="/projects/autorag.png" alt="Auto Multimodal RAG" className="w-full h-full object-cover opacity-50" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/60 to-transparent" />
+                            </div>
+                            <div className="relative z-10 flex flex-col h-full">
+                                <div className="timeline-badge">Nov 2025 - Present</div>
+                                <h3 className="project-title">Auto Multimodal RAG</h3>
+                                <p className="project-subtitle">Multimodal AI Assistant</p>
+                                <p className="project-description">
+                                    RAG system for automotive domain using Google GenAI and FAISS. Supports document ingestion, vector search, and grounded Q&A over manuals and OBD data with 94% availability.
+                                </p>
+                                <div className="tech-badges">
+                                    <span className="badge">PYTHON</span>
+                                    <span className="badge">FASTAPI</span>
+                                    <span className="badge">FAISS</span>
+                                    <span className="badge">GOOGLE GENAI</span>
+                                </div>
                             </div>
                         </motion.div>
 
@@ -328,18 +330,24 @@ export default function DashboardPage() {
                         <motion.div
                             variants={itemVariants}
                             onClick={() => router.push('/projects')}
-                            className="project-card project-card-2 bg-gradient-to-br from-[#0a1128] via-[#1a4a2a] to-[#2d7a45]"
+                            className="project-card project-card-2 overflow-hidden relative"
                         >
-                            <div className="timeline-badge">Jan 2026</div>
-                            <h3 className="project-title">Smart EV Finder</h3>
-                            <p className="project-subtitle">LLM-Powered Recommendations</p>
-                            <p className="project-description">
-                                Conversational charging station finder using Llama 3 for personalized recommendations.
-                            </p>
-                            <div className="tech-badges">
-                                <span className="badge">PYTHON</span>
-                                <span className="badge">LLAMA 3</span>
-                                <span className="badge">NLP</span>
+                            <div className="absolute inset-0 z-0">
+                                <img src="/projects/ev-finder.png" alt="Smart EV Finder" className="w-full h-full object-cover opacity-50" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/60 to-transparent" />
+                            </div>
+                            <div className="relative z-10">
+                                <div className="timeline-badge">Jan 2026</div>
+                                <h3 className="project-title">Smart EV Finder</h3>
+                                <p className="project-subtitle">LLM-Powered Recommendations</p>
+                                <p className="project-description">
+                                    Conversational charging station finder using Llama 3 for personalized recommendations.
+                                </p>
+                                <div className="tech-badges">
+                                    <span className="badge">PYTHON</span>
+                                    <span className="badge">LLAMA 3</span>
+                                    <span className="badge">NLP</span>
+                                </div>
                             </div>
                         </motion.div>
 
@@ -347,18 +355,24 @@ export default function DashboardPage() {
                         <motion.div
                             variants={itemVariants}
                             onClick={() => router.push('/projects')}
-                            className="project-card project-card-3 bg-gradient-to-br from-[#0a1128] via-[#2d1b69] to-[#4a2d8a]"
+                            className="project-card project-card-3 overflow-hidden relative"
                         >
-                            <div className="timeline-badge">Apr 2025 - Jul 2025</div>
-                            <h3 className="project-title">Lip Read AI — LipNet</h3>
-                            <p className="project-subtitle">3D CNN & Bi-LSTM</p>
-                            <p className="project-description">
-                                Deep learning lip-reading system trained on 30K+ video frames using CNNs and LSTMs.
-                            </p>
-                            <div className="tech-badges">
-                                <span className="badge">PYTORCH</span>
-                                <span className="badge">3D CNN</span>
-                                <span className="badge">BI-LSTM</span>
+                            <div className="absolute inset-0 z-0">
+                                <img src="/projects/lipread.png" alt="Lip Read AI" className="w-full h-full object-cover opacity-50" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/60 to-transparent" />
+                            </div>
+                            <div className="relative z-10">
+                                <div className="timeline-badge">Apr 2025 - Jul 2025</div>
+                                <h3 className="project-title">Lip Read AI — LipNet</h3>
+                                <p className="project-subtitle">3D CNN & Bi-LSTM</p>
+                                <p className="project-description">
+                                    Deep learning lip-reading system trained on 30K+ video frames using CNNs and LSTMs.
+                                </p>
+                                <div className="tech-badges">
+                                    <span className="badge">PYTORCH</span>
+                                    <span className="badge">3D CNN</span>
+                                    <span className="badge">BI-LSTM</span>
+                                </div>
                             </div>
                         </motion.div>
 
@@ -366,18 +380,24 @@ export default function DashboardPage() {
                         <motion.div
                             variants={itemVariants}
                             onClick={() => router.push('/projects')}
-                            className="project-card project-card-4 bg-gradient-to-br from-[#0a1128] via-[#3d2b1f] to-[#5a4a30]"
+                            className="project-card project-card-4 overflow-hidden relative"
                         >
-                            <div className="timeline-badge">Jan 2025</div>
-                            <h3 className="project-title">AI Car Simulation</h3>
-                            <p className="project-subtitle">NEAT Algorithm</p>
-                            <p className="project-description">
-                                Self-driving car simulation using NeuroEvolution to autonomously navigate tracks.
-                            </p>
-                            <div className="tech-badges">
-                                <span className="badge">PYTHON</span>
-                                <span className="badge">NEAT</span>
-                                <span className="badge">RL</span>
+                            <div className="absolute inset-0 z-0">
+                                <img src="/projects/ai-car.png" alt="AI Car Simulation" className="w-full h-full object-cover opacity-50" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/60 to-transparent" />
+                            </div>
+                            <div className="relative z-10">
+                                <div className="timeline-badge">Jan 2025</div>
+                                <h3 className="project-title">AI Car Simulation</h3>
+                                <p className="project-subtitle">NEAT Algorithm</p>
+                                <p className="project-description">
+                                    Self-driving car simulation using NeuroEvolution to autonomously navigate tracks.
+                                </p>
+                                <div className="tech-badges">
+                                    <span className="badge">PYTHON</span>
+                                    <span className="badge">NEAT</span>
+                                    <span className="badge">RL</span>
+                                </div>
                             </div>
                         </motion.div>
 
@@ -385,18 +405,24 @@ export default function DashboardPage() {
                         <motion.div
                             variants={itemVariants}
                             onClick={() => router.push('/projects')}
-                            className="project-card project-card-5 bg-gradient-to-br from-[#0a1128] via-[#1b4332] to-[#2d6b52]"
+                            className="project-card project-card-5 overflow-hidden relative"
                         >
-                            <div className="timeline-badge">Dec 2025</div>
-                            <h3 className="project-title">KinesisKeyEntry</h3>
-                            <p className="project-subtitle">AWS Smart Authentication</p>
-                            <p className="project-description">
-                                Smart door system using AWS Rekognition for facial authentication and access control.
-                            </p>
-                            <div className="tech-badges">
-                                <span className="badge">AWS</span>
-                                <span className="badge">REKOGNITION</span>
-                                <span className="badge">KINESIS</span>
+                            <div className="absolute inset-0 z-0">
+                                <img src="/projects/kinesis.png" alt="KinesisKeyEntry" className="w-full h-full object-cover opacity-50" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/60 to-transparent" />
+                            </div>
+                            <div className="relative z-10">
+                                <div className="timeline-badge">Dec 2025</div>
+                                <h3 className="project-title">KinesisKeyEntry</h3>
+                                <p className="project-subtitle">AWS Smart Authentication</p>
+                                <p className="project-description">
+                                    Smart door system using AWS Rekognition for facial authentication and access control.
+                                </p>
+                                <div className="tech-badges">
+                                    <span className="badge">AWS</span>
+                                    <span className="badge">REKOGNITION</span>
+                                    <span className="badge">KINESIS</span>
+                                </div>
                             </div>
                         </motion.div>
 
@@ -404,18 +430,24 @@ export default function DashboardPage() {
                         <motion.div
                             variants={itemVariants}
                             onClick={() => router.push('/projects')}
-                            className="project-card project-card-6 bg-gradient-to-br from-[#0a1128] via-[#0d4f4f] to-[#1a6b6b]"
+                            className="project-card project-card-6 overflow-hidden relative"
                         >
-                            <div className="timeline-badge">Aug 2025 - Oct 2025</div>
-                            <h3 className="project-title">Dataset Concierge Bot</h3>
-                            <p className="project-subtitle">Conversational AI</p>
-                            <p className="project-description">
-                                AWS-powered bot to find and retrieve datasets using natural language processing.
-                            </p>
-                            <div className="tech-badges">
-                                <span className="badge">JS</span>
-                                <span className="badge">AWS LEX</span>
-                                <span className="badge">DYNAMODB</span>
+                            <div className="absolute inset-0 z-0">
+                                <img src="/projects/dataset-bot.png" alt="Dataset Concierge Bot" className="w-full h-full object-cover opacity-50" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/60 to-transparent" />
+                            </div>
+                            <div className="relative z-10">
+                                <div className="timeline-badge">Aug 2025 - Oct 2025</div>
+                                <h3 className="project-title">Dataset Concierge Bot</h3>
+                                <p className="project-subtitle">Conversational AI</p>
+                                <p className="project-description">
+                                    AWS-powered bot to find and retrieve datasets using natural language processing.
+                                </p>
+                                <div className="tech-badges">
+                                    <span className="badge">JS</span>
+                                    <span className="badge">AWS LEX</span>
+                                    <span className="badge">DYNAMODB</span>
+                                </div>
                             </div>
                         </motion.div>
 
@@ -423,18 +455,24 @@ export default function DashboardPage() {
                         <motion.div
                             variants={itemVariants}
                             onClick={() => router.push('/projects')}
-                            className="project-card project-card-7 bg-gradient-to-br from-[#0a1128] via-[#4a3b1b] to-[#6b5a2d]"
+                            className="project-card project-card-7 overflow-hidden relative"
                         >
-                            <div className="timeline-badge">Jan 2025</div>
-                            <h3 className="project-title">License Plate Recognition</h3>
-                            <p className="project-subtitle">ANPR System</p>
-                            <p className="project-description">
-                                Automatic detection and recognition of license plates from vehicle images using deep learning.
-                            </p>
-                            <div className="tech-badges">
-                                <span className="badge">PYTHON</span>
-                                <span className="badge">OPENCV</span>
-                                <span className="badge">DL</span>
+                            <div className="absolute inset-0 z-0">
+                                <img src="/projects/license.png" alt="License Plate Recognition" className="w-full h-full object-cover opacity-50" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/60 to-transparent" />
+                            </div>
+                            <div className="relative z-10">
+                                <div className="timeline-badge">Jan 2025</div>
+                                <h3 className="project-title">License Plate Recognition</h3>
+                                <p className="project-subtitle">ANPR System</p>
+                                <p className="project-description">
+                                    Automatic detection and recognition of license plates from vehicle images using deep learning.
+                                </p>
+                                <div className="tech-badges">
+                                    <span className="badge">PYTHON</span>
+                                    <span className="badge">OPENCV</span>
+                                    <span className="badge">DL</span>
+                                </div>
                             </div>
                         </motion.div>
 
@@ -534,12 +572,12 @@ export default function DashboardPage() {
                         </div>
                     </motion.section>
                 </div>
-            </motion.div>
+            </motion.div >
 
             <style jsx global>{`
                 .no-scrollbar::-webkit-scrollbar { display: none; }
                 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
             `}</style>
-        </div>
+        </div >
     );
 }

@@ -27,7 +27,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/auto-multimodal-rag",
         class: "card-autorag",
-        isInternship: false
+        isInternship: false,
+        image: "/projects/autorag.png"
     },
     {
         id: "lipread",
@@ -50,7 +51,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/Lip-Read-AI-using-LipNet",
         class: "card-lipread",
-        isInternship: false
+        isInternship: false,
+        image: "/projects/lipread.png"
     },
     {
         id: "dataset-bot",
@@ -72,7 +74,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/Dataset-Concierge-Bot",
         class: "card-dataset-bot",
-        isInternship: false
+        isInternship: false,
+        image: "/projects/dataset-bot.png"
     },
     {
         id: "ai-car",
@@ -93,7 +96,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/AI-Car-Simulation-using-NEAT-Algorithm",
         class: "card-ai-car",
-        isInternship: false
+        isInternship: false,
+        image: "/projects/ai-car.png"
     },
     {
         id: "covid",
@@ -115,7 +119,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/Covid--19-Data-Analysis-Capstone-Project",
         class: "card-covid",
-        isInternship: false
+        isInternship: false,
+        image: "/projects/covid.png"
     },
     {
         id: "kinesis",
@@ -137,7 +142,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/KinesisKeyEntry",
         class: "card-kinesis",
-        isInternship: false
+        isInternship: false,
+        image: "/projects/kinesis.png"
     },
     {
         id: "ev-finder",
@@ -159,7 +165,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/smart-ev-finder",
         class: "card-ev-finder",
-        isInternship: false
+        isInternship: false,
+        image: "/projects/ev-finder.png"
     },
     {
         id: "smartsoil",
@@ -181,7 +188,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/Smartsoil-Crop-Recommender",
         class: "card-smartsoil",
-        isInternship: false
+        isInternship: false,
+        image: "/projects/smartsoil.png"
     },
     {
         id: "license",
@@ -203,7 +211,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/Automatic-License-Plate-Recognition",
         class: "card-license",
-        isInternship: false
+        isInternship: false,
+        image: "/projects/license.png"
     },
     {
         id: "yolo-crop",
@@ -225,7 +234,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande",
         class: "card-yolo-crop",
-        isInternship: true
+        isInternship: true,
+        image: "/projects/yolo-crop.png"
     },
     {
         id: "ml-pipeline",
@@ -246,7 +256,8 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande",
         class: "card-ml-pipeline",
-        isInternship: true
+        isInternship: true,
+        image: "/projects/ml-pipeline.png"
     }
 ];
 
@@ -310,7 +321,17 @@ export default function ProjectsPage() {
                             onClick={() => setSelectedProject(project)}
                             className={`project-card relative h-[320px] rounded-[16px] border border-primary/30 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:border-primary/70 hover:shadow-[0_8px_30px_rgba(6,182,212,0.2)] bg-primary/[0.03]`}
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-50" />
+                            {project.image && (
+                                <div className="absolute inset-0 z-[1]">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="w-full h-full object-cover opacity-60"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/80 to-transparent" />
+                                </div>
+                            )}
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-50 z-[2]" />
                             <div className="project-card-overlay absolute inset-0 z-[2]" />
 
                             {project.isInternship && (

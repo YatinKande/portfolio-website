@@ -17,6 +17,12 @@ export const personalInfo = {
         "Utilize 'Physics First' frameworks to decouple and solve complex system constraints.",
         "Can explain backpropagation using only a deck of cards."
     ],
+    journey: [
+        "My fascination with data began when I realized that every interaction, from a simple click to a complex sensor reading, tells a story. Starting with my BSc in Data Science, I was drawn to the ability to decode these stories using statistical rigor and computational power. It wasn't just about the numbers; it was about uncovering the invisible patterns that drive human behavior and system performance.",
+        "For me, machine learning is the ultimate puzzle. Whether it's optimizing a YOLO model for edge-device crop detection or building a multimodal RAG system for automotive diagnostics, I find deep satisfaction in decoupling complex constraints into manageable, solvable components. I thrive on the challenge of taking messy data and transforming it into a precise, predictive asset.",
+        "I believe in understanding the fundamental mechanisms behind the data before applying complex models. My philosophy centers on bridge-building: connecting research-grade algorithms with production-ready reliability. I prioritize scalable inference and end-to-end performance, ensuring that every system I deploy is not just accurate, but robust and interpretable.",
+        "What drives me is the real-world impact of intelligence at scale. I am motivated by the prospect of building systems that empower users and solve critical industry challenges. As I pursue my MS at the University of Michigan, I am focused on pushing the boundaries of Generative AI and Computer Vision to create a more efficient, data-driven future."
+    ],
     socials: [
         {
             name: "GitHub",
@@ -112,7 +118,7 @@ export const projects = [
         tech: ["FastAPI", "FAISS", "GenAI"],
         github: null,
         demo: null,
-        image: null,
+        image: "/projects/autorag.png",
         featured: true,
     },
     {
@@ -125,7 +131,7 @@ export const projects = [
         tech: ["AWS Lex", "Lambda", "DynamoDB", "S3"],
         github: null,
         demo: null,
-        image: null,
+        image: "/projects/dataset-bot.png",
         featured: true,
     },
     {
@@ -138,7 +144,7 @@ export const projects = [
         tech: ["YOLO", "Python", "Dash"],
         github: null,
         demo: null,
-        image: null,
+        image: "/projects/yolo-crop.png",
         featured: true,
     },
 ];
