@@ -27,7 +27,7 @@ export default function LoadingStatus({ progress }: { progress: number }) {
     }, [currentState]);
 
     return (
-        <div className="font-mono text-[11px] text-cyan-400 h-4 flex items-center justify-center tracking-widest uppercase">
+        <div className="font-mono text-[11px] text-[#0066ff] h-4 flex items-center justify-center tracking-widest uppercase">
             {displayText}
             {displayText.length > 0 && (
                 <motion.span

@@ -27,8 +27,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/auto-multimodal-rag",
         class: "card-autorag",
-        isInternship: false,
-        image: "/projects/autorag.png"
+        isInternship: false
     },
     {
         id: "lipread",
@@ -51,8 +50,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/Lip-Read-AI-using-LipNet",
         class: "card-lipread",
-        isInternship: false,
-        image: "/projects/lipread.png"
+        isInternship: false
     },
     {
         id: "dataset-bot",
@@ -74,8 +72,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/Dataset-Concierge-Bot",
         class: "card-dataset-bot",
-        isInternship: false,
-        image: "/projects/dataset-bot.png"
+        isInternship: false
     },
     {
         id: "ai-car",
@@ -96,8 +93,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/AI-Car-Simulation-using-NEAT-Algorithm",
         class: "card-ai-car",
-        isInternship: false,
-        image: "/projects/ai-car.png"
+        isInternship: false
     },
     {
         id: "covid",
@@ -119,8 +115,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/Covid--19-Data-Analysis-Capstone-Project",
         class: "card-covid",
-        isInternship: false,
-        image: "/projects/covid.png"
+        isInternship: false
     },
     {
         id: "kinesis",
@@ -142,8 +137,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/KinesisKeyEntry",
         class: "card-kinesis",
-        isInternship: false,
-        image: "/projects/kinesis.png"
+        isInternship: false
     },
     {
         id: "ev-finder",
@@ -165,8 +159,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/smart-ev-finder",
         class: "card-ev-finder",
-        isInternship: false,
-        image: "/projects/ev-finder.png"
+        isInternship: false
     },
     {
         id: "smartsoil",
@@ -188,8 +181,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/Smartsoil-Crop-Recommender",
         class: "card-smartsoil",
-        isInternship: false,
-        image: "/projects/smartsoil.png"
+        isInternship: false
     },
     {
         id: "license",
@@ -211,8 +203,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande/Automatic-License-Plate-Recognition",
         class: "card-license",
-        isInternship: false,
-        image: "/projects/license.png"
+        isInternship: false
     },
     {
         id: "yolo-crop",
@@ -234,8 +225,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande",
         class: "card-yolo-crop",
-        isInternship: true,
-        image: "/projects/yolo-crop.png"
+        isInternship: true
     },
     {
         id: "ml-pipeline",
@@ -256,8 +246,7 @@ const PROJECTS_DATA = [
         ],
         github: "https://github.com/YatinKande",
         class: "card-ml-pipeline",
-        isInternship: true,
-        image: "/projects/ml-pipeline.png"
+        isInternship: true
     }
 ];
 
@@ -273,10 +262,10 @@ export default function ProjectsPage() {
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen relative overflow-x-hidden pt-12 pb-20">
+        <div className="min-h-screen relative overflow-x-hidden pt-12 pb-20 bg-[#fafbfc]">
             <NeuralBackground />
 
-            <div className="fixed inset-0 pointer-events-none z-[1] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,17,40,0.4)_100%)]" />
+            <div className="fixed inset-0 pointer-events-none z-[1] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(250,251,252,0.9)_100%)]" />
 
             <div className="max-w-[1200px] mx-auto relative z-10 px-6 sm:px-10">
 
@@ -288,16 +277,16 @@ export default function ProjectsPage() {
                 >
                     <button
                         onClick={() => router.push('/dashboard')}
-                        className="text-primary text-[14px] font-bold hover:underline flex items-center gap-2 mb-8 transition-opacity"
+                        className="text-[#0066ff] text-[14px] font-bold hover:underline flex items-center gap-2 mb-8 transition-opacity"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         Back to Dashboard
                     </button>
 
                     <div className="text-center">
-                        <h1 className="text-[42px] font-bold text-white mb-2 font-heading tracking-tight drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">PROJECTS</h1>
-                        <p className="text-[16px] italic text-white/70 mb-8 font-medium">Explore my work</p>
-                        <div className="h-[1px] w-full max-w-sm mx-auto bg-primary/30" />
+                        <h1 className="text-[42px] font-bold text-[#2a2a3a] mb-2 font-heading tracking-tight">PROJECTS</h1>
+                        <p className="text-[16px] italic text-[#667788] mb-8 font-medium">Explore my work</p>
+                        <div className="h-[1px] w-full max-w-sm mx-auto bg-[#dce2e8]" />
                     </div>
                 </motion.header>
 
@@ -319,19 +308,9 @@ export default function ProjectsPage() {
                                 visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
                             }}
                             onClick={() => setSelectedProject(project)}
-                            className={`project-card relative h-[320px] rounded-[16px] border border-primary/30 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:border-primary/70 hover:shadow-[0_8px_30px_rgba(6,182,212,0.2)] bg-primary/[0.03]`}
+                            className={`project-card relative h-[320px] rounded-[16px] border border-[#dce2e8] overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:border-[#0066ff] hover:shadow-[0_8px_30px_rgba(0,102,255,0.1)] bg-white`}
                         >
-                            {project.image && (
-                                <div className="absolute inset-0 z-[1]">
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        className="w-full h-full object-cover opacity-60"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/80 to-transparent" />
-                                </div>
-                            )}
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-50 z-[2]" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#0066ff]/5 via-transparent to-transparent opacity-50" />
                             <div className="project-card-overlay absolute inset-0 z-[2]" />
 
                             {project.isInternship && (
@@ -345,17 +324,17 @@ export default function ProjectsPage() {
                                     e.stopPropagation();
                                     window.open(project.github, '_blank');
                                 }}
-                                className="absolute top-[14px] right-[14px] w-[38px] h-[38px] rounded-full bg-black/60 border border-white/25 flex items-center justify-center text-white hover:bg-black/85 hover:border-white transition-all z-[10]"
+                                className="absolute top-[14px] right-[14px] w-[38px] h-[38px] rounded-full bg-white/80 backdrop-blur-sm border border-[#dce2e8] flex items-center justify-center text-[#2a2a3a] hover:bg-[#0066ff] hover:text-white hover:border-[#0066ff] transition-all z-[10] shadow-sm"
                             >
                                 <Github size={18} />
                             </button>
 
-                            <div className="absolute bottom-0 left-0 right-0 h-[65%] p-[24px] flex flex-col justify-end bg-gradient-to-t from-[#0A1128] via-[#0A1128]/90 to-transparent z-[10]">
-                                <h2 className="text-[19px] font-bold text-white mb-[8px] font-heading drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">{project.title}</h2>
-                                <p className="text-[13px] font-medium text-white/90 mb-[12px] line-clamp-2 leading-relaxed">{project.intro}</p>
+                            <div className="absolute bottom-0 left-0 right-0 h-[65%] p-[24px] flex flex-col justify-end bg-gradient-to-t from-white via-white/95 to-transparent z-[10]">
+                                <h2 className="text-[19px] font-bold text-[#2a2a3a] mb-[8px] font-heading">{project.title}</h2>
+                                <p className="text-[13px] font-medium text-[#667788] mb-[12px] line-clamp-2 leading-relaxed">{project.intro}</p>
                                 <div className="flex flex-wrap gap-[6px]">
                                     {project.tech.map(tag => (
-                                        <span key={tag} className="px-[10px] py-[4px] bg-primary/20 border border-primary/40 text-primary text-[11px] font-bold uppercase rounded-[20px]">
+                                        <span key={tag} className="px-[10px] py-[4px] bg-[#0066ff]/5 border border-[#dce2e8] text-[#0066ff] text-[11px] font-bold uppercase rounded-[20px]">
                                             {tag}
                                         </span>
                                     ))}
@@ -382,42 +361,42 @@ export default function ProjectsPage() {
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.9 }}
                             transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="relative w-full max-w-[680px] max-h-[85vh] overflow-y-auto bg-gradient-to-br from-[#0a1628] to-[#122240] border border-primary/40 rounded-[20px] p-[36px] shadow-2xl custom-scrollbar"
+                            className="relative w-full max-w-[680px] max-h-[85vh] overflow-y-auto bg-white border border-[#dce2e8] rounded-[20px] p-[36px] shadow-2xl custom-scrollbar"
                         >
                             <button
                                 onClick={() => setSelectedProject(null)}
-                                className="absolute top-6 right-6 text-white hover:text-primary transition-colors"
+                                className="absolute top-6 right-6 text-[#2a2a3a] hover:text-[#0066ff] transition-colors"
                             >
                                 <X size={28} />
                             </button>
 
                             <div className="flex flex-col gap-6">
                                 <div>
-                                    <h2 className="text-[26px] font-bold text-white mb-2 font-heading">{selectedProject.title}</h2>
+                                    <h2 className="text-[26px] font-bold text-[#2a2a3a] mb-2 font-heading">{selectedProject.title}</h2>
                                     <div className="flex flex-wrap gap-2 mb-4">
                                         {selectedProject.tech.map(tag => (
-                                            <span key={tag} className="px-2.5 py-1 bg-primary/20 border border-primary/40 text-primary text-[11px] font-bold uppercase rounded-[20px]">
+                                            <span key={tag} className="px-2.5 py-1 bg-[#0066ff]/5 border border-[#dce2e8] text-[#0066ff] text-[11px] font-bold uppercase rounded-[20px]">
                                                 {tag}
                                             </span>
                                         ))}
                                     </div>
-                                    <div className="flex items-center gap-2 text-primary text-[13px] font-medium">
+                                    <div className="flex items-center gap-2 text-[#0066ff] text-[13px] font-medium">
                                         <Calendar size={14} />
                                         <span>{selectedProject.timeline}</span>
                                     </div>
                                 </div>
 
-                                <div className="h-[1px] w-full bg-primary/15" />
+                                <div className="h-[1px] w-full bg-[#dce2e8]" />
 
                                 <div>
-                                    <span className="text-[12px] uppercase text-primary font-bold tracking-[2px] block mb-3">DESCRIPTION</span>
-                                    <p className="text-[14px] text-white/75 leading-[1.7]">{selectedProject.description}</p>
+                                    <span className="text-[12px] uppercase text-[#0066ff] font-bold tracking-[2px] block mb-3">DESCRIPTION</span>
+                                    <p className="text-[14px] text-[#2a2a3a]/80 leading-[1.7]">{selectedProject.description}</p>
                                 </div>
 
-                                <div className="h-[1px] w-full bg-primary/15" />
+                                <div className="h-[1px] w-full bg-[#dce2e8]" />
 
                                 <div>
-                                    <span className="text-[12px] uppercase text-primary font-bold tracking-[2px] block mb-4">KEY ACHIEVEMENTS</span>
+                                    <span className="text-[12px] uppercase text-[#0066ff] font-bold tracking-[2px] block mb-4">KEY ACHIEVEMENTS</span>
                                     <ul className="space-y-3">
                                         {selectedProject.achievements.map((achievement, idx) => (
                                             <motion.li
@@ -427,30 +406,30 @@ export default function ProjectsPage() {
                                                 transition={{ delay: 0.3 + (idx * 0.15) }}
                                                 className="flex items-start gap-3"
                                             >
-                                                <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
-                                                <span className="text-[14px] text-white leading-relaxed">{achievement}</span>
+                                                <CheckCircle2 size={16} className="text-[#ff6b35] shrink-0 mt-0.5" />
+                                                <span className="text-[14px] text-[#2a2a3a] leading-relaxed">{achievement}</span>
                                             </motion.li>
                                         ))}
                                     </ul>
                                 </div>
 
-                                <div className="h-[1px] w-full bg-primary/15" />
+                                <div className="h-[1px] w-full bg-[#dce2e8]" />
 
                                 <div>
-                                    <span className="text-[12px] uppercase text-primary font-bold tracking-[2px] block mb-4">TECH STACK</span>
+                                    <span className="text-[12px] uppercase text-[#0066ff] font-bold tracking-[2px] block mb-4">TECH STACK</span>
                                     <div className="space-y-3">
                                         {selectedProject.techBars.map((bar, idx) => (
                                             <div key={bar.label} className="flex flex-col gap-1.5">
                                                 <div className="flex justify-between items-center px-1">
-                                                    <span className="text-[12px] text-white/70 font-medium">{bar.label}</span>
-                                                    <span className="text-[12px] text-primary font-bold">{bar.value}%</span>
+                                                    <span className="text-[12px] text-[#667788] font-medium">{bar.label}</span>
+                                                    <span className="text-[12px] text-[#0066ff] font-bold">{bar.value}%</span>
                                                 </div>
-                                                <div className="h-[6px] bg-primary/10 rounded-full overflow-hidden">
+                                                <div className="h-[6px] bg-[#f0f3f6] rounded-full overflow-hidden">
                                                     <motion.div
                                                         initial={{ width: 0 }}
                                                         animate={{ width: `${bar.value}%` }}
                                                         transition={{ duration: 1.2, delay: 0.4 + (idx * 0.2), ease: "easeOut" }}
-                                                        className="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full"
+                                                        className="h-full bg-gradient-to-r from-[#ff6b35] to-[#0066ff] rounded-full"
                                                     />
                                                 </div>
                                             </div>
@@ -461,7 +440,7 @@ export default function ProjectsPage() {
                                 <div className="pt-4">
                                     <button
                                         onClick={() => window.open(selectedProject.github, '_blank')}
-                                        className="w-fit flex items-center gap-3 px-6 py-3 bg-primary/15 border border-primary/50 text-primary font-bold rounded-[8px] hover:bg-primary/25 transition-all"
+                                        className="w-fit flex items-center gap-3 px-6 py-3 bg-[#0066ff]/5 border border-[#dce2e8] text-[#0066ff] font-bold rounded-[8px] hover:bg-[#0066ff]/10 hover:border-[#0066ff] transition-all"
                                     >
                                         <Github size={20} />
                                         View on GitHub →
@@ -477,16 +456,16 @@ export default function ProjectsPage() {
         .project-card-overlay {
           background: linear-gradient(
             to top, 
-            rgba(10, 17, 40, 0.95) 0%, 
-            rgba(10, 17, 40, 0.75) 40%,
-            rgba(10, 17, 40, 0.4) 70%,
+            rgba(255, 255, 255, 0.98) 0%, 
+            rgba(255, 255, 255, 0.9) 40%,
+            rgba(255, 255, 255, 0.4) 70%,
             transparent 100%
           );
         }
 
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(6, 182, 212, 0.3); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f0f3f6; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #dce2e8; border-radius: 10px; }
       `}</style>
         </div>
     );

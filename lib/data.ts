@@ -17,12 +17,6 @@ export const personalInfo = {
         "Utilize 'Physics First' frameworks to decouple and solve complex system constraints.",
         "Can explain backpropagation using only a deck of cards."
     ],
-    journey: [
-        "My fascination with data began when I realized that every interaction, from a simple click to a complex sensor reading, tells a story. Starting with my BSc in Data Science, I was drawn to the ability to decode these stories using statistical rigor and computational power. It wasn't just about the numbers; it was about uncovering the invisible patterns that drive human behavior and system performance.",
-        "For me, machine learning is the ultimate puzzle. Whether it's optimizing a YOLO model for edge-device crop detection or building a multimodal RAG system for automotive diagnostics, I find deep satisfaction in decoupling complex constraints into manageable, solvable components. I thrive on the challenge of taking messy data and transforming it into a precise, predictive asset.",
-        "I believe in understanding the fundamental mechanisms behind the data before applying complex models. My philosophy centers on bridge-building: connecting research-grade algorithms with production-ready reliability. I prioritize scalable inference and end-to-end performance, ensuring that every system I deploy is not just accurate, but robust and interpretable.",
-        "What drives me is the real-world impact of intelligence at scale. I am motivated by the prospect of building systems that empower users and solve critical industry challenges. As I pursue my MS at the University of Michigan, I am focused on pushing the boundaries of Generative AI and Computer Vision to create a more efficient, data-driven future."
-    ],
     socials: [
         {
             name: "GitHub",
@@ -110,16 +104,17 @@ export const skills = {
 export const projects = [
     {
         title: "AutoRAG: Multi-Modal Generative AI Assistant",
-        description: "Retrieval-augmented Q&A for documents and images using FastAPI and FAISS.",
+        description: "Retrieval-augmented Q\u0026A for documents and images using FastAPI and FAISS.",
         bullets: [
-            "Retrieval-augmented Q&A for documents and images using FastAPI and FAISS.",
+            "Retrieval-augmented Q\u0026A for documents and images using FastAPI and FAISS.",
             "Added request logging and basic monitoring to track latency and failures."
         ],
         tech: ["FastAPI", "FAISS", "GenAI"],
-        github: null,
+        github: "https://github.com/YatinKande/AutoRAG",
         demo: null,
         image: "/projects/autorag.png",
         featured: true,
+        size: "large" // Bento: 2x2
     },
     {
         title: "Dataset Recommender Bot (AWS)",
@@ -129,10 +124,11 @@ export const projects = [
             "Instrumented logging to measure engagement and support controlled experimentation."
         ],
         tech: ["AWS Lex", "Lambda", "DynamoDB", "S3"],
-        github: null,
+        github: "https://github.com/YatinKande/AWS-Dataset-Recommender",
         demo: null,
-        image: "/projects/dataset-bot.png",
+        image: "/projects/aws_bot.png",
         featured: true,
+        size: "tall" // Bento: 1x2
     },
     {
         title: "CV Pipeline for Crop vs Weed Detection",
@@ -142,10 +138,11 @@ export const projects = [
             "Summarized precision/recall and error trends using dashboards for review."
         ],
         tech: ["YOLO", "Python", "Dash"],
-        github: null,
+        github: "https://github.com/YatinKande/Crop-Weed-Detection",
         demo: null,
-        image: "/projects/yolo-crop.png",
+        image: "/projects/cv_agri.png",
         featured: true,
+        size: "wide" // Bento: 2x1
     },
 ];
 
@@ -182,21 +179,24 @@ export const education = [
         degree: "MS in Data Science",
         field: "Data Science",
         location: "Dearborn, MI, USA",
-        year: "2024 - 2026 (Expected)"
+        year: "2024 - 2026 (Expected)",
+        achievements: ["GPA: 3.8"]
     },
     {
         institution: "Vellore Institute of Technology",
         degree: "PG Program in Data Science",
         field: "Data Science",
         location: "Bangalore, India",
-        year: "2023 - 2024"
+        year: "2023 - 2024",
+        achievements: ["Specialized in Applied Statistics and ML"]
     },
     {
         institution: "Jain University",
         degree: "BSc Honors in Data Science",
         field: "Data Science",
         location: "Bangalore, India",
-        year: "2019 - 2022"
+        year: "2019 - 2022",
+        achievements: ["Focus on Mathematical Foundations of AI"]
     }
 ];
 

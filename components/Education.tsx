@@ -1,18 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { experience } from "@/lib/data";
-import { Briefcase, MapPin } from "lucide-react";
+import { education } from "@/lib/data";
+import { GraduationCap, MapPin } from "lucide-react";
 
-export default function Experience() {
+export default function Education() {
     return (
         <div className="bg-white border border-[#cfe5df] p-10 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] h-full">
             {/* Header */}
             <div className="flex items-center gap-3 mb-10">
                 <div className="p-2.5 bg-[#20c997]/10 rounded-xl text-[#20c997]">
-                    <Briefcase className="size-6" />
+                    <GraduationCap className="size-6" />
                 </div>
-                <h2 className="text-3xl font-bold text-[#1a2e28]">Experience</h2>
+                <h2 className="text-3xl font-bold text-[#1a2e28]">Education</h2>
             </div>
 
             {/* Timeline */}
@@ -20,10 +20,10 @@ export default function Experience() {
                 {/* Vertical Line */}
                 <div className="absolute left-[7px] top-2 bottom-0 w-[2px] bg-[#cfe5df]" />
 
-                {experience.map((item, idx) => (
+                {education.map((item, idx) => (
                     <motion.div
                         key={idx}
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: idx * 0.1, duration: 0.5 }}
                         viewport={{ once: true }}
@@ -35,17 +35,17 @@ export default function Experience() {
                         {/* Date Range */}
                         <div className="flex justify-between items-start mb-1">
                             <h4 className="font-bold text-lg text-[#1a2e28] leading-tight group-hover:text-[#20c997] transition-colors">
-                                {item.role}
+                                {item.degree}
                             </h4>
                             <span className="text-xs font-mono font-bold text-[#20c997] mt-1 whitespace-nowrap ml-4">
-                                {item.period}
+                                {item.year}
                             </span>
                         </div>
 
-                        {/* Company & Location */}
+                        {/* Institution & Location */}
                         <div className="flex flex-col gap-1 mb-4">
-                            <div className="text-[#ff6b6b] font-bold text-base leading-none">
-                                {item.company}
+                            <div className="text-[#1a2e28] font-bold text-base leading-none opacity-80">
+                                {item.institution}
                             </div>
                             <div className="flex items-center gap-1.5 text-[#5a7069] text-sm">
                                 <MapPin className="size-3.5" />
@@ -55,10 +55,10 @@ export default function Experience() {
 
                         {/* Achievements */}
                         <ul className="space-y-2.5">
-                            {item.bullets.map((bullet, bIdx) => (
-                                <li key={bIdx} className="flex gap-2 text-[14px] text-[#5a7069]/90 leading-relaxed">
+                            {item.achievements?.map((achievement, aIdx) => (
+                                <li key={aIdx} className="flex gap-2 text-[14px] text-[#5a7069]/90 leading-relaxed">
                                     <span className="text-[#20c997] font-bold select-none">•</span>
-                                    <span>{bullet}</span>
+                                    <span>{achievement}</span>
                                 </li>
                             ))}
                         </ul>

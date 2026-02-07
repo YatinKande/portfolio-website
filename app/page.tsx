@@ -1,193 +1,310 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
-import NeuralBackground from "@/components/NeuralBackground";
-import BackgroundWatermarks from "@/components/BackgroundWatermarks";
+import { useEffect, useState } from "react";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Skills from "@/components/Skills";
+import Experience from "@/components/Experience";
+import Projects from "@/components/Projects";
+import Education from "@/components/Education";
+import Certifications from "@/components/Certifications";
+import Contact from "@/components/Contact";
+import { BarChart3, GraduationCap, Briefcase, Rocket } from "lucide-react";
+import NextImage from "next/image";
 import GlitchText from "@/components/GlitchText";
-import TypewriterQuote from "@/components/TypewriterQuote";
-import ConsoleLog from "@/components/ConsoleLog";
-import InsightTicker from "@/components/InsightTicker";
-import LoadingStatus from "@/components/LoadingStatus";
-import Image from "next/image";
+import Navbar from "@/components/Navbar";
 
 export default function LandingPage() {
-    const router = useRouter();
     const [progress, setProgress] = useState(0);
-    const [isComplete, setIsComplete] = useState(false);
-    const progressRef = useRef(0);
-    const transitionTriggered = useRef(false);
+    const [status, setStatus] = useState("INITIALIZING_SYSTEM");
+    const [phase, setPhase] = useState<"loading" | "transitioning" | "complete">("loading");
+    const [isLoading, setIsLoading] = useState(true);
+
+    const duration = 2500; // 2.5s for loading fill
 
     useEffect(() => {
-        // Clear completion state on fresh load
-        sessionStorage.removeItem('loaderCompleted');
+        const startTime = Date.now();
 
-        const sequenceTimer = setTimeout(() => {
-            const duration = 6000; // Optimized duration
-            const startTime = Date.now();
+        const updateProgress = () => {
+            const elapsed = Date.now() - startTime;
+            const newProgress = Math.min((elapsed / duration) * 100, 100);
+            setProgress(newProgress);
 
-            const updateProgress = () => {
-                const elapsed = Date.now() - startTime;
-                const newProgress = Math.min((elapsed / duration) * 100, 100);
-
-                progressRef.current = newProgress;
-                setProgress(newProgress);
-
-                if (newProgress < 100) {
-                    requestAnimationFrame(updateProgress);
-                } else {
-                    if (!transitionTriggered.current) {
-                        transitionTriggered.current = true;
+            if (newProgress < 100) {
+                requestAnimationFrame(updateProgress);
+            } else {
+                // Loading complete (3.0s total with 0.5s delay)
+                setTimeout(() => {
+                    setStatus("DEPLOYMENT_COMPLETE");
+                    // Step 2 starts at 3.2s
+                    setTimeout(() => {
+                        setPhase("transitioning");
+                        // Loader completely removed after transition (4.0s)
                         setTimeout(() => {
-                            sessionStorage.setItem('loaderCompleted', 'true');
-                            setIsComplete(true);
+                            setIsLoading(false);
+                            setPhase("complete");
                         }, 800);
-                    }
-                }
-            };
+                    }, 200);
+                }, 500);
+            }
+        };
 
+        const initialDelay = setTimeout(() => {
             requestAnimationFrame(updateProgress);
-        }, 1500);
+        }, 500);
 
-        return () => clearTimeout(sequenceTimer);
+        return () => clearTimeout(initialDelay);
     }, []);
 
-    useEffect(() => {
-        if (isComplete) {
-            router.push("/dashboard");
-        }
-    }, [isComplete, router]);
+    const stats = [
+        { icon: BarChart3, text: "3.8 GPA", delay: 1.2 },
+        { icon: GraduationCap, text: "MS @ UMichigan", delay: 1.35 },
+        { icon: Briefcase, text: "2+ Years ML/AI", delay: 1.5 },
+        { icon: Rocket, text: "10+ Projects", delay: 1.65 },
+    ];
 
     return (
-        <div className="min-h-screen relative flex flex-col items-center justify-center overflow-hidden bg-background loader-container">
-
-            <NeuralBackground />
-            <BackgroundWatermarks />
-
-            <div className="fixed inset-0 pointer-events-none z-[2] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,17,40,0.9)_100%)]" />
-            <div className="fixed inset-0 pointer-events-none z-[5] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(18,16,16,1)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-[0.02] animate-scanline" />
-
-            <style jsx global>{`
-                @keyframes fadeInUp {
-                  from { opacity: 0; transform: translateY(20px); }
-                  to { opacity: 1; transform: translateY(0); }
-                }
-
-                @keyframes scanline {
-                    0% { background-position: 0 0; }
-                    100% { background-position: 0 100%; }
-                }
-
-                @keyframes packet-move {
-                    0% { left: -10%; opacity: 0; }
-                    10% { opacity: 1; }
-                    90% { opacity: 1; }
-                    100% { left: 100%; opacity: 0; }
-                }
-
-                .animate-scanline { animation: scanline 20s linear infinite; }
-
-                .fade-up-element {
-                    opacity: 0;
-                    animation: fadeInUp 0.8s ease-out forwards;
-                }
-
-                .data-packet {
-                    position: absolute;
-                    top: 50%;
-                    width: 8px;
-                    height: 8px;
-                    background: #06B6D4;
-                    border-radius: 50%;
-                    transform: translateY(-50%);
-                    box-shadow: 0 0 10px #06B6D4;
-                    animation: packet-move 2s infinite linear;
-                }
-            `}</style>
+        <main className="min-h-screen bg-[#f0f8f6] selection:bg-[#ff6b6b]/30 relative overflow-hidden">
+            {/* Background Animated Gradient & Particles Overlay */}
+            <div className="fixed inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#20c997]/5 via-transparent to-[#ff6b6b]/5 animate-pulse" />
+                {/* Floating Dots Pattern with slow drift */}
+                <motion.div
+                    animate={{
+                        backgroundPosition: ["0px 0px", "40px 40px"],
+                    }}
+                    transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                    className="absolute inset-0 opacity-[0.15]"
+                    style={{
+                        backgroundImage: "radial-gradient(#20c997 1.5px, transparent 1.5px)",
+                        backgroundSize: "40px 40px"
+                    }}
+                />
+            </div>
 
             <AnimatePresence>
-                {!isComplete && (
+                {isLoading && (
                     <motion.div
-                        className="relative z-10 flex flex-col items-center gap-6 w-full max-w-lg px-4 text-center"
-                        exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)", transition: { duration: 1.2 } }}
+                        key="loader-container"
+                        className="fixed inset-0 z-[100] flex flex-col items-center justify-center px-6"
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.8, ease: "easeInOut" }}
                     >
-
-                        <div className="fade-up-element" style={{ animationDelay: '0s' }}>
-                            <div className="relative mb-2">
-                                <motion.div
-                                    animate={{ opacity: [0.3, 0.6, 0.3], scale: [1.1, 1.3, 1.1] }}
-                                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                                    className="absolute inset-0 rounded-full bg-cyan-400 blur-3xl"
+                        {/* Profile Photo */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={phase === "transitioning" ? {
+                                scale: 1.1,
+                                opacity: 1
+                            } : {
+                                opacity: 1,
+                                scale: 1
+                            }}
+                            transition={{
+                                duration: 0.8,
+                                ease: [0.4, 0, 0.2, 1]
+                            }}
+                            layoutId="profile-photo"
+                            className="relative mb-[30px] z-20"
+                        >
+                            <div className="absolute inset-0 rounded-full bg-[#20c997]/30 blur-[40px] animate-pulse" />
+                            <div className="relative w-[120px] h-[120px] md:w-[160px] md:h-[160px] rounded-full border-[5px] border-[#20c997] shadow-[0_0_40px_rgba(32,201,151,0.35)] overflow-hidden">
+                                <NextImage
+                                    src="/me.jpg"
+                                    alt="Yatin Kande"
+                                    fill
+                                    className="object-cover scale-110"
+                                    priority
                                 />
-                                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-cyan-400/60 relative shadow-[0_0_40px_rgba(6,182,212,0.5)] z-10">
-                                    <Image
-                                        src="/me.jpg"
-                                        alt="Yatin Kande"
-                                        fill
-                                        className="object-cover"
-                                        priority
+                            </div>
+                        </motion.div>
+
+                        {/* Loader UI wrapper for fading out */}
+                        <motion.div
+                            animate={{
+                                opacity: phase === "transitioning" ? 0 : 1,
+                                y: phase === "transitioning" ? 20 : 0
+                            }}
+                            transition={{ duration: 0.5 }}
+                            className="flex flex-col items-center text-center w-full"
+                        >
+                            {/* Name & Title */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.4, duration: 0.3 }}
+                                className="mb-[40px]"
+                            >
+                                <h1 className="text-[32px] md:text-[42px] font-bold text-[#1a2e28] tracking-tight leading-none mb-2">
+                                    Yatin Kande
+                                </h1>
+                                <div className="mt-4">
+                                    <GlitchText />
+                                </div>
+                            </motion.div>
+
+                            {/* Loading Section */}
+                            <div className="w-full max-w-[300px] md:max-w-[450px] mb-[35px]">
+                                <div className="flex justify-between items-end mb-[12px] font-mono text-[13px]">
+                                    <div className={status === "DEPLOYMENT_COMPLETE" ? "text-[#00ff9d] font-bold" : "text-[#20c997]"}>
+                                        {status}
+                                        <motion.span
+                                            animate={{ opacity: [1, 0] }}
+                                            transition={{ duration: 0.5, repeat: Infinity }}
+                                        >
+                                            |
+                                        </motion.span>
+                                    </div>
+                                    <div className="text-[#20c997] opacity-60 font-bold">{Math.floor(progress)}%</div>
+                                </div>
+                                <div className="h-[6px] w-full bg-[#cfe5df] rounded-[3px] overflow-hidden">
+                                    <motion.div
+                                        className="h-full bg-gradient-to-r from-[#ff6b6b] to-[#20c997] shadow-[0_0_15px_rgba(32,201,151,0.5)]"
+                                        style={{ width: `${progress}%` }}
+                                        transition={{ ease: "easeInOut" }}
                                     />
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="space-y-1">
-                            <div className="fade-up-element" style={{ animationDelay: '1000ms' }}>
-                                <h1 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
-                                    Yatin Kande
-                                </h1>
-                            </div>
-
-                            <div className="fade-up-element" style={{ animationDelay: '2000ms' }}>
-                                <GlitchText startTime={2800} />
-                            </div>
-                        </div>
-
-                        <div className="fade-up-element" style={{ animationDelay: '3000ms' }}>
-                            <TypewriterQuote delay={0} />
-                        </div>
-
-                        <div className="w-full max-w-sm flex flex-col items-center mt-8">
-                            <div className="fade-up-element w-full" style={{ animationDelay: '4000ms' }}>
-                                <InsightTicker />
-                            </div>
-
-                            <div className="fade-up-element w-full px-8 sm:px-0" style={{ animationDelay: '4500ms' }}>
-                                <div className="h-2 w-full bg-[#0A1128]/50 border border-cyan-900/50 rounded-full overflow-hidden backdrop-blur-sm relative mt-8 mb-4 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-                                    <div
-                                        className="h-full bg-gradient-to-r from-blue-600 via-cyan-500 to-cyan-400 relative transition-[width] duration-[16ms] linear"
-                                        style={{ width: `${progress}%` }}
-                                    >
-                                        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                                            <div className="data-packet" style={{ animationDelay: '0s' }} />
-                                            <div className="data-packet" style={{ animationDelay: '0.6s' }} />
-                                            <div className="data-packet" style={{ animationDelay: '1.2s' }} />
-                                        </div>
-                                    </div>
+                            {/* Info Stats Card */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 1, duration: 0.6 }}
+                                className="bg-white/85 backdrop-blur-[12px] border border-[#cfe5df] rounded-[16px] p-8 shadow-[0_8px_32px_rgba(0,0,0,0.06)] mb-[25px]"
+                            >
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[30px] gap-y-[20px]">
+                                    {stats.map((stat, i) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ delay: stat.delay, duration: 0.3 }}
+                                            className="flex items-center gap-3"
+                                        >
+                                            <div className="p-2 rounded-lg bg-[#20c997]/10">
+                                                <stat.icon className="text-[#20c997] size-5" />
+                                            </div>
+                                            <span className="text-[#1a2e28] font-bold text-[16px] whitespace-nowrap">
+                                                {stat.text}
+                                            </span>
+                                        </motion.div>
+                                    ))}
                                 </div>
+                            </motion.div>
 
-                                <LoadingStatus progress={progress} />
+                            {/* Tagline */}
+                            <motion.p
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 1.8, duration: 0.5 }}
+                                className="italic text-[15px] text-[#789088] font-medium"
+                            >
+                                "Transforming raw data into strategic intelligence"
+                            </motion.p>
+                        </motion.div>
+                    </motion.div>
+                )}
 
-                                <div className="mt-2 text-[10px] font-mono text-cyan-400/40 uppercase tracking-widest text-right w-full">
-                                    {Math.floor(progress)}%
+                {/* Main Portfolio Content */}
+                {(!isLoading || phase === "transitioning") && (
+                    <motion.div
+                        key="portfolio-content"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1.2, ease: "easeOut" }}
+                        className="relative z-10"
+                    >
+                        <Navbar />
+
+                        <motion.section
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <Hero />
+                        </motion.section>
+
+                        <motion.section
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <About />
+                        </motion.section>
+
+                        <motion.section
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <Skills />
+                        </motion.section>
+
+                        <motion.section
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            className="bg-[#f8fdfc] py-24 px-6 border-t border-[#cfe5df]"
+                        >
+                            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                                <Experience />
+                                <Education />
+                            </div>
+                        </motion.section>
+
+                        <motion.section
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <Projects />
+                        </motion.section>
+
+                        <motion.section
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <Certifications />
+                        </motion.section>
+
+                        <motion.section
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <Contact />
+                        </motion.section>
+
+                        <footer className="py-12 bg-[#1a2e28] border-t border-[#cfe5df] px-6">
+                            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                                <div className="flex items-center gap-4">
+                                    <div className="size-3 rounded-full bg-[#20c997] animate-pulse" />
+                                    <span className="text-[10px] font-mono text-[#cfe5df]/50 uppercase tracking-widest">
+                                        SYSTEM_STATUS: ONLINE | VERSION: 3.1.0
+                                    </span>
+                                </div>
+                                <div className="text-[10px] font-mono text-[#cfe5df]/30 uppercase tracking-[0.2em]">
+                                    © 2026 YATIN KANDE • DATA SCIENCE ECOSYSTEM
                                 </div>
                             </div>
-                        </div>
-
+                        </footer>
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            <div className="fade-up-element md-only" style={{ animationDelay: '1000ms', position: 'fixed', bottom: '30px', left: '30px', zIndex: 40 }}>
-                <ConsoleLog startDelay={500} />
-            </div>
-
-            <div className="fixed bottom-[25px] right-[30px] z-50 text-[10px] sm:text-[11px] font-mono text-cyan-400/20 text-right leading-relaxed select-none uppercase tracking-widest">
-                BUILD: 2025.01<br />
-                ENV: PRODUCTION<br />
-                STATUS: ✓ ONLINE
-            </div>
-        </div>
+        </main>
     );
 }

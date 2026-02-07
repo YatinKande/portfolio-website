@@ -1,75 +1,91 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-const ROLES = ["DATA SCIENTIST", "DATA ANALYST", "AI ENGINEER", "ML ENGINEER"];
+const ROLES = [
+    "Data Scientist",
+    "Data Analyst",
+    "ML Engineer",
+    "AI Engineer",
+    "End-to-End ML Specialist"
+];
 
-export default function GlitchText({ startTime = 0 }: { startTime?: number }) {
+const GLITCH_CHARS = "!<>-_\\/[]{}—=+*^?#________";
+
+export default function GlitchText() {
     const [index, setIndex] = useState(0);
+    const [displayText, setDisplayText] = useState(ROLES[0]);
     const [isGlitching, setIsGlitching] = useState(false);
 
+    const scramble = useCallback((text: string) => {
+        return text
+            .split("")
+            .map(() => GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)])
+            .join("");
+    }, []);
+
     useEffect(() => {
-        let cycleTimer: NodeJS.Timeout;
-        let glitchTimer: NodeJS.Timeout;
+        const cycleInterval = setInterval(() => {
+            setIsGlitching(true);
 
-        const startCycling = () => {
-            const cycle = () => {
-                // Show role for 3 seconds
-                cycleTimer = setTimeout(() => {
-                    // Trigger glitch (0.4s)
-                    setIsGlitching(true);
+            // Animation sequence for transition (0.3s total)
+            const nextIndex = (index + 1) % ROLES.length;
+            const nextRole = ROLES[nextIndex];
 
-                    glitchTimer = setTimeout(() => {
-                        setIsGlitching(false);
-                        setIndex((prev) => (prev + 1) % ROLES.length);
-                        cycle(); // Recursive call for next role
-                    }, 400);
-                }, 3000);
-            };
-            cycle();
-        };
+            // Phase 1: Scramble current text
+            let frames = 0;
+            const scrambleInterval = setInterval(() => {
+                setDisplayText(scramble(ROLES[index]));
+                frames++;
+                if (frames >= 3) {
+                    clearInterval(scrambleInterval);
+                    // Phase 2: Scramble next text
+                    let framesNext = 0;
+                    const scrambleNextInterval = setInterval(() => {
+                        setDisplayText(scramble(nextRole));
+                        framesNext++;
+                        if (framesNext >= 3) {
+                            clearInterval(scrambleNextInterval);
+                            // Phase 3: Set actual next role
+                            setDisplayText(nextRole);
+                            setIsGlitching(false);
+                            setIndex(nextIndex);
+                        }
+                    }, 50);
+                }
+            }, 50);
 
-        // Delay starting the cycle until the hero section is visible
-        const initialDelay = setTimeout(startCycling, startTime);
+        }, 2300); // 2s show + 0.3s glitch
 
-        return () => {
-            clearTimeout(initialDelay);
-            clearTimeout(cycleTimer);
-            clearTimeout(glitchTimer);
-        };
-    }, [startTime]);
+        return () => clearInterval(cycleInterval);
+    }, [index, scramble]);
 
     return (
-        <div className="h-8 flex items-center justify-center relative overflow-visible">
+        <div className="h-8 flex items-center justify-center relative">
             <span
-                className={`font-bold text-cyan-400 tracking-widest text-lg md:text-xl font-heading uppercase relative inline-block transition-opacity duration-300 ${isGlitching ? 'glitch-active' : ''}`}
-                data-text={ROLES[index]}
+                className={`
+                    font-mono font-medium tracking-[2px] uppercase transition-all duration-75
+                    text-[14px] md:text-[16px] lg:text-[18px]
+                    ${isGlitching ? 'text-coral scale-105 skew-x-12 animate-flicker' : 'text-[#5a7069]'}
+                `}
+                style={{
+                    color: isGlitching ? (Math.random() > 0.5 ? '#ff6b6b' : '#20c997') : '#5a7069',
+                    textShadow: isGlitching ? (Math.random() > 0.5 ? '2px 0 #20c997' : '-2px 0 #ff6b6b') : 'none'
+                }}
             >
-                {ROLES[index]}
+                {displayText}
             </span>
 
             <style jsx>{`
-                .glitch-active {
-                    animation: glitch 0.4s ease forwards;
+                @keyframes flicker {
+                    0% { opacity: 0.8; transform: translate(1px, 1px); }
+                    25% { opacity: 1; transform: translate(-1px, 0); }
+                    50% { opacity: 0.9; transform: translate(2px, -1px); }
+                    75% { opacity: 1; transform: translate(-1px, 1px); }
+                    100% { opacity: 1; transform: translate(0); }
                 }
-                
-                @keyframes glitch {
-                  0%, 100% { transform: translate(0); text-shadow: none; }
-                  25% { transform: translate(-2px, 2px); text-shadow: 2px 0 cyan, -2px 0 cyan; }
-                  50% { transform: translate(2px, -2px); }
-                  75% { transform: translate(-2px, -2px); text-shadow: -2px 0 cyan, 2px 0 cyan; }
-                }
-
-                .glitch-active::before,
-                .glitch-active::after {
-                    content: attr(data-text);
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: transparent;
+                .animate-flicker {
+                    animation: flicker 0.1s infinite;
                 }
             `}</style>
         </div>

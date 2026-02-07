@@ -39,15 +39,15 @@ export default function CareerTimeline() {
     ];
 
     return (
-        <div className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
-            <h3 className="font-heading font-bold text-lg mb-6 flex items-center gap-2">
-                <div className="size-2 rounded-full bg-primary animate-pulse" />
+        <div className="bg-white backdrop-blur-sm border border-[#dce2e8] rounded-2xl p-6 shadow-sm">
+            <h3 className="font-heading font-bold text-lg mb-6 flex items-center gap-2 text-[#2a2a3a]">
+                <div className="size-2 rounded-full bg-[#0066ff] animate-pulse" />
                 Career Timeline
             </h3>
 
             <div className="relative">
                 {/* Timeline line */}
-                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-white/10" />
+                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-[#f0f3f6]" />
 
                 {/* Timeline items */}
                 <div className="space-y-6">
@@ -55,13 +55,14 @@ export default function CareerTimeline() {
                         <motion.div
                             key={idx}
                             initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
                             transition={{ delay: idx * 0.1, duration: 0.5 }}
                             className="relative pl-12"
                         >
                             {/* Icon */}
-                            <div className={`absolute left-0 top-0 w-8 h-8 rounded-full flex items-center justify-center ${item.type === "education" ? "bg-purple-500/20 text-purple-400" : "bg-primary/20 text-primary"
-                                } ${item.current ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : ""}`}>
+                            <div className={`absolute left-0 top-0 w-8 h-8 rounded-full flex items-center justify-center ${item.type === "education" ? "bg-[#ff6b35]/10 text-[#ff6b35]" : "bg-[#0066ff]/10 text-[#0066ff]"
+                                } ${item.current ? "ring-2 ring-[#0066ff] ring-offset-2 ring-offset-white" : "border border-[#dce2e8]"}`}>
                                 {item.type === "education" ? (
                                     <GraduationCap className="size-4" />
                                 ) : (
@@ -71,11 +72,11 @@ export default function CareerTimeline() {
 
                             {/* Content */}
                             <div>
-                                <div className="text-xs text-muted-foreground font-mono mb-1">{item.year}</div>
-                                <div className="font-semibold text-sm">{item.title}</div>
-                                <div className="text-xs text-muted-foreground">{item.subtitle}</div>
+                                <div className="text-xs text-[#667788] font-mono mb-1">{item.year}</div>
+                                <div className="font-semibold text-sm text-[#2a2a3a]">{item.title}</div>
+                                <div className="text-xs text-[#667788]">{item.subtitle}</div>
                                 {item.current && (
-                                    <div className="inline-block mt-1 px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">
+                                    <div className="inline-block mt-1 px-2 py-0.5 bg-[#0066ff]/5 text-[#0066ff] text-xs rounded-full font-bold">
                                         Current
                                     </div>
                                 )}

@@ -26,12 +26,12 @@ export default function InsightTicker() {
                 <motion.div
                     key={index}
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.5 }}
+                    animate={{ opacity: 0.7 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="flex items-center gap-2 text-[12px] italic text-white font-light text-center"
+                    className="flex items-center gap-2 text-[12px] italic text-[#667788] font-light text-center"
                 >
-                    <span className="text-cyan-400">💡</span>
+                    <span className="text-[#0066ff]">💡</span>
                     {INSIGHTS[index]}
                 </motion.div>
             </AnimatePresence>

@@ -30,13 +30,13 @@ export default function TypewriterQuote({ delay = 0 }: { delay?: number }) {
     if (!started) return <div className="h-6" />; // Placeholder
 
     return (
-        <div className="font-light italic text-gray-400 text-sm md:text-base h-6">
+        <div className="font-light italic text-[#667788] text-sm md:text-base h-6">
             "{displayedText}
             {displayedText.length < QUOTE.length && (
                 <motion.span
                     animate={{ opacity: [1, 0] }}
                     transition={{ duration: 0.5, repeat: Infinity }}
-                    className="inline-block w-[2px] h-4 bg-cyan-400 ml-1 align-middle"
+                    className="inline-block w-[2px] h-4 bg-[#0066ff] ml-1 align-middle"
                 />
             )}
             "

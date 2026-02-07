@@ -60,7 +60,7 @@ export default function NeuralBackground() {
             ctx.clearRect(0, 0, width, height);
 
             // Draw grid overlay
-            ctx.strokeStyle = "rgba(6, 182, 212, 0.03)";
+            ctx.strokeStyle = "rgba(0, 102, 255, 0.05)";
             ctx.lineWidth = 1;
             const gridSize = 40;
             for (let x = 0; x < width; x += gridSize) {
@@ -99,8 +99,8 @@ export default function NeuralBackground() {
                 }
 
                 // Draw Particle
-                const opacity = 0.6 / p.layer;
-                ctx.fillStyle = `rgba(6, 182, 212, ${opacity})`;
+                const opacity = 0.4 / p.layer;
+                ctx.fillStyle = `rgba(0, 102, 255, ${opacity})`;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -117,7 +117,7 @@ export default function NeuralBackground() {
 
                     if (dist2 < connectDist) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${(0.2 - dist2 / connectDist) / p.layer})`;
+                        ctx.strokeStyle = `rgba(0, 102, 255, ${(0.15 - dist2 / connectDist) / p.layer})`;
                         ctx.lineWidth = 0.5 / p.layer;
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);

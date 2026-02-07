@@ -17,25 +17,25 @@ const categoryIcons: Record<string, any> = {
 };
 
 const categoryColors: Record<string, string> = {
-    "Programming Languages": "#06B6D4",
-    "Databases": "#3B82F6",
-    "Machine Learning": "#8B5CF6",
-    "Deep Learning": "#EC4899",
-    "Data Analytics": "#10B981",
-    "Visualization & BI": "#F59E0B",
-    "Libraries & Frameworks": "#14B8A6",
-    "Cloud & DevOps": "#6366F1"
+    "Programming Languages": "#0066ff",
+    "Databases": "#0066ff",
+    "Machine Learning": "#ff6b35",
+    "Deep Learning": "#ff6b35",
+    "Data Analytics": "#0066ff",
+    "Visualization & BI": "#ff6b35",
+    "Libraries & Frameworks": "#0066ff",
+    "Cloud & DevOps": "#0066ff"
 };
 
 const categoryGradients: Record<string, string> = {
-    "Programming Languages": "linear-gradient(90deg, #06B6D4, #3B82F6)",
-    "Databases": "linear-gradient(90deg, #3B82F6, #1D4ED8)",
-    "Machine Learning": "linear-gradient(90deg, #8B5CF6, #6D28D9)",
-    "Deep Learning": "linear-gradient(90deg, #EC4899, #BE185D)",
-    "Data Analytics": "linear-gradient(90deg, #10B981, #059669)",
-    "Visualization & BI": "linear-gradient(90deg, #F59E0B, #D97706)",
-    "Libraries & Frameworks": "linear-gradient(90deg, #14B8A6, #0D9488)",
-    "Cloud & DevOps": "linear-gradient(90deg, #6366F1, #4338CA)"
+    "Programming Languages": "linear-gradient(90deg, #0066ff, #ff6b35)",
+    "Databases": "linear-gradient(90deg, #0066ff, #dce2e8)",
+    "Machine Learning": "linear-gradient(90deg, #ff6b35, #0066ff)",
+    "Deep Learning": "linear-gradient(90deg, #ff6b35, #ff6b35)",
+    "Data Analytics": "linear-gradient(90deg, #0066ff, #dce2e8)",
+    "Visualization & BI": "linear-gradient(90deg, #ff6b35, #dce2e8)",
+    "Libraries & Frameworks": "linear-gradient(90deg, #0066ff, #ff6b35)",
+    "Cloud & DevOps": "linear-gradient(90deg, #0066ff, #0066ff)"
 };
 
 export default function ComprehensiveSkills() {
