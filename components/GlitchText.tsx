@@ -6,8 +6,7 @@ const ROLES = [
     "Data Scientist",
     "Data Analyst",
     "ML Engineer",
-    "AI Engineer",
-    "End-to-End ML Specialist"
+    "AI Engineer"
 ];
 
 const GLITCH_CHARS = "!<>-_\\/[]{}—=+*^?#________";

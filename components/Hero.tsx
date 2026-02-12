@@ -10,6 +10,65 @@ import NextImage from "next/image";
 import GlitchText from "./GlitchText";
 
 export default function Hero() {
+    const [visibleIndices, setVisibleIndices] = useState<number[]>([]);
+    const [animComplete, setAnimComplete] = useState(false);
+
+    // 1. Scroll-triggered blur effect
+    useEffect(() => {
+        const handleScroll = () => {
+            const photoContainer = document.getElementById("hero-profile-photo");
+            if (!photoContainer) return;
+
+            requestAnimationFrame(() => {
+                const scrollY = window.scrollY;
+                const heroHeight = window.innerHeight;
+                const startThreshold = heroHeight * 0.1;
+
+                if (scrollY <= startThreshold) {
+                    photoContainer.style.filter = "blur(0px)";
+                    photoContainer.style.opacity = "1";
+                    return;
+                }
+
+                let progress = (scrollY - startThreshold) / (heroHeight * 0.9);
+
+                if (progress < 0) progress = 0;
+                if (progress > 1) progress = 1;
+
+                const blurAmount = progress * 12;
+                const opacityAmount = 1 - progress;
+
+                photoContainer.style.filter = `blur(${blurAmount}px)`;
+                photoContainer.style.opacity = `${opacityAmount}`;
+            });
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // 2. Cinematic Entrance Animation
+    useEffect(() => {
+        // Prevent replay on back navigation within the same session
+        if (sessionStorage.getItem('hero_revealed')) {
+            setAnimComplete(true);
+            return;
+        }
+
+        const delays = [100, 500, 900, 1300, 1700, 2000];
+        delays.forEach((delay, index) => {
+            setTimeout(() => {
+                setVisibleIndices(prev => [...prev, index]);
+                if (index === delays.length - 1) {
+                    setTimeout(() => {
+                        setAnimComplete(true);
+                        sessionStorage.setItem('hero_revealed', 'true');
+                    }, 900);
+                }
+            }, delay);
+        });
+    }, []);
+
     const scrollToAbout = () => {
         const aboutSection = document.getElementById("about");
         if (aboutSection) {
@@ -17,20 +76,40 @@ export default function Hero() {
         }
     };
 
+    const getHeroClass = (index: number) => {
+        if (animComplete) return "";
+        return `hero-hidden ${visibleIndices.includes(index) ? 'hero-visible' : ''}`;
+    };
+
     return (
         <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-20 px-6 bg-gradient-to-br from-[#f0f8f6] via-[#e6f2ef] to-[#f0f8f6]">
             {/* Main Content Container */}
+            <style jsx>{`
+                .hero-hidden {
+                    opacity: 0;
+                }
+                .hero-visible {
+                    opacity: 1;
+                    transition: opacity 0.9s ease-in-out;
+                }
+                @media (prefers-reduced-motion: reduce) {
+                    .hero-hidden {
+                        opacity: 1 !important;
+                        transition: none !important;
+                    }
+                }
+            `}</style>
+
             <div className="flex flex-col items-center text-center z-10 w-full max-w-4xl mx-auto">
-                {/* 1. Profile Photo */}
+
+                {/* Step 1: Profile Photo */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                    layoutId="profile-photo"
-                    className="relative mb-[30px]"
+                    id="hero-profile-photo"
+                    className={`relative mb-[30px] ${getHeroClass(0)}`}
+                    style={{ willChange: "filter, opacity" }}
                 >
                     <div className="absolute inset-0 rounded-full bg-[#20c997]/20 blur-2xl animate-pulse" />
-                    <div className="relative w-[140px] h-[140px] lg:w-[180px] lg:h-[180px] rounded-full border-[4px] border-[#20c997] shadow-[0_0_30px_rgba(32,201,151,0.3)] overflow-hidden z-10">
+                    <div className="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px] rounded-full border-[4px] border-[#20c997] shadow-[0_0_30px_rgba(32,201,151,0.3)] overflow-hidden z-10">
                         <NextImage
                             src="/me.jpg"
                             alt="Yatin Kande"
@@ -41,42 +120,31 @@ export default function Hero() {
                     </div>
                 </motion.div>
 
-                {/* 2. Name */}
+                {/* Step 2: Name */}
                 <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="font-bold text-[28px] md:text-[36px] lg:text-[48px] text-[#1a2e28] mb-[15px] tracking-tight"
+                    className={`font-bold text-[28px] md:text-[36px] lg:text-[48px] text-[#1a2e28] mb-[15px] tracking-tight ${getHeroClass(1)}`}
                 >
                     Hi, I'm <span className="text-[#ff6b6b]">Yatin</span> <span className="text-[#20c997]">Kande</span>
                 </motion.h1>
 
-                {/* 3. Glitching Roles */}
+                {/* Step 3: Rotating Job Title */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="mb-[25px]"
+                    className={`mb-[25px] ${getHeroClass(2)}`}
                 >
                     <GlitchText />
                 </motion.div>
 
-                {/* 4. Description Paragraph */}
+                {/* Step 4: Summary Paragraph */}
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.6 }}
-                    className="text-[15px] lg:text-[16px] text-[#5a7069] leading-[1.6] max-w-[700px] mx-auto mb-[35px]"
+                    className={`text-[15px] lg:text-[16px] text-[#5a7069] leading-[1.6] max-w-2xl mx-auto mb-[35px] ${getHeroClass(3)}`}
                 >
-                    Experienced Data Scientist specializing in building scalable Machine Learning pipelines and deep learning solutions.
-                    I transform complex data into measurable business impact, from advanced statistical modeling to deploying high-performance ML models.
+                    Data Scientist specializing in building scalable ML pipelines, deep learning systems, and GenAI solutions.
+                    Skilled in Python, PyTorch, and AWS cloud workflows — delivering models that drive measurable business impact from experimentation to production deployment.
                 </motion.p>
 
+                {/* Step 5: Contact Button */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.8 }}
-                    className="mb-[50px]"
+                    className={`mb-[50px] ${getHeroClass(4)}`}
                 >
                     <motion.div
                         whileHover={{ y: -5, scale: 1.02 }}
@@ -92,12 +160,9 @@ export default function Hero() {
                     </motion.div>
                 </motion.div>
 
-                {/* 6. Down Arrow */}
+                {/* Step 6: Down Arrow */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                    className="mt-auto md:mb-[40px]"
+                    className={`mt-auto md:mb-[40px] ${getHeroClass(5)}`}
                 >
                     <button
                         onClick={scrollToAbout}
@@ -111,3 +176,4 @@ export default function Hero() {
         </section>
     );
 }
+

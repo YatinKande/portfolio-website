@@ -3,250 +3,208 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Github, X, Calendar, CheckCircle2, ArrowLeft } from "lucide-react";
-import NeuralBackground from "@/components/NeuralBackground";
+import { Github, X, ArrowLeft, ExternalLink, Mail, Linkedin, ChevronRight, Check } from "lucide-react";
+import Image from "next/image";
 
 const PROJECTS_DATA = [
     {
-        id: "autorag",
-        title: "Auto Multimodal RAG",
-        intro: "Multimodal RAG system for automotive domain using GenAI, FAISS, and FastAPI",
-        description: "Engineered a multimodal RAG system for the automotive domain. Supports document ingestion, vector search, and grounded Q&A over manuals, recalls, and OBD data using Google GenAI and FAISS.",
-        timeline: "Nov 2025 - Present",
-        tech: ["Python", "FastAPI", "FAISS", "Google GenAI"],
-        techBars: [
-            { label: "Python", value: 95 },
-            { label: "FastAPI", value: 85 },
-            { label: "FAISS", value: 80 },
-            { label: "Google GenAI", value: 82 }
+        id: "aws-docs-rag-bot",
+        title: "AWS Docs RAG Bot",
+        fullTitle: "AWS Documentation RAG Chatbot",
+        intro: "Intelligent document Q&A system with retrieval-augmented generation",
+        description: "A sophisticated document RAG chatbot that allows users to upload AWS documentation or any files and ask questions. The system retrieves the most relevant passages from documents and generates grounded, contextual answers with informative citations. Ensures responses are strictly based on provided content.",
+        features: [
+            "Upload and process AWS documentation",
+            "Intelligent passage retrieval using FAISS",
+            "Grounded answer generation with citations",
+            "Fast query response times",
+            "RESTful API architecture"
         ],
-        achievements: [
-            "Built document and image search with chunking and metadata filtering",
-            "Achieved 94% service availability with retry logic and circuit controls",
-            "Implemented request logging and monitoring for latency tracking"
+        tech: ["FastAPI", "FAISS", "Python", "LangChain", "AWS"],
+        techDetails: [
+            { name: "FastAPI", description: "High-performance web framework for the backend." },
+            { name: "FAISS", description: "Efficient vector similarity search for document retrieval." },
+            { name: "LangChain", description: "Framework for building LLM-powered applications." },
+            { name: "AWS", description: "Cloud infrastructure for hosting and storage." }
         ],
-        github: "https://github.com/YatinKande/auto-multimodal-rag",
-        class: "card-autorag",
-        isInternship: false
+        github: "https://github.com/YatinKande/aws-docs-rag-bot",
+        image: "/projects/aws_rag_chatbot.png"
     },
     {
-        id: "lipread",
-        title: "Lip Read AI — LipNet",
-        intro: "Deep learning lip-reading system using 3D CNNs, Bi-LSTMs, and CTC loss",
-        description: "Implemented a deep learning lip-reading AI system trained on the GRID dataset using a LipNet-inspired architecture with 3D CNNs, Bi-LSTMs, and CTC loss. Processes video with OpenCV and trains via TensorFlow.",
-        timeline: "Apr 2025 - Jul 2025",
-        tech: ["Python", "3D CNN", "Bi-LSTM", "TensorFlow", "OpenCV"],
-        techBars: [
-            { label: "Python", value: 92 },
-            { label: "3D CNN", value: 88 },
-            { label: "Bi-LSTM", value: 85 },
-            { label: "TensorFlow", value: 80 },
-            { label: "OpenCV", value: 78 }
-        ],
-        achievements: [
-            "Processed and normalized 30,000+ video frames with structured splits",
-            "Performed SQL-based analysis across 50+ training iterations",
-            "Built complete training and validation pipeline with CTC loss"
-        ],
-        github: "https://github.com/YatinKande/Lip-Read-AI-using-LipNet",
-        class: "card-lipread",
-        isInternship: false
-    },
-    {
-        id: "dataset-bot",
-        title: "Dataset Concierge Bot",
-        intro: "Conversational bot to find and retrieve datasets using natural language",
-        description: "A conversational bot that helps users find, save, and retrieve datasets from multiple sources using natural language. Features new-user onboarding, slot-filling, and flexible date handling.",
-        timeline: "Aug 2025 - Oct 2025",
-        tech: ["JavaScript", "AWS Lex", "DynamoDB", "Lambda"],
-        techBars: [
-            { label: "JavaScript", value: 85 },
-            { label: "AWS Lex", value: 88 },
-            { label: "DynamoDB", value: 80 },
-            { label: "Lambda", value: 82 }
-        ],
-        achievements: [
-            "Implemented natural language understanding with AWS Lex",
-            "Built flexible date handling and user ID management system",
-            "Deployed serverless architecture with Lambda and DynamoDB"
-        ],
-        github: "https://github.com/YatinKande/Dataset-Concierge-Bot",
-        class: "card-dataset-bot",
-        isInternship: false
-    },
-    {
-        id: "ai-car",
-        title: "AI Car Simulation — NEAT",
-        intro: "Self-driving car simulation using NeuroEvolution for autonomous navigation",
-        description: "Python-based simulation of self-driving cars using NeuroEvolution of Augmenting Topologies (NEAT). Implements reinforcement learning for cars to autonomously navigate tracks by evolving neural networks.",
-        timeline: "Jan 2025",
-        tech: ["Python", "NEAT", "Reinforcement Learning"],
-        techBars: [
-            { label: "Python", value: 95 },
-            { label: "NEAT", value: 88 },
-            { label: "Reinforcement Learning", value: 82 }
-        ],
-        achievements: [
-            "Implemented full NEAT algorithm for neural network evolution",
-            "Built autonomous track navigation and collision avoidance",
-            "Visualized evolutionary progress across generations"
-        ],
-        github: "https://github.com/YatinKande/AI-Car-Simulation-using-NEAT-Algorithm",
-        class: "card-ai-car",
-        isInternship: false
-    },
-    {
-        id: "covid",
-        title: "COVID-19 Data Analysis",
-        intro: "Comprehensive data visualizations analyzing Covid-19 crisis patterns and trends",
-        description: "Comprehensive data analysis and visualization project describing Covid-19 crisis patterns. Includes trend analysis, geographic comparisons, and interactive dashboards built with Plotly.",
-        timeline: "Sep 2025",
-        tech: ["Python", "Pandas", "Plotly", "Jupyter"],
-        techBars: [
-            { label: "Python", value: 90 },
-            { label: "Pandas", value: 92 },
-            { label: "Plotly", value: 85 },
-            { label: "Jupyter", value: 88 }
-        ],
-        achievements: [
-            "Created interactive visualizations for crisis trend analysis",
-            "Performed geographic and temporal pattern comparisons",
-            "Built full capstone project with documentation"
-        ],
-        github: "https://github.com/YatinKande/Covid--19-Data-Analysis-Capstone-Project",
-        class: "card-covid",
-        isInternship: false
-    },
-    {
-        id: "kinesis",
-        title: "KinesisKeyEntry",
-        intro: "Smart door authentication using AWS Rekognition and Kinesis Video Streams",
-        description: "Smart Door Authentication System using AWS Rekognition for facial detection, Kinesis Video Streams for real-time processing, S3 for storage, and DynamoDB for secure access control management.",
-        timeline: "Dec 2025",
-        tech: ["AWS Rekognition", "Kinesis", "S3", "DynamoDB"],
-        techBars: [
-            { label: "AWS Rekognition", value: 88 },
-            { label: "Kinesis", value: 82 },
-            { label: "DynamoDB", value: 80 },
-            { label: "S3", value: 78 }
-        ],
-        achievements: [
-            "Integrated AWS Rekognition for real-time facial authentication",
-            "Built video stream processing pipeline with Kinesis",
-            "Implemented secure access control with S3 and DynamoDB"
-        ],
-        github: "https://github.com/YatinKande/KinesisKeyEntry",
-        class: "card-kinesis",
-        isInternship: false
-    },
-    {
-        id: "ev-finder",
+        id: "smart-ev-finder",
         title: "Smart EV Finder",
-        intro: "LLM-powered EV charging station finder using Llama 3 for personalized recommendations",
-        description: "Conversational EV charging station finder powered by Llama 3 LLM. Leverages natural language understanding and dynamic user profiling to deliver personalized charging station recommendations.",
-        timeline: "Jan 2026",
-        tech: ["Python", "Llama 3", "LLM", "NLP"],
-        techBars: [
-            { label: "Python", value: 92 },
-            { label: "Llama 3", value: 85 },
-            { label: "NLP", value: 88 },
-            { label: "LLM", value: 82 }
+        fullTitle: "Smart EV Charging Station Finder",
+        intro: "AI-powered conversational EV charging station finder",
+        description: "A conversational AI application powered by Llama 3 that helps users find the best EV charging stations. The system leverages natural language understanding to interpret user queries and provides personalized charging station recommendations based on location, availability, and speed.",
+        features: [
+            "Natural language query processing",
+            "Dynamic user profiling system",
+            "Real-time charging station availability",
+            "Personalized recommendations",
+            "Multi-criteria filtering"
         ],
-        achievements: [
-            "Integrated Llama 3 for advanced natural language understanding",
-            "Built dynamic user profiling for personalized results",
-            "Delivered location-based personalized charging recommendations"
+        tech: ["Llama 3", "Python", "NLP", "Geolocation APIs"],
+        techDetails: [
+            { name: "Llama 3", description: "State-of-the-art LLM for natural language processing." },
+            { name: "Python", description: "Primary language for backend logic and data processing." },
+            { name: "Geolocation APIs", description: "Used for mapping and station discovery." }
         ],
         github: "https://github.com/YatinKande/smart-ev-finder",
-        class: "card-ev-finder",
-        isInternship: false
+        image: "/projects/ev-finder.png"
     },
     {
-        id: "smartsoil",
-        title: "SmartSoil Crop Recommender",
-        intro: "AI system recommending optimal crops using soil nutrient data analysis",
-        description: "AI-powered crop recommendation system using soil nutrient data analysis. Helps farmers and policymakers in India make informed, data-driven choices to improve crop yields across regions.",
-        timeline: "Oct 2025",
-        tech: ["Python", "Scikit-learn", "Pandas", "Jupyter"],
-        techBars: [
-            { label: "Python", value: 90 },
-            { label: "Scikit-learn", value: 88 },
-            { label: "Pandas", value: 85 },
-            { label: "Jupyter", value: 82 }
+        id: "auto-multimodal-rag",
+        title: "Automotive Multimodal RAG",
+        fullTitle: "Automotive Multimodal RAG System",
+        intro: "Multimodal RAG system for automotive domain Q&A",
+        description: "An advanced multimodal RAG system designed specifically for the automotive domain. It supports document ingestion, vector search, and grounded Q&A capabilities over automotive manuals, recall documents, and OBD-II diagnostic data, processing both text and imagery.",
+        features: [
+            "Multimodal data processing (text, images, diagrams)",
+            "Vector-based semantic search",
+            "Automotive domain specialization",
+            "OBD-II data integration",
+            "Recall and manual documentation support"
         ],
-        achievements: [
-            "Built soil nutrient analysis and classification pipeline",
-            "Trained recommendation model for regional crop optimization",
-            "Designed for real-world agricultural decision support"
+        tech: ["Google GenAI", "FAISS", "FastAPI", "Python"],
+        techDetails: [
+            { name: "Google GenAI", description: "Multimodal LLM for text and image understanding." },
+            { name: "FAISS", description: "Vector database for fast document retrieval." },
+            { name: "FastAPI", description: "Fast and modern API framework." }
+        ],
+        github: "https://github.com/YatinKande/auto-multimodal-rag",
+        image: "/projects/auto_multimodal_rag.png"
+    },
+    {
+        id: "kinesis-key-entry",
+        title: "Kinesis Key Entry",
+        fullTitle: "Kinesis Smart Door Authentication System",
+        intro: "AWS-powered secure door access control system",
+        description: "A cutting-edge smart door authentication system using AWS Rekognition for facial recognition, Kinesis Video Streams for real-time video processing, S3 for secure storage, and DynamoDB for access control management. Provides secure, contactless entry with comprehensive audit trails.",
+        features: [
+            "Real-time facial recognition",
+            "Video stream processing with Kinesis",
+            "Secure access control management",
+            "Audit trail and logging",
+            "Integration with AWS cloud services"
+        ],
+        tech: ["AWS Rekognition", "Kinesis", "S3", "DynamoDB"],
+        techDetails: [
+            { name: "AWS Rekognition", description: "Facial recognition for secure authentication." },
+            { name: "Kinesis Video Streams", description: "Real-time video processing pipeline." },
+            { name: "DynamoDB", description: "NoSQL database for access management." }
+        ],
+        github: "https://github.com/YatinKande/KinesisKeyEntry",
+        image: "/projects/smart_door_auth.png"
+    },
+    {
+        id: "dataset-concierge-bot",
+        title: "Dataset Concierge Bot",
+        fullTitle: "Dataset Concierge Bot",
+        intro: "Conversational bot for dataset discovery and management",
+        description: "An intelligent conversational bot that helps users find, save, and retrieve datasets from multiple sources using natural language. Features include new-user onboarding, slot-filling for precise queries, flexible date handling, and user ID-based data management. Built as a serverless chatbot using AWS Lex, Lambda, and DynamoDB with 500+ daily requests.",
+        features: [
+            "Natural language dataset search",
+            "Multi-source dataset aggregation",
+            "User preference learning",
+            "Slot-filling conversation flow",
+            "Serverless architecture (500+ daily requests)"
+        ],
+        tech: ["AWS Lex", "AWS Lambda", "DynamoDB", "JavaScript", "S3"],
+        techDetails: [
+            { name: "AWS Lex", description: "Conversational AI for building intelligent bots." },
+            { name: "AWS Lambda", description: "Serverless compute for handling requests." },
+            { name: "DynamoDB", description: "Scalable NoSQL database for management." }
+        ],
+        github: "https://github.com/YatinKande/Dataset-Concierge-Bot",
+        image: "/projects/dataset-bot.png"
+    },
+    {
+        id: "smartsoil-crop-recommender",
+        title: "SmartSoil Crop Recommender",
+        fullTitle: "SmartSoil Crop Recommender System",
+        intro: "Data-driven crop recommendation for Indian farmers",
+        description: "A machine learning-powered crop recommendation system that analyzes soil nutrient data to suggest the best crops for different regions in India. Helps farmers and policymakers make informed, data-driven decisions to improve crop yields and support sustainable agriculture practices.",
+        features: [
+            "Soil nutrient analysis",
+            "Regional crop optimization",
+            "Data-driven recommendations",
+            "Farmer-friendly interface",
+            "Policy support insights"
+        ],
+        tech: ["Python", "Jupyter", "Scikit-learn", "Pandas"],
+        techDetails: [
+            { name: "Scikit-learn", description: "Machine learning algorithms for recommendations." },
+            { name: "Pandas", description: "Data manipulation and analysis toolkit." },
+            { name: "Jupyter Notebook", description: "Interactive development environment." }
         ],
         github: "https://github.com/YatinKande/Smartsoil-Crop-Recommender",
-        class: "card-smartsoil",
-        isInternship: false
+        image: "/projects/smartsoil.png"
     },
     {
-        id: "license",
-        title: "License Plate Recognition",
-        intro: "ANPR system detecting and recognizing license plates from vehicle images",
-        description: "Automatic Number Plate Recognition system using image processing and deep learning techniques to automatically detect, extract, and recognize license plate numbers from vehicles in images or videos.",
-        timeline: "Jan 2025",
-        tech: ["Python", "OpenCV", "Deep Learning", "Jupyter"],
-        techBars: [
-            { label: "Python", value: 90 },
-            { label: "OpenCV", value: 88 },
-            { label: "Deep Learning", value: 85 },
-            { label: "Jupyter", value: 80 }
+        id: "lip-read-ai-lipnet",
+        title: "Lip-Read AI using LipNet",
+        fullTitle: "AI Lip Reading System using LipNet Architecture",
+        intro: "Deep learning lip-reading system with 3D CNNs",
+        description: "An advanced deep learning-based lip-reading AI system trained on the GRID dataset. Uses a LipNet-inspired architecture with 3D Convolutional Neural Networks, Bi-directional LSTMs, and CTC loss for accurate speech recognition from silent video. Processes video input with OpenCV and trains models using TensorFlow.",
+        features: [
+            "Silent speech recognition from video",
+            "3D CNN + BiLSTM architecture",
+            "CTC loss optimization",
+            "Video preprocessing pipeline",
+            "High accuracy on GRID dataset"
         ],
-        achievements: [
-            "Built detection pipeline using deep learning and OpenCV",
-            "Implemented OCR for license plate character extraction",
-            "Achieved real-time processing capability on video streams"
+        tech: ["PyTorch", "3D CNN", "BiLSTM", "OpenCV"],
+        techDetails: [
+            { name: "3D CNNs", description: "Spatiotemporal feature extraction from video." },
+            { name: "BiLSTM", description: "Sequence modeling for phoneme recognition." },
+            { name: "OpenCV", description: "Robust video frame processing." }
         ],
-        github: "https://github.com/YatinKande/Automatic-License-Plate-Recognition",
-        class: "card-license",
-        isInternship: false
+        github: "https://github.com/YatinKande/Lip-Read-AI-using-LipNet",
+        image: "/projects/lipread.png"
     },
     {
-        id: "yolo-crop",
-        title: "YOLO Crop Detection",
-        intro: "Real-time weed detection in agriculture using YOLO on 1000+ multispectral images",
-        description: "Trained YOLO-based vision models on 1000+ multispectral images to distinguish crops from weeds in real agricultural field conditions. Built end-to-end computer vision pipelines with deployment dashboards.",
-        timeline: "Feb 2024 - Jul 2024 | DataZymes Inc, Bengaluru",
-        tech: ["YOLO", "OpenCV", "Python", "Plotly Dash"],
-        techBars: [
-            { label: "YOLO", value: 95 },
-            { label: "OpenCV", value: 90 },
-            { label: "Python", value: 92 },
-            { label: "Plotly Dash", value: 82 }
+        id: "covid-19-data-analysis",
+        title: "COVID-19 Data Analysis",
+        fullTitle: "COVID-19 Data Analysis Capstone Project",
+        intro: "Comprehensive COVID-19 crisis data analysis",
+        description: "A comprehensive data analysis and visualization project examining the COVID-19 pandemic. Features interactive visualizations that describe infection rates, mortality trends, vaccination progress, and regional impacts. Provides insights into the global health crisis through data-driven storytelling.",
+        features: [
+            "Interactive data visualizations",
+            "Time-series analysis",
+            "Regional impact comparisons",
+            "Vaccination tracking",
+            "Mortality trend analysis"
         ],
-        achievements: [
-            "Trained YOLO on 1000+ multispectral real-field images",
-            "Reduced false positives using augmentation and normalization",
-            "Created Plotly Dash dashboards for deployment readiness reviews"
+        tech: ["Python", "Jupyter", "Pandas", "Matplotlib", "Seaborn"],
+        techDetails: [
+            { name: "Pandas", description: "Large-scale health data manipulation." },
+            { name: "Matplotlib/Seaborn", description: "Advanced statistical visualizations." },
+            { name: "NumPy", description: "High-performance numerical computing." }
         ],
-        github: "https://github.com/YatinKande",
-        class: "card-yolo-crop",
-        isInternship: true
+        github: "https://github.com/YatinKande/Covid--19-Data-Analysis-Capstone-Project",
+        image: "/projects/covid.png"
     },
     {
-        id: "ml-pipeline",
-        title: "ML Classification Pipeline",
-        intro: "End-to-end supervised learning pipeline on 32K+ records with full EDA",
-        description: "Implemented supervised learning pipelines on datasets exceeding 32,000 records using Python, Pandas, and Scikit-learn. Conducted thorough EDA and evaluated models using multiple metrics.",
-        timeline: "Mar 2022 - Jun 2022 | SmartKnower, Bengaluru",
-        tech: ["Scikit-learn", "Pandas", "Python"],
-        techBars: [
-            { label: "Scikit-learn", value: 90 },
-            { label: "Pandas", value: 92 },
-            { label: "Python", value: 95 }
+        id: "ai-car-simulation-neat",
+        title: "AI Car Simulation (NEAT)",
+        fullTitle: "AI Car Simulation using NEAT Algorithm",
+        intro: "NeuroEvolution autonomous vehicle navigation",
+        description: "A Python-based simulation of self-driving cars using NeuroEvolution of Augmenting Topologies (NEAT). Implements reinforcement learning for autonomous navigation where neural networks evolve over generations to learn optimal driving strategies on complex tracks. Cars learn to navigate obstacles and optimize racing lines through genetic algorithms.",
+        features: [
+            "Genetic algorithm-based learning",
+            "Neural network evolution",
+            "Autonomous track navigation",
+            "Multi-generation optimization",
+            "Real-time simulation visualization"
         ],
-        achievements: [
-            "Built full pipeline on 32,000+ record dataset",
-            "Evaluated using accuracy, precision, recall, F1-score, ROC-AUC",
-            "Documented reproducible experiment notes for model selection"
+        tech: ["Python", "NEAT", "Reinforcement Learning", "Pygame"],
+        techDetails: [
+            { name: "NEAT Algorithm", description: "NeuroEvolution for adaptive control systems." },
+            { name: "Reinforcement Learning", description: "Optimization through environment interaction." },
+            { name: "Pygame", description: "2D rendering for simulation visualization." }
         ],
-        github: "https://github.com/YatinKande",
-        class: "card-ml-pipeline",
-        isInternship: true
+        github: "https://github.com/YatinKande/AI-Car-Simulation-using-NEAT-Algorithm",
+        image: "/projects/ai-car.png"
     }
 ];
 
@@ -262,79 +220,78 @@ export default function ProjectsPage() {
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen relative overflow-x-hidden pt-12 pb-20 bg-[#fafbfc]">
-            <NeuralBackground />
-
-            <div className="fixed inset-0 pointer-events-none z-[1] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(250,251,252,0.9)_100%)]" />
-
-            <div className="max-w-[1200px] mx-auto relative z-10 px-6 sm:px-10">
-
-                <motion.header
-                    initial={{ opacity: 0, y: -10 }}
+        <div className="min-h-screen bg-[#f0f8f6] font-sans text-[#1a2e28] overflow-x-hidden selection:bg-[#20c997]/30">
+            {/* Header Section */}
+            <header className="pt-24 pb-20 px-6 sm:px-10 max-w-[1240px] mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-12"
+                    transition={{ duration: 0.6 }}
                 >
                     <button
-                        onClick={() => router.push('/dashboard')}
-                        className="text-[#0066ff] text-[14px] font-bold hover:underline flex items-center gap-2 mb-8 transition-opacity"
+                        onClick={() => router.push('/')}
+                        className="flex items-center gap-2 text-[#20c997] font-bold hover:gap-3 transition-all mb-10 group"
                     >
-                        <ArrowLeft className="w-4 h-4" />
-                        Back to Dashboard
+                        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                        <span className="text-[14px] uppercase tracking-widest">Back to Portfolio</span>
                     </button>
 
-                    <div className="text-center">
-                        <h1 className="text-[42px] font-bold text-[#2a2a3a] mb-2 font-heading tracking-tight">PROJECTS</h1>
-                        <p className="text-[16px] italic text-[#667788] mb-8 font-medium">Explore my work</p>
-                        <div className="h-[1px] w-full max-w-sm mx-auto bg-[#dce2e8]" />
-                    </div>
-                </motion.header>
+                    <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-[1.1]">
+                        All Projects <span className="inline-block hover:rotate-12 transition-transform cursor-help">📂</span>
+                    </h1>
+                    <p className="text-lg md:text-2xl text-[#5a7069] max-w-3xl leading-relaxed font-medium">
+                        A comprehensive gallery of my work in <span className="text-[#20c997]">AI</span>, <span className="text-[#20c997]">ML</span>, and <span className="text-[#20c997]">Data Engineering</span>.
+                    </p>
+                    <div className="h-1.5 w-32 bg-[#20c997] mt-10 rounded-full" />
+                </motion.div>
+            </header>
 
-                <motion.div
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[28px]"
-                    initial="visible"
-                    animate="visible"
-                    variants={{
-                        visible: {
-                            transition: { staggerChildren: 0.05 }
-                        }
-                    }}
-                >
-                    {PROJECTS_DATA.map((project) => (
+            {/* Projects Grid */}
+            <main className="max-w-[1240px] mx-auto px-6 sm:px-10 pb-32">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
+                    {PROJECTS_DATA.map((project, idx) => (
                         <motion.div
                             key={project.id}
-                            variants={{
-                                hidden: { opacity: 0, y: 30 },
-                                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
-                            }}
+                            initial={{ opacity: 0, scale: 0.95, y: 30 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{ delay: idx * 0.1, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                            whileHover={{ y: -8 }}
                             onClick={() => setSelectedProject(project)}
-                            className={`project-card relative h-[320px] rounded-[16px] border border-[#dce2e8] overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:border-[#0066ff] hover:shadow-[0_8px_30px_rgba(0,102,255,0.1)] bg-white`}
+                            className="group relative bg-white border border-[#cfe5df] rounded-[24px] overflow-hidden cursor-pointer shadow-sm hover:shadow-[0_20px_40px_rgba(26,46,40,0.1)] transition-all duration-500 h-[350px] flex flex-col"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#0066ff]/5 via-transparent to-transparent opacity-50" />
-                            <div className="project-card-overlay absolute inset-0 z-[2]" />
+                            {/* Card Media */}
+                            <div className="relative h-[180px] w-full shrink-0 overflow-hidden">
+                                {project.image ? (
+                                    <Image
+                                        src={project.image}
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-gradient-to-br from-[#20c997]/20 to-[#20c997]/5" />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
 
-                            {project.isInternship && (
-                                <div className="absolute top-[14px] left-[14px] px-[8px] py-[3px] bg-blue-500/30 border border-blue-500/50 text-[#60A5FA] text-[9px] font-bold uppercase rounded-[12px] z-[10]">
-                                    INTERNSHIP
+                                <div className="absolute bottom-4 left-6 right-6 transition-transform duration-500 group-hover:-translate-y-1">
+                                    <h3 className="text-white text-[20px] font-bold tracking-tight leading-tight">
+                                        {project.title}
+                                    </h3>
                                 </div>
-                            )}
+                            </div>
 
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    window.open(project.github, '_blank');
-                                }}
-                                className="absolute top-[14px] right-[14px] w-[38px] h-[38px] rounded-full bg-white/80 backdrop-blur-sm border border-[#dce2e8] flex items-center justify-center text-[#2a2a3a] hover:bg-[#0066ff] hover:text-white hover:border-[#0066ff] transition-all z-[10] shadow-sm"
-                            >
-                                <Github size={18} />
-                            </button>
+                            {/* Card Content */}
+                            <div className="p-6 flex flex-col flex-1">
+                                <p className="text-[#5a7069] text-[14px] line-clamp-2 mb-auto leading-relaxed font-medium">
+                                    {project.intro}
+                                </p>
 
-                            <div className="absolute bottom-0 left-0 right-0 h-[65%] p-[24px] flex flex-col justify-end bg-gradient-to-t from-white via-white/95 to-transparent z-[10]">
-                                <h2 className="text-[19px] font-bold text-[#2a2a3a] mb-[8px] font-heading">{project.title}</h2>
-                                <p className="text-[13px] font-medium text-[#667788] mb-[12px] line-clamp-2 leading-relaxed">{project.intro}</p>
-                                <div className="flex flex-wrap gap-[6px]">
-                                    {project.tech.map(tag => (
-                                        <span key={tag} className="px-[10px] py-[4px] bg-[#0066ff]/5 border border-[#dce2e8] text-[#0066ff] text-[11px] font-bold uppercase rounded-[20px]">
+                                <div className="flex flex-wrap gap-2 mt-4">
+                                    {project.tech.slice(0, 3).map((tag) => (
+                                        <span
+                                            key={tag}
+                                            className="px-2.5 py-1 bg-[#f0f8f6] border border-[#20c997]/20 text-[#20c997] text-[10px] font-bold uppercase tracking-wider rounded-md"
+                                        >
                                             {tag}
                                         </span>
                                     ))}
@@ -342,109 +299,173 @@ export default function ProjectsPage() {
                             </div>
                         </motion.div>
                     ))}
-                </motion.div>
-            </div>
+                </div>
 
+                {/* Footer CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mt-32 text-center"
+                >
+                    <a
+                        href="https://github.com/YatinKande"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 px-10 py-5 bg-white border-2 border-[#20c997] text-[#20c997] font-bold text-lg rounded-full hover:bg-[#20c997] hover:text-white transition-all duration-500 shadow-sm hover:shadow-[0_15px_30px_rgba(32,201,151,0.2)] hover:-translate-y-1.5"
+                    >
+                        <Github className="w-6 h-6" />
+                        <span>View More on GitHub</span>
+                    </a>
+
+                    <div className="flex justify-center gap-10 mt-16 scale-110">
+                        <a href="https://linkedin.com/in/yatin-kande" target="_blank" className="text-[#5a7069] hover:text-[#20c997] transition-all hover:scale-125 duration-300">
+                            <Linkedin className="w-7 h-7" />
+                        </a>
+                        <a href="https://github.com/YatinKande" target="_blank" className="text-[#5a7069] hover:text-[#20c997] transition-all hover:scale-125 duration-300">
+                            <Github className="w-7 h-7" />
+                        </a>
+                        <a href="mailto:yatink@umich.edu" className="text-[#5a7069] hover:text-[#20c997] transition-all hover:scale-125 duration-300">
+                            <Mail className="w-7 h-7" />
+                        </a>
+                    </div>
+                </motion.div>
+            </main>
+
+            {/* Project Modal */}
             <AnimatePresence>
                 {selectedProject && (
-                    <div className="fixed inset-0 z-[1000] flex items-center justify-center p-6 sm:p-10">
+                    <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 md:p-8">
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setSelectedProject(null)}
-                            className="absolute inset-0 bg-black/75 backdrop-blur-sm"
+                            className="absolute inset-0 bg-[#0a1512]/90 backdrop-blur-xl"
                         />
 
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="relative w-full max-w-[680px] max-h-[85vh] overflow-y-auto bg-white border border-[#dce2e8] rounded-[20px] p-[36px] shadow-2xl custom-scrollbar"
+                            layoutId={selectedProject.id}
+                            initial={{ opacity: 0, scale: 0.95, y: 40 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 40 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden bg-white rounded-[40px] shadow-2xl flex flex-col lg:flex-row"
                         >
-                            <button
-                                onClick={() => setSelectedProject(null)}
-                                className="absolute top-6 right-6 text-[#2a2a3a] hover:text-[#0066ff] transition-colors"
-                            >
-                                <X size={28} />
-                            </button>
+                            {/* Modal Left - Sticky Image Sidebar */}
+                            <div className="lg:w-[40%] relative bg-[#f0f8f6] min-h-[300px] lg:min-h-full">
+                                {selectedProject.image && (
+                                    <Image
+                                        src={selectedProject.image}
+                                        alt={selectedProject.title}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/95 hidden lg:block" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-white/95 to-transparent lg:hidden" />
 
-                            <div className="flex flex-col gap-6">
-                                <div>
-                                    <h2 className="text-[26px] font-bold text-[#2a2a3a] mb-2 font-heading">{selectedProject.title}</h2>
-                                    <div className="flex flex-wrap gap-2 mb-4">
-                                        {selectedProject.tech.map(tag => (
-                                            <span key={tag} className="px-2.5 py-1 bg-[#0066ff]/5 border border-[#dce2e8] text-[#0066ff] text-[11px] font-bold uppercase rounded-[20px]">
+                                <div className="absolute top-10 left-10 z-20">
+                                    <div className="px-4 py-2 bg-white/90 backdrop-blur-sm border border-[#cfe5df] rounded-full shadow-sm">
+                                        <span className="text-[12px] font-bold text-[#20c997] uppercase tracking-[3px]">Project Spotlight</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Modal Right - Content */}
+                            <div className="flex-1 overflow-y-auto p-10 md:p-16 relative flex flex-col custom-scrollbar">
+                                <button
+                                    onClick={() => setSelectedProject(null)}
+                                    className="absolute top-10 right-10 p-3 rounded-full bg-[#f0f8f6] text-[#1a2e28] hover:bg-[#ff6b35] hover:text-white transition-all transform hover:rotate-90 shadow-sm"
+                                >
+                                    <X size={26} />
+                                </button>
+
+                                <div className="mb-12">
+                                    <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight text-[#1a2e28]">
+                                        {selectedProject.fullTitle}
+                                    </h2>
+                                    <div className="flex flex-wrap gap-2.5">
+                                        {selectedProject.tech.map((tag) => (
+                                            <span
+                                                key={tag}
+                                                className="px-4 py-1.5 bg-[#f0f8f6] border border-[#20c997]/30 text-[#20c997] text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm"
+                                            >
                                                 {tag}
                                             </span>
                                         ))}
                                     </div>
-                                    <div className="flex items-center gap-2 text-[#0066ff] text-[13px] font-medium">
-                                        <Calendar size={14} />
-                                        <span>{selectedProject.timeline}</span>
-                                    </div>
                                 </div>
 
-                                <div className="h-[1px] w-full bg-[#dce2e8]" />
+                                <div className="space-y-12 flex-1">
+                                    <section>
+                                        <h4 className="text-[12px] font-bold text-[#20c997] uppercase tracking-[4px] mb-5 flex items-center gap-4">
+                                            <span>Overview</span>
+                                            <div className="h-[1px] flex-1 bg-[#cfe5df]" />
+                                        </h4>
+                                        <p className="text-[16px] text-[#5a7069] leading-[1.8] font-medium">
+                                            {selectedProject.description}
+                                        </p>
+                                    </section>
 
-                                <div>
-                                    <span className="text-[12px] uppercase text-[#0066ff] font-bold tracking-[2px] block mb-3">DESCRIPTION</span>
-                                    <p className="text-[14px] text-[#2a2a3a]/80 leading-[1.7]">{selectedProject.description}</p>
-                                </div>
+                                    <section>
+                                        <h4 className="text-[12px] font-bold text-[#20c997] uppercase tracking-[4px] mb-6 flex items-center gap-4">
+                                            <span>Key Features</span>
+                                            <div className="h-[1px] flex-1 bg-[#cfe5df]" />
+                                        </h4>
+                                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                            {selectedProject.features.map((feature, i) => (
+                                                <motion.li
+                                                    key={i}
+                                                    initial={{ opacity: 0, x: -15 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    transition={{ delay: 0.3 + (i * 0.1) }}
+                                                    className="flex items-start gap-4 p-4 bg-[#f0f8f6]/50 rounded-2xl border border-[#cfe5df] border-dashed hover:border-solid hover:bg-white hover:shadow-md transition-all duration-300"
+                                                >
+                                                    <div className="w-6 h-6 shrink-0 rounded-full bg-[#20c997]/20 flex items-center justify-center mt-0.5">
+                                                        <Check className="w-4 h-4 text-[#20c997]" />
+                                                    </div>
+                                                    <span className="text-[14px] text-[#1a2e28] font-medium leading-relaxed">{feature}</span>
+                                                </motion.li>
+                                            ))}
+                                        </ul>
+                                    </section>
 
-                                <div className="h-[1px] w-full bg-[#dce2e8]" />
-
-                                <div>
-                                    <span className="text-[12px] uppercase text-[#0066ff] font-bold tracking-[2px] block mb-4">KEY ACHIEVEMENTS</span>
-                                    <ul className="space-y-3">
-                                        {selectedProject.achievements.map((achievement, idx) => (
-                                            <motion.li
-                                                key={idx}
-                                                initial={{ opacity: 0, x: -10 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ delay: 0.3 + (idx * 0.15) }}
-                                                className="flex items-start gap-3"
-                                            >
-                                                <CheckCircle2 size={16} className="text-[#ff6b35] shrink-0 mt-0.5" />
-                                                <span className="text-[14px] text-[#2a2a3a] leading-relaxed">{achievement}</span>
-                                            </motion.li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                <div className="h-[1px] w-full bg-[#dce2e8]" />
-
-                                <div>
-                                    <span className="text-[12px] uppercase text-[#0066ff] font-bold tracking-[2px] block mb-4">TECH STACK</span>
-                                    <div className="space-y-3">
-                                        {selectedProject.techBars.map((bar, idx) => (
-                                            <div key={bar.label} className="flex flex-col gap-1.5">
-                                                <div className="flex justify-between items-center px-1">
-                                                    <span className="text-[12px] text-[#667788] font-medium">{bar.label}</span>
-                                                    <span className="text-[12px] text-[#0066ff] font-bold">{bar.value}%</span>
+                                    <article>
+                                        <h4 className="text-[12px] font-bold text-[#20c997] uppercase tracking-[4px] mb-6 flex items-center gap-4">
+                                            <span>Technologies Used</span>
+                                            <div className="h-[1px] flex-1 bg-[#cfe5df]" />
+                                        </h4>
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                            {selectedProject.techDetails.map((td, i) => (
+                                                <div key={td.name} className="flex flex-col gap-2 group/tech">
+                                                    <h5 className="text-[14px] font-bold text-[#1a2e28] group-hover/tech:text-[#20c997] transition-colors">{td.name}</h5>
+                                                    <div className="h-0.5 w-6 bg-[#20c997] group-hover/tech:w-12 transition-all" />
+                                                    <p className="text-[13px] text-[#5a7069] leading-relaxed italic">{td.description}</p>
                                                 </div>
-                                                <div className="h-[6px] bg-[#f0f3f6] rounded-full overflow-hidden">
-                                                    <motion.div
-                                                        initial={{ width: 0 }}
-                                                        animate={{ width: `${bar.value}%` }}
-                                                        transition={{ duration: 1.2, delay: 0.4 + (idx * 0.2), ease: "easeOut" }}
-                                                        className="h-full bg-gradient-to-r from-[#ff6b35] to-[#0066ff] rounded-full"
-                                                    />
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
+                                            ))}
+                                        </div>
+                                    </article>
                                 </div>
 
-                                <div className="pt-4">
-                                    <button
-                                        onClick={() => window.open(selectedProject.github, '_blank')}
-                                        className="w-fit flex items-center gap-3 px-6 py-3 bg-[#0066ff]/5 border border-[#dce2e8] text-[#0066ff] font-bold rounded-[8px] hover:bg-[#0066ff]/10 hover:border-[#0066ff] transition-all"
+                                <div className="mt-20 pt-10 border-t border-[#f0f8f6] flex flex-col sm:flex-row items-center justify-between gap-6">
+                                    <div className="flex items-center gap-4">
+                                        <a href="mailto:yatink@umich.edu" className="p-3 bg-white border border-[#cfe5df] rounded-full text-[#5a7069] hover:bg-[#20c997] hover:text-white transition-all shadow-sm">
+                                            <Mail size={20} />
+                                        </a>
+                                        <p className="text-[13px] font-bold text-[#5a7069]">Interested in this tech?</p>
+                                    </div>
+
+                                    <a
+                                        href={selectedProject.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-3 px-8 py-4 bg-white border-2 border-[#20c997] text-[#20c997] font-bold rounded-2xl hover:bg-[#20c997] hover:text-white transition-all group scale-105 active:scale-100 shadow-[0_10px_20px_rgba(32,201,151,0.15)]"
                                     >
-                                        <Github size={20} />
-                                        View on GitHub →
-                                    </button>
+                                        <Github className="w-5 h-5" />
+                                        <span className="tracking-wide">View on GitHub</span>
+                                        <ExternalLink className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity" />
+                                    </a>
                                 </div>
                             </div>
                         </motion.div>
@@ -453,20 +474,20 @@ export default function ProjectsPage() {
             </AnimatePresence>
 
             <style jsx global>{`
-        .project-card-overlay {
-          background: linear-gradient(
-            to top, 
-            rgba(255, 255, 255, 0.98) 0%, 
-            rgba(255, 255, 255, 0.9) 40%,
-            rgba(255, 255, 255, 0.4) 70%,
-            transparent 100%
-          );
-        }
-
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f0f3f6; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #dce2e8; border-radius: 10px; }
-      `}</style>
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 8px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: #f0f8f6;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: #cfe5df;
+                    border-radius: 10px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: #20c997;
+                }
+            `}</style>
         </div>
     );
 }
