@@ -11,7 +11,11 @@ const ROLES = [
 
 const GLITCH_CHARS = "!<>-_\\/[]{}—=+*^?#________";
 
-export default function GlitchText() {
+interface GlitchTextProps {
+    startTime?: number;
+}
+
+export default function GlitchText({ startTime = 0 }: GlitchTextProps) {
     const [index, setIndex] = useState(0);
     const [displayText, setDisplayText] = useState(ROLES[0]);
     const [isGlitching, setIsGlitching] = useState(false);
