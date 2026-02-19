@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
-import Experience from "@/components/Experience";
+import BackgroundSection from "@/components/BackgroundSection";
 import Projects from "@/components/Projects";
-import Education from "@/components/Education";
 import Certifications from "@/components/Certifications";
 import Contact from "@/components/Contact";
 import { BarChart3, GraduationCap, Briefcase, Rocket } from "lucide-react";
@@ -20,10 +19,22 @@ export default function LandingPage() {
     const [status, setStatus] = useState("INITIALIZING_SYSTEM");
     const [phase, setPhase] = useState<"loading" | "transitioning" | "complete">("loading");
     const [isLoading, setIsLoading] = useState(true);
+    const [isHydrated, setIsHydrated] = useState(false);
 
     const duration = 2500; // 2.5s for loading fill
 
     useEffect(() => {
+        setIsHydrated(true);
+
+        // Check if loader has already been seen in this session
+        const loaderSeen = sessionStorage.getItem("loaderSeen");
+        if (loaderSeen) {
+            setIsLoading(false);
+            setPhase("complete");
+            setProgress(100);
+            return;
+        }
+
         const startTime = Date.now();
 
         const updateProgress = () => {
@@ -44,12 +55,13 @@ export default function LandingPage() {
                         setTimeout(() => {
                             setIsLoading(false);
                             setPhase("complete");
+                            // Mark loader as seen for this session
+                            sessionStorage.setItem("loaderSeen", "true");
                         }, 800);
                     }, 200);
                 }, 500);
             }
         };
-
         const initialDelay = setTimeout(() => {
             requestAnimationFrame(updateProgress);
         }, 500);
@@ -57,12 +69,32 @@ export default function LandingPage() {
         return () => clearTimeout(initialDelay);
     }, []);
 
+    // Manual hash scroll handler
+    useEffect(() => {
+        if (!isLoading && isHydrated) {
+            const hash = window.location.hash;
+            if (hash) {
+                // Small delay to ensure all animations/layouts are settled
+                const timeoutId = setTimeout(() => {
+                    const targetId = hash.replace("#", "");
+                    const element = document.getElementById(targetId);
+                    if (element) {
+                        element.scrollIntoView({ behavior: "smooth" });
+                    }
+                }, 100);
+                return () => clearTimeout(timeoutId);
+            }
+        }
+    }, [isLoading, isHydrated]);
+
     const stats = [
         { icon: BarChart3, text: "3.8 GPA", delay: 1.2 },
         { icon: GraduationCap, text: "MS @ UMichigan", delay: 1.35 },
         { icon: Briefcase, text: "2+ Years ML/AI", delay: 1.5 },
         { icon: Rocket, text: "10+ Projects", delay: 1.65 },
     ];
+
+    if (!isHydrated) return null;
 
     return (
         <main className="min-h-screen bg-[#f0f8f6] selection:bg-[#ff6b6b]/30 relative overflow-hidden">
@@ -98,10 +130,7 @@ export default function LandingPage() {
                         {/* Profile Photo */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
-                            animate={phase === "transitioning" ? {
-                                scale: 1.1,
-                                opacity: 1
-                            } : {
+                            animate={{
                                 opacity: 1,
                                 scale: 1
                             }}
@@ -128,9 +157,9 @@ export default function LandingPage() {
                         <motion.div
                             animate={{
                                 opacity: phase === "transitioning" ? 0 : 1,
-                                y: phase === "transitioning" ? 20 : 0
+                                y: phase === "transitioning" ? 40 : 0
                             }}
-                            transition={{ duration: 0.5 }}
+                            transition={{ duration: 0.4, ease: "easeIn" }}
                             className="flex flex-col items-center text-center w-full"
                         >
                             {/* Name & Title */}
@@ -223,10 +252,9 @@ export default function LandingPage() {
                         <Navbar />
 
                         <motion.section
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1, ease: "easeOut" }}
                         >
                             <Hero />
                         </motion.section>
@@ -249,24 +277,15 @@ export default function LandingPage() {
                             <Skills />
                         </motion.section>
 
-                        <motion.section
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="bg-[#f8fdfc] py-24 px-6 border-t border-[#cfe5df]"
-                        >
-                            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                                <Experience />
-                                <Education />
-                            </div>
-                        </motion.section>
+                        <BackgroundSection />
 
                         <motion.section
+                            id="projects"
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            className="scroll-mt-24"
                         >
                             <Projects />
                         </motion.section>

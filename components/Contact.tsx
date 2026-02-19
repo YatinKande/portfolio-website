@@ -18,25 +18,44 @@ export default function Contact() {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        try {
+            const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE";
 
-        // Construct mailto link
-        const githubLink = "https://github.com/YatinKande";
-        const linkedinLink = "https://www.linkedin.com/in/yatin-kande/";
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    access_key: accessKey,
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message,
+                    subject: `Portfolio Contact from ${formData.name}`
+                })
+            });
 
-        const subject = `Portfolio Contact from ${formData.name}`;
-        const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-        window.location.href = `mailto:${personalInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const result = await response.json();
 
-        setIsSubmitting(false);
-        setIsSent(true);
+            if (result.success) {
+                setIsSent(true);
+                setFormData({ name: "", email: "", message: "" });
+            } else {
+                console.error("Submission failed:", result.message);
+                alert("Sorry, there was an error sending your message. Please try again later.");
+            }
+        } catch (error) {
+            console.error("Submission error:", error);
+            alert("Something went wrong. Please check your connection and try again.");
+        } finally {
+            setIsSubmitting(false);
 
-        // Reset after showing success
-        setTimeout(() => {
-            setIsSent(false);
-            setFormData({ name: "", email: "", message: "" });
-        }, 5000);
+            // Reset "Sent" state after a delay
+            if (isSent) {
+                setTimeout(() => setIsSent(false), 5000);
+            }
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -164,7 +183,7 @@ export default function Contact() {
                                     "MESSAGE RECEIVED!"
                                 ) : (
                                     <>
-                                        SEND MISSION CONTROL
+                                        SEND MESSAGE
                                         <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                     </>
                                 )}

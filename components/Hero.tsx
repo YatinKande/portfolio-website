@@ -105,7 +105,13 @@ export default function Hero() {
                 {/* Step 1: Profile Photo */}
                 <motion.div
                     id="hero-profile-photo"
-                    className={`relative mb-[30px] ${getHeroClass(0)}`}
+                    layoutId="profile-photo"
+                    transition={{
+                        type: "tween",
+                        duration: 1.0,
+                        ease: [0.4, 0, 0.2, 1]
+                    }}
+                    className={`relative mb-[30px] opacity-100 ${animComplete ? '' : 'hero-visible'}`}
                     style={{ willChange: "filter, opacity" }}
                 >
                     <div className="absolute inset-0 rounded-full bg-[#20c997]/20 blur-2xl animate-pulse" />

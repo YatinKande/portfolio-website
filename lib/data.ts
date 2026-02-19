@@ -103,159 +103,236 @@ export const skills = {
 
 export const projects = [
     {
+        id: "aws-docs-rag-bot",
         title: "AWS Docs RAG Bot",
-        description: "Intelligent document Q&A system with retrieval-augmented generation.",
-        bullets: [
-            "Retrieval-augmented Q&A system for AWS documentation using FastAPI and FAISS.",
-            "Retrieves most relevant passages and generates grounded answers with citations."
+        fullTitle: "AWS Documentation RAG Chatbot",
+        intro: "Intelligent document Q&A system with retrieval-augmented generation",
+        description: "A sophisticated document RAG chatbot that allows users to upload AWS documentation or any files and ask questions. The system retrieves the most relevant passages from documents and generates grounded, contextual answers with informative citations. Ensures responses are strictly based on provided content.",
+        features: [
+            "Upload and process AWS documentation",
+            "Intelligent passage retrieval using FAISS",
+            "Grounded answer generation with citations",
+            "Fast query response times",
+            "RESTful API architecture"
         ],
-        tech: ["FastAPI", "FAISS", "AWS", "RAG"],
+        tech: ["FastAPI", "FAISS", "Python", "LangChain", "AWS"],
+        techDetails: [
+            { name: "FastAPI", description: "High-performance web framework for the backend." },
+            { name: "FAISS", description: "Efficient vector similarity search for document retrieval." },
+            { name: "LangChain", description: "Framework for building LLM-powered applications." },
+            { name: "AWS", description: "Cloud infrastructure for hosting and storage." }
+        ],
         github: "https://github.com/YatinKande/aws-docs-rag-bot",
-        demo: null,
         image: "/projects/aws_rag_chatbot.png",
         featured: true,
-        size: "large" // Bento: 2x2
+        size: "large"
     },
     {
-        title: "Automotive Multimodal RAG",
-        description: "Multimodal RAG system for automotive domain Q&A.",
-        bullets: [
-            "Advanced multimodal RAG system for manuals, recalls, and OBD data.",
-            "Uses Google GenAI, FAISS, and FastAPI for grounded automotive Q&A."
+        id: "smart-ev-finder",
+        title: "Smart EV Finder",
+        fullTitle: "Smart EV Charging Station Finder",
+        intro: "AI-powered conversational EV charging station finder",
+        description: "A conversational AI application powered by Llama 3 that helps users find the best EV charging stations. The system leverages natural language understanding to interpret user queries and provides personalized charging station recommendations based on location, availability, and speed.",
+        features: [
+            "Natural language query processing",
+            "Dynamic user profiling system",
+            "Real-time charging station availability",
+            "Personalized recommendations",
+            "Multi-criteria filtering"
         ],
-        tech: ["Google GenAI", "FAISS", "FastAPI"],
-        github: "https://github.com/YatinKande/auto-multimodal-rag",
-        demo: null,
-        image: "/projects/auto_multimodal_rag.png",
-        featured: true,
-        size: "tall" // Changed from large to tall to accommodate the new project in bento grid
-    },
-    {
-        title: "Smart EV Charging Finder",
-        description: "AI-powered conversational EV charging station finder.",
-        bullets: [
-            "Conversational AI powered by Llama 3 to find optimal charging stations.",
-            "Leverages location services and dynamic user profiling for personalized tips."
+        tech: ["Llama 3", "Python", "NLP", "Geolocation APIs"],
+        techDetails: [
+            { name: "Llama 3", description: "State-of-the-art LLM for natural language processing." },
+            { name: "Python", description: "Primary language for backend logic and data processing." },
+            { name: "Geolocation APIs", description: "Used for mapping and station discovery." }
         ],
-        tech: ["Llama 3", "NLP", "Location Services"],
         github: "https://github.com/YatinKande/smart-ev-finder",
-        demo: null,
         image: "/projects/ev-finder.png",
         featured: false,
-        size: "wide" // Bento: 2x1
+        size: "wide"
     },
     {
-        title: "Dataset Concierge Bot",
-        description: "Conversational bot for dataset discovery and management.",
-        bullets: [
-            "Intelligent bot for finding, saving, and retrieving datasets using natural language.",
-            "Built with AWS Lex, Lambda, and DynamoDB, handling 500+ daily requests."
+        id: "auto-multimodal-rag",
+        title: "Automotive Multimodal RAG",
+        fullTitle: "Automotive Multimodal RAG System",
+        intro: "Multimodal RAG system for automotive domain Q&A",
+        description: "An advanced multimodal RAG system designed specifically for the automotive domain. It supports document ingestion, vector search, and grounded Q&A capabilities over automotive manuals, recall documents, and OBD-II diagnostic data, processing both text and imagery.",
+        features: [
+            "Multimodal data processing (text, images, diagrams)",
+            "Vector-based semantic search",
+            "Automotive domain specialization",
+            "OBD-II data integration",
+            "Recall and manual documentation support"
         ],
-        tech: ["AWS Lex", "Lambda", "DynamoDB", "NLP"],
+        tech: ["Google GenAI", "FAISS", "FastAPI", "Python"],
+        techDetails: [
+            { name: "Google GenAI", description: "Multimodal LLM for text and image understanding." },
+            { name: "FAISS", description: "Vector database for fast document retrieval." },
+            { name: "FastAPI", description: "Fast and modern API framework." }
+        ],
+        github: "https://github.com/YatinKande/auto-multimodal-rag",
+        image: "/projects/auto_multimodal_rag.png",
+        featured: true,
+        size: "tall"
+    },
+    {
+        id: "kinesis-key-entry",
+        title: "Kinesis Key Entry",
+        fullTitle: "Kinesis Smart Door Authentication System",
+        intro: "AWS-powered secure door access control system",
+        description: "A cutting-edge smart door authentication system using AWS Rekognition for facial recognition, Kinesis Video Streams for real-time video processing, S3 for secure storage, and DynamoDB for access control management. Provides secure, contactless entry with comprehensive audit trails.",
+        features: [
+            "Real-time facial recognition",
+            "Video stream processing with Kinesis",
+            "Secure access control management",
+            "Audit trail and logging",
+            "Integration with AWS cloud services"
+        ],
+        tech: ["AWS Rekognition", "Kinesis", "S3", "DynamoDB"],
+        techDetails: [
+            { name: "AWS Rekognition", description: "Facial recognition for secure authentication." },
+            { name: "Kinesis Video Streams", description: "Real-time video processing pipeline." },
+            { name: "DynamoDB", description: "NoSQL database for access management." }
+        ],
+        github: "https://github.com/YatinKande/KinesisKeyEntry",
+        image: "/projects/smart_door_auth.png",
+        featured: true,
+        size: "wide"
+    },
+    {
+        id: "dataset-concierge-bot",
+        title: "Dataset Concierge Bot",
+        fullTitle: "Dataset Concierge Bot",
+        intro: "Conversational bot for dataset discovery and management",
+        description: "An intelligent conversational bot that helps users find, save, and retrieve datasets from multiple sources using natural language. Features include new-user onboarding, slot-filling for precise queries, flexible date handling, and user ID-based data management. Built as a serverless chatbot using AWS Lex, Lambda, and DynamoDB with 500+ daily requests.",
+        features: [
+            "Natural language dataset search",
+            "Multi-source dataset aggregation",
+            "User preference learning",
+            "Slot-filling conversation flow",
+            "Serverless architecture (500+ daily requests)"
+        ],
+        tech: ["AWS Lex", "AWS Lambda", "DynamoDB", "JavaScript", "S3"],
+        techDetails: [
+            { name: "AWS Lex", description: "Conversational AI for building intelligent bots." },
+            { name: "AWS Lambda", description: "Serverless compute for handling requests." },
+            { name: "DynamoDB", description: "Scalable NoSQL database for management." }
+        ],
         github: "https://github.com/YatinKande/Dataset-Concierge-Bot",
-        demo: null,
         image: "/projects/dataset-bot.png",
         featured: true,
         size: "tall"
     },
     {
+        id: "smartsoil-crop-recommender",
         title: "SmartSoil Crop Recommender",
-        description: "Data-driven crop recommendation for Indian farmers.",
-        bullets: [
-            "ML-powered system analyzing soil nutrient data to suggest optimal crops.",
-            "Helps farmers and policymakers make informed decisions to improve yields."
+        fullTitle: "SmartSoil Crop Recommender System",
+        intro: "Data-driven crop recommendation for Indian farmers",
+        description: "A machine learning-powered crop recommendation system that analyzes soil nutrient data to suggest the best crops for different regions in India. Helps farmers and policymakers make informed, data-driven decisions to improve crop yields and support sustainable agriculture practices.",
+        features: [
+            "Soil nutrient analysis",
+            "Regional crop optimization",
+            "Data-driven recommendations",
+            "Farmer-friendly interface",
+            "Policy support insights"
         ],
-        tech: ["Machine Learning", "Agriculture", "Data Analysis"],
+        tech: ["Python", "Jupyter", "Scikit-learn", "Pandas"],
+        techDetails: [
+            { name: "Scikit-learn", description: "Machine learning algorithms for recommendations." },
+            { name: "Pandas", description: "Data manipulation and analysis toolkit." },
+            { name: "Jupyter Notebook", description: "Interactive development environment." }
+        ],
         github: "https://github.com/YatinKande/Smartsoil-Crop-Recommender",
-        demo: null,
         image: "/projects/smartsoil.png",
         featured: true,
         size: "wide"
     },
     {
-        title: "CV Pipeline for Crop vs Weed Detection",
-        description: "Trained YOLO-based models and built preprocessing + validation workflows.",
-        bullets: [
-            "Trained YOLO-based models and built preprocessing + validation workflows.",
-            "Summarized precision/recall and error trends using dashboards for review."
-        ],
-        tech: ["YOLO", "Python", "Dash"],
-        github: "https://github.com/YatinKande/Crop-Weed-Detection",
-        demo: null,
-        image: "/projects/cv_agri.png",
-        featured: false,
-        size: "wide" // Bento: 2x1
-    },
-    {
-        title: "Kinesis Key Entry",
-        description: "AWS-powered secure door access control system.",
-        bullets: [
-            "Real-time facial recognition using AWS Rekognition and Kinesis.",
-            "Secure access management and audit logging with DynamoDB and S3."
-        ],
-        tech: ["AWS Rekognition", "Kinesis", "DynamoDB"],
-        github: "https://github.com/YatinKande/KinesisKeyEntry",
-        demo: null,
-        image: "/projects/smart_door_auth.png",
-        featured: true,
-        size: "wide" // Bento: 2x1
-    },
-    {
+        id: "lip-read-ai-lipnet",
         title: "Lip-Read AI using LipNet",
-        description: "Deep learning lip-reading system with 3D CNNs.",
-        bullets: [
-            "Advanced deep learning lip-reading AI trained on the GRID dataset.",
-            "Uses 3D CNNs, BiLSTMs, and CTC loss for silent speech recognition."
+        fullTitle: "AI Lip Reading System using LipNet Architecture",
+        intro: "Deep learning lip-reading system with 3D CNNs",
+        description: "An advanced deep learning-based lip-reading AI system trained on the GRID dataset. Uses a LipNet-inspired architecture with 3D Convolutional Neural Networks, Bi-directional LSTMs, and CTC loss for accurate speech recognition from silent video. Processes video input with OpenCV and trains models using TensorFlow.",
+        features: [
+            "Silent speech recognition from video",
+            "3D CNN + BiLSTM architecture",
+            "CTC loss optimization",
+            "Video preprocessing pipeline",
+            "High accuracy on GRID dataset"
         ],
-        tech: ["PyTorch", "3D CNN", "BiLSTM", "Computer Vision"],
+        tech: ["PyTorch", "3D CNN", "BiLSTM", "OpenCV"],
+        techDetails: [
+            { name: "3D CNNs", description: "Spatiotemporal feature extraction from video." },
+            { name: "BiLSTM", description: "Sequence modeling for phoneme recognition." },
+            { name: "OpenCV", description: "Robust video frame processing." }
+        ],
         github: "https://github.com/YatinKande/Lip-Read-AI-using-LipNet",
-        demo: null,
         image: "/projects/lipread.png",
         featured: true,
         size: "wide"
     },
     {
-        title: "AI Car Simulation (NEAT)",
-        description: "NeuroEvolution autonomous vehicle navigation.",
-        bullets: [
-            "Python simulation of self-driving cars using the NEAT algorithm.",
-            "Neural networks evolve over generations to learn optimal racing lines."
-        ],
-        tech: ["NEAT", "Reinforcement Learning", "Python"],
-        github: "https://github.com/YatinKande/AI-Car-Simulation-using-NEAT-Algorithm",
-        demo: null,
-        image: "/projects/ai-car.png",
-        featured: false,
-        size: "wide"
-    },
-    {
+        id: "covid-19-data-analysis",
         title: "COVID-19 Data Analysis",
-        description: "Comprehensive COVID-19 crisis data analysis.",
-        bullets: [
-            "Interactive visualizations examining infection rates and mortality trends.",
-            "Data-driven storytelling on global health impacts and vaccination progress."
+        fullTitle: "COVID-19 Data Analysis Capstone Project",
+        intro: "Comprehensive COVID-19 crisis data analysis",
+        description: "A comprehensive data analysis and visualization project examining the COVID-19 pandemic. Features interactive visualizations that describe infection rates, mortality trends, vaccination progress, and regional impacts. Provides insights into the global health crisis through data-driven storytelling.",
+        features: [
+            "Interactive data visualizations",
+            "Time-series analysis",
+            "Regional impact comparisons",
+            "Vaccination tracking",
+            "Mortality trend analysis"
         ],
-        tech: ["Python", "Data Viz", "Pandas", "Analytics"],
+        tech: ["Python", "Jupyter", "Pandas", "Matplotlib", "Seaborn"],
+        techDetails: [
+            { name: "Pandas", description: "Large-scale health data manipulation." },
+            { name: "Matplotlib/Seaborn", description: "Advanced statistical visualizations." },
+            { name: "NumPy", description: "High-performance numerical computing." }
+        ],
         github: "https://github.com/YatinKande/Covid--19-Data-Analysis-Capstone-Project",
-        demo: null,
         image: "/projects/covid.png",
         featured: false,
         size: "wide"
     },
+    {
+        id: "ai-car-simulation-neat",
+        title: "AI Car Simulation (NEAT)",
+        fullTitle: "AI Car Simulation using NEAT Algorithm",
+        intro: "NeuroEvolution autonomous vehicle navigation",
+        description: "A Python-based simulation of self-driving cars using NeuroEvolution of Augmenting Topologies (NEAT). Implements reinforcement learning for autonomous navigation where neural networks evolve over generations to learn optimal driving strategies on complex tracks. Cars learn to navigate obstacles and optimize racing lines through genetic algorithms.",
+        features: [
+            "Genetic algorithm-based learning",
+            "Neural network evolution",
+            "Autonomous track navigation",
+            "Multi-generation optimization",
+            "Real-time simulation visualization"
+        ],
+        tech: ["Python", "NEAT", "Reinforcement Learning", "Pygame"],
+        techDetails: [
+            { name: "NEAT Algorithm", description: "NeuroEvolution for adaptive control systems." },
+            { name: "Reinforcement Learning", description: "Optimization through environment interaction." },
+            { name: "Pygame", description: "2D rendering for simulation visualization." }
+        ],
+        github: "https://github.com/YatinKande/AI-Car-Simulation-using-NEAT-Algorithm",
+        image: "/projects/ai-car.png",
+        featured: false,
+        size: "wide"
+    }
 ];
 
 export const experience = [
     {
         role: "Data Analyst Intern (AI/ML)",
-        company: "DataZymes Inc",
+        company: "SmartKnower",
         location: "Bengaluru, India",
-        period: "Feb 2024 — Jul 2024",
+        period: "Mar 2023 — Aug 2023",
         description: "",
         bullets: [
-            "Developed a YOLOv5 object detection model on 1,200 plus images achieving 74 percent mAP and 79 percent precision for crop disease identification.",
-            "Streamlined a computer vision pipeline using Python and OpenCV reducing inference time by 40 percent for real-time monitoring workflows.",
-            "Implemented data augmentation including rotation, flipping, brightness adjustment, and noise injection boosting F1-score from 0.72 to 0.76.",
-            "Architected distributed preprocessing workflows with Apache Spark enabling scalable processing of 10,000 plus images per day."
+            "Engineered a YOLOv5 object detection model with transfer learning on 10,000+ preprocessed field images, stabilizing mAP at 74% and F1-score at 0.76 to automate weed and crop disease identification.",
+            "Architected a distributed image preprocessing pipeline with Apache Spark and OpenCV, achieving 3–4x improvement in pipeline throughput for high-volume agricultural sensor workflows.",
+            "Optimized real-time computer vision inference through batched frame processing, reducing inference latency by 40% for farm machinery embedded hardware.",
+            "Constructed 1,500+ supplementary plant images via web scraping and custom augmentation (rotation, flipping, noise injection, contrast variance), boosting F1-score from 0.72 to 0.76."
         ]
     },
     {
@@ -265,10 +342,10 @@ export const experience = [
         period: "Mar 2022 — Jun 2022",
         description: "",
         bullets: [
-            "Built churn prediction models on 8,500 plus customer records achieving 81 percent AUC-ROC and 79 percent accuracy using XGBoost.",
-            "Engineered 15 plus features from customer behavior data including transaction trends and usage metrics boosting baseline accuracy by 5 points.",
-            "Evaluated Random Forest, Logistic Regression, and gradient boosting models selecting XGBoost as the final production model.",
-            "Optimized hyperparameters with GridSearchCV improving precision by 4 percent while maintaining 75 percent recall for production deployment."
+            "Built a customer churn prediction system with XGBoost on 8,500+ records, achieving 81% AUC-ROC and 79% accuracy for targeted retention interventions.",
+            "Evaluated Random Forest, Logistic Regression, and gradient boosting via stratified cross-validation, selecting XGBoost as the optimal production model.",
+            "Refined XGBoost via GridSearchCV hyperparameter tuning, improving precision by 4% while maintaining 75% recall.",
+            "Engineered 15+ behavioral and transactional features from temporal usage patterns, boosting baseline accuracy by 5 percentage points."
         ]
     },
 ];
@@ -279,37 +356,47 @@ export const education = [
         degree: "MS in Data Science",
         field: "Data Science",
         location: "Dearborn, MI, USA",
-        year: "2024 — 2026 (Expected)",
-        achievements: ["GPA: 3.8"]
+        year: "Aug 2024 — Dec 2025",
+        achievements: ["GPA: 3.77"]
     },
     {
         institution: "Vellore Institute of Technology",
         degree: "Post Graduate Program in Data Science",
         field: "Data Science",
         location: "Bangalore, India",
-        year: "2023 — 2024",
-        achievements: ["Advanced coursework in Machine Learning, Deep Learning, and Statistical Modeling"]
+        year: "Jul 2023 — May 2024",
+        achievements: ["GPA: 3.7"]
     },
     {
         institution: "Jain University",
         degree: "BSc Honors in Data Science",
         field: "Data Science",
         location: "Bangalore, India",
-        year: "2019 — 2022",
-        achievements: ["Foundation in Data Science, Statistics, Programming, and Analytical Problem Solving"]
+        year: "Jul 2020 — May 2023",
+        achievements: ["GPA: 3.6"]
     }
 ];
 
 export const certifications = [
     {
-        name: "Oracle Cloud Infrastructure AI Foundations Associate",
+        name: "Oracle Cloud Infrastructure (OCI) AI Foundations Associate",
         issuer: "Oracle",
         year: "2025",
     },
     {
         name: "Google Data Analytics Professional Certificate",
-        issuer: "Coursera",
+        issuer: "Google",
         year: "2024",
+    },
+    {
+        name: "AWS Certified Machine Learning Specialty",
+        issuer: "Amazon Web Services",
+        year: "In Progress",
+    },
+    {
+        name: "Deep Learning Specialization",
+        issuer: "DeepLearning.AI",
+        year: "In Progress",
     },
 ];
 

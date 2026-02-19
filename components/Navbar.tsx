@@ -24,17 +24,19 @@ export default function Navbar() {
 
             // Active section tracking logic
             const sections = navLinks.map(link => link.href.substring(1));
-            const scrollPosition = window.scrollY + 100;
+            const scrollPosition = window.scrollY + window.innerHeight / 3;
 
+            let currentSection = "";
             for (const section of sections) {
                 const element = document.getElementById(section);
                 if (element) {
-                    const { offsetTop, offsetHeight } = element;
-                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                        setActiveSection(section);
+                    const { offsetTop } = element;
+                    if (scrollPosition >= offsetTop) {
+                        currentSection = section;
                     }
                 }
             }
+            setActiveSection(currentSection);
         };
 
         window.addEventListener("scroll", handleScroll);

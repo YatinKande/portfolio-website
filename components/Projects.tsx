@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
 import { Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import ProjectModal from "./ProjectModal";
 
 const PROJECT_GLOWS: Record<string, string> = {
     "AWS Docs RAG Bot": "0 0 30px rgba(138, 43, 226, 0.5)",
@@ -16,6 +18,8 @@ const PROJECT_GLOWS: Record<string, string> = {
 };
 
 export default function Projects() {
+    const [selectedProject, setSelectedProject] = useState<any>(null);
+
     const featuredTitles = [
         "AWS Docs RAG Bot",
         "Automotive Multimodal RAG",
@@ -29,35 +33,24 @@ export default function Projects() {
         projects.find(p => p.title === title)
     ).filter(Boolean);
 
-    // CSS Grid positioning classes based on exact user specification
+    // CSS Grid positioning classes for a compact bento layout
     const getGridClass = (index: number) => {
         switch (index) {
-            case 0: return "lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-3 lg:h-[500px]"; // AWS RAG: 2 cols, 2 rows
-            case 1: return "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2 lg:h-[240px]"; // Auto RAG: Col 3, Row 1
-            case 2: return "lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3 lg:h-[240px]"; // Dataset Bot: Col 3, Row 2
-            case 3: return "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4 lg:h-[240px]"; // Kinesis: Col 1, Row 3
-            case 4: return "lg:col-start-2 lg:col-end-3 lg:row-start-3 lg:row-end-4 lg:h-[240px]"; // SmartSoil: Col 2, Row 3
-            case 5: return "lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4 lg:h-[240px]"; // LipNet: Col 3, Row 3
-            default: return "lg:h-[240px]";
+            case 0: return "lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-3 lg:h-[420px]"; // Big: 2 cols, 2 rows
+            case 1: return "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2 lg:h-[200px]"; // Stacked Right 1
+            case 2: return "lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3 lg:h-[200px]"; // Stacked Right 2
+            case 3: return "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4 lg:h-[200px]"; // Row 2 bottom left
+            case 4: return "lg:col-start-2 lg:col-end-3 lg:row-start-3 lg:row-end-4 lg:h-[200px]"; // Row 2 bottom center
+            case 5: return "lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4 lg:h-[200px]"; // Row 2 bottom right
+            default: return "lg:h-[200px]";
         }
     };
 
     return (
-        <section id="projects" className="py-[60px] bg-[#f0f8f6]">
+        <section className="py-[60px] bg-[#f0f8f6]">
             <div className="max-w-[1240px] px-5 mx-auto">
                 {/* Section Header */}
                 <div className="text-center mb-12">
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#e6f4f1] mb-6"
-                    >
-                        <Sparkles className="size-3.5 text-[#20c997]" />
-                        <span className="text-[11px] font-bold text-[#20c997] uppercase tracking-wider">
-                            ⭐ Featured Work
-                        </span>
-                    </motion.div>
 
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
@@ -65,7 +58,7 @@ export default function Projects() {
                         viewport={{ once: true }}
                         className="text-[32px] md:text-[42px] font-bold text-[#1a2e28] mb-4 tracking-tight"
                     >
-                        Projects & Portfolio 💼
+                        Projects 💼
                     </motion.h2>
 
                     <motion.p
@@ -96,9 +89,10 @@ export default function Projects() {
                                     y: -5,
                                     boxShadow: `0 12px 40px rgba(0,0,0,0.4), ${glow}`
                                 }}
-                                className={`group relative overflow-hidden rounded-[16px] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 ease-in-out cursor-pointer h-[350px] ${getGridClass(index)}`}
+                                onClick={() => setSelectedProject(project)}
+                                className={`group relative overflow-hidden rounded-[16px] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 ease-in-out cursor-pointer h-[320px] ${getGridClass(index)}`}
                             >
-                                <Link href="/projects" className="block w-full h-full relative z-10">
+                                <div className="block w-full h-full relative z-10">
                                     {/* Background Image */}
                                     {project.image && (
                                         <div className="absolute inset-0 z-0">
@@ -122,7 +116,7 @@ export default function Projects() {
                                                 {project.title}
                                             </h3>
                                             <p className={`text-white/90 font-normal mb-[15px] leading-[1.5] drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)] ${isBig ? 'text-[17px]' : 'text-[14px]'}`}>
-                                                {project.description}
+                                                {project.intro || project.description}
                                             </p>
 
                                             {/* Tech Tags */}
@@ -138,7 +132,7 @@ export default function Projects() {
                                             </div>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </motion.div>
                         );
                     })}
@@ -154,6 +148,10 @@ export default function Projects() {
                     </Link>
                 </div>
             </div>
+
+            {selectedProject && (
+                <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+            )}
         </section>
     );
 }
