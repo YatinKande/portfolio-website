@@ -115,7 +115,7 @@ export default function Hero() {
                     style={{ willChange: "filter, opacity" }}
                 >
                     <div className="absolute inset-0 rounded-full bg-[#20c997]/20 blur-2xl animate-pulse" />
-                    <div className="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px] rounded-full border-[4px] border-[#20c997] shadow-[0_0_30px_rgba(32,201,151,0.3)] overflow-hidden z-10">
+                    <div className="relative w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px] min-w-[120px] min-h-[120px] rounded-full border-[4px] border-[#20c997] shadow-[0_0_30px_rgba(32,201,151,0.3)] overflow-hidden z-10">
                         <NextImage
                             src="/me.jpg"
                             alt="Yatin Kande"
@@ -135,9 +135,25 @@ export default function Hero() {
 
                 {/* Step 3: Rotating Job Title */}
                 <motion.div
-                    className={`mb-[25px] ${getHeroClass(2)}`}
+                    className={`mb-[12px] ${getHeroClass(2)}`}
                 >
                     <GlitchText />
+                </motion.div>
+
+                {/* Step 3b: Credibility Line */}
+                <motion.div
+                    className={`mb-[22px] flex flex-wrap items-center justify-center gap-x-2 gap-y-1 ${getHeroClass(2)}`}
+                >
+                    <span className="text-[12px] md:text-[13px] font-semibold text-[#1a2e28]/60 uppercase tracking-widest">MS @ UMich</span>
+                    <span className="text-[#20c997] font-bold text-[12px]">·</span>
+                    <span className="text-[12px] md:text-[13px] font-semibold text-[#1a2e28]/60 uppercase tracking-widest">3.8 GPA</span>
+                    <span className="text-[#20c997] font-bold text-[12px]">·</span>
+                    <span className="text-[12px] md:text-[13px] font-semibold text-[#1a2e28]/60 uppercase tracking-widest">Ex-DataZymes</span>
+                    <span className="text-[#20c997] font-bold text-[12px]">·</span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#20c997]/15 border border-[#20c997]/30 text-[12px] font-bold text-[#20c997] uppercase tracking-widest">
+                        <span className="size-1.5 rounded-full bg-[#20c997] animate-pulse" />
+                        Open to Full-time
+                    </span>
                 </motion.div>
 
                 {/* Step 4: Summary Paragraph */}

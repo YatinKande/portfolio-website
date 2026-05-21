@@ -9,80 +9,99 @@ import {
     MessageSquare,
     Settings,
     Layers,
-    CheckCircle2
 } from "lucide-react";
 
-const skillCategories = [
+type Proficiency = "Expert" | "Proficient" | "Familiar";
+
+interface SkillItem {
+    name: string;
+    level: Proficiency;
+}
+
+interface SkillCategory {
+    title: string;
+    icon: React.ElementType;
+    skills: SkillItem[];
+    accent: string;
+}
+
+const LEVEL_STYLES: Record<Proficiency, string> = {
+    Expert: "bg-[#20c997]/15 text-[#20c997] border border-[#20c997]/30",
+    Proficient: "bg-[#6366f1]/15 text-[#6366f1] border border-[#6366f1]/30",
+    Familiar: "bg-[#f59e0b]/15 text-[#f59e0b] border border-[#f59e0b]/30",
+};
+
+const skillCategories: SkillCategory[] = [
     {
         title: "Machine Learning",
         icon: Brain,
         skills: [
-            "Scikit-learn, XGBoost, LightGBM",
-            "Feature engineering",
-            "Hyperparameter tuning & model evaluation"
+            { name: "Scikit-learn, XGBoost, LightGBM", level: "Expert" },
+            { name: "Feature engineering", level: "Expert" },
+            { name: "Hyperparameter tuning & model evaluation", level: "Expert" },
         ],
-        accent: "#20c997" // Mint
+        accent: "#20c997",
     },
     {
         title: "Deep Learning / Computer Vision",
         icon: Eye,
         skills: [
-            "PyTorch, TensorFlow, YOLOv5, 3D CNN-BiLSTM",
-            "Real-time inference optimization",
-            "Data augmentation & transfer learning"
+            { name: "PyTorch, TensorFlow, YOLOv5, 3D CNN-BiLSTM", level: "Expert" },
+            { name: "Real-time inference optimization", level: "Proficient" },
+            { name: "Data augmentation & transfer learning", level: "Proficient" },
         ],
-        accent: "#ff6b6b" // Coral
+        accent: "#ff6b6b",
     },
     {
         title: "Cloud / Applications",
         icon: Cloud,
         skills: [
-            "AWS Lex & Lambda serverless",
-            "SQS, SNS, DynamoDB, API Gateway",
-            "Lightweight scalable microservices"
+            { name: "AWS Lex & Lambda serverless", level: "Proficient" },
+            { name: "SQS, SNS, DynamoDB, API Gateway", level: "Proficient" },
+            { name: "Lightweight scalable microservices", level: "Familiar" },
         ],
-        accent: "#20c997"
+        accent: "#20c997",
     },
     {
         title: "Programming & Databases",
         icon: Database,
         skills: [
-            "Python, SQL, Bash, R",
-            "PostgreSQL, MySQL, MongoDB, Snowflake",
-            "API integration, modular architecture, clean code practices"
+            { name: "Python, SQL, Bash", level: "Expert" },
+            { name: "PostgreSQL, MySQL, MongoDB, Snowflake", level: "Proficient" },
+            { name: "API integration & clean code practices", level: "Proficient" },
         ],
-        accent: "#ff6b6b"
+        accent: "#ff6b6b",
     },
     {
         title: "NLP & GenAI",
         icon: MessageSquare,
         skills: [
-            "RAG, LangChain, FAISS, Hugging Face",
-            "Prompt engineering, embeddings, hybrid search",
-            "Semantic chunking, metadata filtering"
+            { name: "RAG, LangChain, FAISS, Hugging Face", level: "Expert" },
+            { name: "Prompt engineering, embeddings, hybrid search", level: "Expert" },
+            { name: "Semantic chunking, metadata filtering", level: "Proficient" },
         ],
-        accent: "#20c997"
+        accent: "#20c997",
     },
     {
         title: "MLOps & Deployment",
         icon: Settings,
         skills: [
-            "Docker, Kubernetes, MLflow, CI/CD",
-            "End-to-end training → deployment workflows",
-            "Model tracking, versioning, reproducibility",
-            "AWS SageMaker, serverless event-driven architecture"
+            { name: "End-to-end training → deployment workflows", level: "Expert" },
+            { name: "Docker, MLflow, CI/CD pipelines", level: "Proficient" },
+            { name: "AWS SageMaker, serverless architecture", level: "Familiar" },
+            { name: "Model tracking, versioning, reproducibility", level: "Proficient" },
         ],
-        accent: "#ff6b6b"
+        accent: "#ff6b6b",
     },
     {
         title: "Data Engineering & Big Data",
         icon: Layers,
         skills: [
-            "Apache Spark, PySpark, Kafka, Airflow",
-            "AWS S3, Lambda, DynamoDB pipelines"
+            { name: "Apache Spark, PySpark, Kafka, Airflow", level: "Proficient" },
+            { name: "AWS S3, Lambda, DynamoDB pipelines", level: "Proficient" },
         ],
-        accent: "#20c997"
-    }
+        accent: "#20c997",
+    },
 ];
 
 export default function Skills() {
@@ -90,7 +109,7 @@ export default function Skills() {
         <section id="skills" className="py-24 px-6 bg-[#f8fdfc]">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-12">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -116,6 +135,21 @@ export default function Skills() {
                         Specialized tech stack focused on building end-to-end intelligent systems,
                         scalable data pipelines, and high-performance ML models.
                     </motion.p>
+
+                    {/* Legend */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 }}
+                        className="flex items-center justify-center gap-4 mt-4 flex-wrap"
+                    >
+                        {(["Expert", "Proficient", "Familiar"] as Proficiency[]).map((lvl) => (
+                            <span key={lvl} className={`text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider ${LEVEL_STYLES[lvl]}`}>
+                                {lvl}
+                            </span>
+                        ))}
+                    </motion.div>
                 </div>
 
                 {/* Grid */}
@@ -153,16 +187,14 @@ export default function Skills() {
                             </div>
 
                             {/* Skills List */}
-                            <ul className="space-y-4 flex-grow">
+                            <ul className="space-y-3 flex-grow">
                                 {category.skills.map((skill, sIndex) => (
-                                    <li key={sIndex} className="flex gap-3 items-start group/item">
-                                        <CheckCircle2
-                                            size={16}
-                                            className="mt-1 flex-shrink-0 transition-colors"
-                                            style={{ color: `${category.accent}80` }}
-                                        />
-                                        <span className="text-[#5a7069] text-[15px] leading-relaxed group-hover/item:text-[#1a2e28] transition-colors">
-                                            {skill}
+                                    <li key={sIndex} className="flex items-start justify-between gap-3">
+                                        <span className="text-[#5a7069] text-[14px] leading-relaxed flex-1">
+                                            {skill.name}
+                                        </span>
+                                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide shrink-0 mt-0.5 ${LEVEL_STYLES[skill.level]}`}>
+                                            {skill.level}
                                         </span>
                                     </li>
                                 ))}

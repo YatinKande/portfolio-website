@@ -126,7 +126,7 @@ export const projects = [
         id: "aws-docs-rag-bot",
         title: "AWS Docs RAG Bot",
         fullTitle: "AWS Documentation RAG Chatbot",
-        intro: "Intelligent document Q&A system with retrieval-augmented generation",
+        intro: "84% retrieval precision on AWS documentation Q&A",
         description: "A sophisticated document RAG chatbot that allows users to upload AWS documentation or any files and ask questions. The system retrieves the most relevant passages from documents and generates grounded, contextual answers with informative citations. Ensures responses are strictly based on provided content.",
         features: [
             "Upload and process AWS documentation",
@@ -175,7 +175,7 @@ export const projects = [
         id: "auto-multimodal-rag",
         title: "Automotive Multimodal RAG",
         fullTitle: "Automotive Multimodal RAG System",
-        intro: "Multimodal RAG system for automotive domain Q&A",
+        intro: "Multimodal RAG across text, images & OBD-II diagnostics",
         description: "An advanced multimodal RAG system designed specifically for the automotive domain. It supports document ingestion, vector search, and grounded Q&A capabilities over automotive manuals, recall documents, and OBD-II diagnostic data, processing both text and imagery.",
         features: [
             "Multimodal data processing (text, images, diagrams)",
@@ -199,7 +199,7 @@ export const projects = [
         id: "kinesis-key-entry",
         title: "Kinesis Key Entry",
         fullTitle: "Kinesis Smart Door Authentication System",
-        intro: "AWS-powered secure door access control system",
+        intro: "Real-time facial auth via AWS Rekognition & Kinesis streams",
         description: "A cutting-edge smart door authentication system using AWS Rekognition for facial recognition, Kinesis Video Streams for real-time video processing, S3 for secure storage, and DynamoDB for access control management. Provides secure, contactless entry with comprehensive audit trails.",
         features: [
             "Real-time facial recognition",
@@ -223,7 +223,7 @@ export const projects = [
         id: "dataset-concierge-bot",
         title: "Dataset Concierge Bot",
         fullTitle: "Dataset Concierge Bot",
-        intro: "Conversational bot for dataset discovery and management",
+        intro: "Serverless AWS chatbot handling 500+ daily dataset requests",
         description: "An intelligent conversational bot that helps users find, save, and retrieve datasets from multiple sources using natural language. Features include new-user onboarding, slot-filling for precise queries, flexible date handling, and user ID-based data management. Built as a serverless chatbot using AWS Lex, Lambda, and DynamoDB with 500+ daily requests.",
         features: [
             "Natural language dataset search",
@@ -247,7 +247,7 @@ export const projects = [
         id: "smartsoil-crop-recommender",
         title: "SmartSoil Crop Recommender",
         fullTitle: "SmartSoil Crop Recommender System",
-        intro: "Data-driven crop recommendation for Indian farmers",
+        intro: "94% accuracy crop recommendation for Indian farmers",
         description: "A machine learning-powered crop recommendation system that analyzes soil nutrient data to suggest the best crops for different regions in India. Helps farmers and policymakers make informed, data-driven decisions to improve crop yields and support sustainable agriculture practices.",
         features: [
             "Soil nutrient analysis",
@@ -271,7 +271,7 @@ export const projects = [
         id: "lip-read-ai-lipnet",
         title: "Lip-Read AI using LipNet",
         fullTitle: "AI Lip Reading System using LipNet Architecture",
-        intro: "Deep learning lip-reading system with 3D CNNs",
+        intro: "3D CNN-BiLSTM achieving sub-10% word error rate on GRID dataset",
         description: "An advanced deep learning-based lip-reading AI system trained on the GRID dataset. Uses a LipNet-inspired architecture with 3D Convolutional Neural Networks, Bi-directional LSTMs, and CTC loss for accurate speech recognition from silent video. Processes video input with OpenCV and trains models using TensorFlow.",
         features: [
             "Silent speech recognition from video",
@@ -412,11 +412,15 @@ export const certifications = [
         name: "AWS Certified Cloud Practitioner",
         issuer: "Amazon Web Services",
         year: "In Progress",
+        expectedCompletion: "Aug 2026",
+        progress: 70,
     },
     {
         name: "Deep Learning Specialization",
         issuer: "DeepLearning.AI",
         year: "In Progress",
+        expectedCompletion: "Sep 2026",
+        progress: 55,
     },
 ];
 

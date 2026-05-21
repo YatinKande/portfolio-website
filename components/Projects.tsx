@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { projects, type Project } from "@/lib/data";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Github, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ProjectModal from "./ProjectModal";
@@ -108,6 +108,20 @@ export default function Projects() {
 
                                     {/* Dark Overlay (gradient makes text at bottom readable) */}
                                     <div className="absolute inset-0 z-1 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+
+                                    {/* GitHub link — always visible top-right */}
+                                    {project.github && (
+                                        <a
+                                            href={project.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-white text-[11px] font-semibold hover:bg-white/20 hover:border-white/40 transition-all"
+                                        >
+                                            <Github size={13} />
+                                            Code
+                                        </a>
+                                    )}
 
                                     {/* Content Group (positioned at bottom-left) */}
                                     <div className="absolute inset-0 p-[30px] flex flex-col justify-end z-10">

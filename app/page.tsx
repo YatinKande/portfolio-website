@@ -310,13 +310,15 @@ export default function LandingPage() {
 
                         <footer className="py-12 bg-[#1a2e28] border-t border-[#cfe5df]/20 px-6">
                             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="size-3 rounded-full bg-[#20c997] animate-pulse" />
-                                    <span className="text-[10px] font-mono text-[#cfe5df]/50 uppercase tracking-widest">
-                                        SYSTEM_STATUS: ONLINE | VERSION: 3.1.0
+                                {/* Availability signal */}
+                                <div className="flex items-center gap-3">
+                                    <div className="size-2.5 rounded-full bg-[#20c997] animate-pulse" />
+                                    <span className="text-[10px] font-mono text-[#20c997]/80 uppercase tracking-widest font-bold">
+                                        Open to Full-time · Data Scientist / ML Engineer
                                     </span>
                                 </div>
 
+                                {/* Dashboard link */}
                                 <a
                                     href="/dashboard"
                                     className="group flex items-center gap-2 text-[10px] font-mono text-[#20c997]/50 hover:text-[#20c997] uppercase tracking-widest transition-colors"
@@ -326,8 +328,9 @@ export default function LandingPage() {
                                     View Dashboard →
                                 </a>
 
+                                {/* Copyright + location */}
                                 <div className="text-[10px] font-mono text-[#cfe5df]/30 uppercase tracking-[0.2em]">
-                                    © 2026 YATIN KANDE • DATA SCIENCE ECOSYSTEM
+                                    © 2026 Yatin Kande · Dearborn, MI
                                 </div>
                             </div>
                         </footer>
