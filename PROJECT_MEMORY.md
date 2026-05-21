@@ -283,5 +283,86 @@ User fills form → handleSubmit() → POST https://api.web3forms.com/submit
 
 ### [2026-05-21] — Initial memory sync
 - Read full codebase: all app pages, all components, lib/data.ts, tailwind config, globals.css
-- Created PROJECT_MEMORY.md, BUGS.md, TECH_DEBT.md
+- Created PROJECT_MEMORY.md, BUGS.md, TECH_DEBT.md, ARCHITECTURE.md, DEPLOYMENT.md
 - No code changes made in this session
+
+---
+
+### [2026-05-21] — All 10 engineering improvements implemented
+**Commit:** `81cfc59` → pushed to main → Vercel deployed → READY
+**Live URL:** https://portfolio-website-yatinkandes-projects.vercel.app
+
+#### Fix 1 — Mobile hamburger menu (components/Navbar.tsx)
+- Added `mobileOpen` state + resize listener
+- AnimatePresence drawer floats below navbar (not full-screen)
+- Animated X/hamburger icon swap on toggle
+- Backdrop click closes drawer
+- Resume download button included in mobile drawer
+- **Risk:** None. Self-contained state, no global side effects.
+
+#### Fix 2 — Resume download button (components/Hero.tsx + components/Navbar.tsx)
+- Hero: second CTA button added beside "Contact Me" (outlined style)
+- Navbar desktop: pill button in top-right with Download icon
+- Navbar mobile: inside drawer with green bg
+- Links to `/Yatin_Kande_Resume.pdf` (already in /public)
+- **Risk:** None. Static link to existing asset.
+
+#### Fix 3 — SEO metadata + favicon + OG image (app/layout.tsx + app/icon.tsx + app/opengraph-image.tsx)
+- `app/icon.tsx` → auto-generates favicon via Next.js ImageResponse (32×32 mint green "Y" tile)
+- `app/opengraph-image.tsx` → edge runtime 1200×630 branded card (dark bg, mint/coral accents)
+- `layout.tsx` updated with openGraph, twitter card, keywords, authors, metadataBase
+- **metadataBase:** https://portfolio-website-yatinkandes-projects.vercel.app
+- **Risk:** Low. OG image uses edge runtime; if Vercel edge runtime fails, OG falls back to nothing (same as before).
+
+#### Fix 4 — isSent reset timer bug (components/Contact.tsx)
+- Moved `setTimeout(() => setIsSent(false), 5000)` into the `if (result.success)` block
+- Was previously in `finally` block checking `if (isSent)` before `setIsSent(true)` ran
+- **Risk:** None. Pure logic fix.
+
+#### Fix 5 — Font CLS / double-load (app/layout.tsx + app/globals.css)
+- Removed Font Awesome and Devicon CDN links from layout.tsx `<head>` (BackgroundWatermarks deleted)
+- Added `next/font/google` Inter with `variable: '--font-inter'` and `display: 'swap'`
+- Applied `inter.variable` className to `<html>` tag
+- Removed Inter from globals.css `@import` (kept Rajdhani + Orbitron only)
+- **Risk:** Low. Font loading path changed; if Inter fails to load, system sans-serif shows instead of blank.
+
+#### Fix 6 — Employer name inconsistency (components/About.tsx)
+- Changed "DataZymes and SmartKnower" → "SmartKnower" throughout About.tsx text
+- Changed "At DataZymes, I built..." → "As an AI/ML intern, I built..."
+- Matches lib/data.ts experience entries (both at SmartKnower)
+- **Note:** If Yatin confirms DataZymes was a separate employer, revert this and add DataZymes back to lib/data.ts experience.
+
+#### Fix 7 — Wire /dashboard into footer (app/page.tsx)
+- Added subtle "View Dashboard →" monospace link in footer between status and copyright
+- Styled to match existing footer aesthetic (dim green, tracks on hover)
+- **Risk:** None. Additive link only.
+
+#### Fix 8 — Contact error UX (components/Contact.tsx)
+- Replaced both `alert()` calls with `setErrorMessage()` state
+- Added `errorMessage` state (string | null)
+- Inline error banner renders below submit button with Framer Motion fade-in
+- Banner cleared on new submission attempt (`setErrorMessage(null)` at top of handler)
+- **Risk:** None.
+
+#### Fix 9 — Type safety (lib/data.ts + 3 components)
+- Exported `Project` type and `TechDetail` type from lib/data.ts
+- `Projects.tsx`: `useState<Project | null>`, filter with type predicate `(p): p is Project`
+- `ProjectModal.tsx`: `project: Project` instead of `project: any`
+- `app/projects/page.tsx`: `useState<Project | null>`, removed inline `any` annotations
+- **Risk:** None. Compile-time only, zero runtime change.
+
+#### Fix 10 — Deleted orphaned files
+- **Deleted components:** ConsoleLog, InsightTicker, LoadingStatus, TypewriterQuote, SkillWheel, ComprehensiveSkills, BackgroundWatermarks, Footer, BackButton, ui/Background
+- **Deleted asset:** public/about-visual.jpg (unused)
+- **Kept:** NeuralBackground, CareerTimeline, KPITile, ProgressChart, DashboardCard (all used by /dashboard or /analytics)
+- **Risk:** Low. All deleted files were verified unused via grep before deletion.
+
+#### Post-deploy fix — metadataBase URL (app/layout.tsx)
+- Corrected metadataBase from placeholder `yatinkande.vercel.app` to actual `portfolio-website-yatinkandes-projects.vercel.app`
+- Commit: `fix: correct metadataBase to match Vercel production domain`
+
+---
+
+### OPEN ITEMS AFTER THIS SESSION
+- BUG-03 (employer name) needs Yatin to confirm correct employer for AI/ML internship role
+- Consider adding a custom domain (e.g. yatinkande.dev) to replace the long vercel subdomain

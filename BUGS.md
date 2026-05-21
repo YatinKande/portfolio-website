@@ -72,6 +72,24 @@
 
 ## RESOLVED BUGS
 
+### [2026-05-21] BUG-R06 — about-visual.jpg unused
+- **Fix:** Deleted from public/. Commit `81cfc59`.
+
+### [2026-05-21] BUG-R05 — Contact form uses alert()
+- **Fix:** Replaced both alert() calls with inline errorMessage state + styled banner. Commit `81cfc59`.
+
+### [2026-05-21] BUG-R04 — Font CSS variables undefined
+- **Fix:** Inter now loaded via next/font with `variable: '--font-inter'`; CDN double-load removed. Commit `81cfc59`.
+
+### [2026-05-21] BUG-R03 — Employer name inconsistency (partial)
+- **Fix:** Updated About.tsx to reference SmartKnower only, matching lib/data.ts. Needs owner verification. Commit `81cfc59`.
+
+### [2026-05-21] BUG-R02 — isSent reset timer never fires
+- **Fix:** Moved setTimeout into success branch. Commit `81cfc59`.
+
+### [2026-05-21] BUG-R01-MOBILE — Mobile hamburger non-functional
+- **Fix:** Full AnimatePresence drawer implemented in Navbar.tsx. Commit `81cfc59`.
+
 ### [2026-05-20] BUG-R01 — GlitchText startTime prop missing from interface
 - **File:** `components/GlitchText.tsx`
 - **Fix:** Added `startTime?: number` to `GlitchTextProps` interface.

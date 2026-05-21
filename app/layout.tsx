@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description: "Portfolio of Yatin Kande — MS Data Science @ University of Michigan. Building RAG systems, Computer Vision pipelines, and MLOps workflows. Open to ML/AI Engineering roles.",
     keywords: ["AI Engineer", "Data Scientist", "Machine Learning", "RAG", "Computer Vision", "MLOps", "Python", "PyTorch", "AWS", "LangChain"],
     authors: [{ name: "Yatin Kande" }],
-    metadataBase: new URL("https://yatinkande.vercel.app"),
+    metadataBase: new URL("https://portfolio-website-yatinkandes-projects.vercel.app"),
     openGraph: {
         type: "website",
         title: "Yatin Kande | AI & Data Scientist",
