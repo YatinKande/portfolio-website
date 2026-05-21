@@ -170,7 +170,7 @@ export default function Hero() {
                         whileTap={{ scale: 0.98 }}
                     >
                         <a
-                            href="/Yatin_Kande_Resume.pdf"
+                            href="/YatinKande_Resume.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group border-2 border-[#20c997] text-[#20c997] font-bold px-[40px] py-[16px] rounded-full transition-all duration-300 hover:bg-[#20c997] hover:text-white hover:shadow-[0_10px_20px_-5px_rgba(32,201,151,0.3)] inline-flex items-center gap-2 text-[18px]"

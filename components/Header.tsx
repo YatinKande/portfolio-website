@@ -53,7 +53,7 @@ export default function Header() {
                         </Link>
                     ))}
                     <Link
-                        href="/Yatin_Kande_Resume.pdf"
+                        href="/YatinKande_Resume.pdf"
                         target="_blank"
                         className="ml-4 px-6 py-2 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:shadow-[0_0_20px_-5px_hsl(var(--primary))] transition-shadow"
                     >

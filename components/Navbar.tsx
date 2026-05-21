@@ -102,7 +102,7 @@ export default function Navbar() {
 
                     {/* Desktop Resume Button */}
                     <a
-                        href="/Yatin_Kande_Resume.pdf"
+                        href="/YatinKande_Resume.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hidden md:flex items-center gap-2 px-4 py-2 bg-[#20c997] text-white text-sm font-bold rounded-full hover:bg-[#1aad85] transition-colors shadow-sm"
@@ -193,7 +193,7 @@ export default function Navbar() {
                                 <div className="h-px bg-[#cfe5df] my-2" />
 
                                 <a
-                                    href="/Yatin_Kande_Resume.pdf"
+                                    href="/YatinKande_Resume.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={() => setMobileOpen(false)}

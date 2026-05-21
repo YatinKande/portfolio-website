@@ -35,6 +35,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Resumes
-*Resume*
-resume*
+# Resumes (private drafts only — public/YatinKande_Resume.pdf is intentionally tracked)
+resume_draft*
+*_private_resume*
