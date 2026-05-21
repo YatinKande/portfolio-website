@@ -344,9 +344,9 @@ export const projects = [
 export const experience = [
     {
         role: "Data Analyst Intern (AI/ML)",
-        company: "SmartKnower",
+        company: "DataZymes",
         location: "Bengaluru, India",
-        period: "Mar 2023 — Aug 2023",
+        period: "Feb 2024 — Jul 2024",
         description: "",
         bullets: [
             "Engineered a YOLOv5 object detection model with transfer learning on 10,000+ preprocessed field images, stabilizing mAP at 74% and F1-score at 0.76 to automate weed and crop disease identification.",
@@ -356,7 +356,7 @@ export const experience = [
         ]
     },
     {
-        role: "Data Science Intern",
+        role: "Machine Learning Intern",
         company: "SmartKnower",
         location: "Bengaluru, India",
         period: "Mar 2022 — Jun 2022",
@@ -409,7 +409,7 @@ export const certifications = [
         year: "2024",
     },
     {
-        name: "AWS Certified Machine Learning Specialty",
+        name: "AWS Certified Cloud Practitioner",
         issuer: "Amazon Web Services",
         year: "In Progress",
     },
