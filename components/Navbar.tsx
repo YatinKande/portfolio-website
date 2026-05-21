@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { X, Download } from "lucide-react";
 
 const navLinks = [
     { name: "About", href: "#about" },
@@ -17,12 +18,12 @@ const navLinks = [
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("");
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
 
-            // Active section tracking logic
             const sections = navLinks.map(link => link.href.substring(1));
             const scrollPosition = window.scrollY + window.innerHeight / 3;
 
@@ -43,61 +44,169 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Close mobile menu on resize to desktop
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) setMobileOpen(false);
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     return (
-        <motion.nav
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            className={cn(
-                "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 px-6 py-4",
-                isScrolled ? "bg-white/80 backdrop-blur-md border-b border-[#cfe5df] py-3 shadow-sm" : "bg-transparent"
-            )}
-        >
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
-                {/* Logo */}
-                <Link href="/" className="group flex items-center gap-2">
-                    <div className="size-10 rounded-xl bg-[#20c997] flex items-center justify-center text-white font-bold text-xl group-hover:bg-[#ff6b6b] transition-colors">
-                        Y
+        <>
+            <motion.nav
+                initial={{ y: -100 }}
+                animate={{ y: 0 }}
+                className={cn(
+                    "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 px-6 py-4",
+                    isScrolled ? "bg-white/80 backdrop-blur-md border-b border-[#cfe5df] py-3 shadow-sm" : "bg-transparent"
+                )}
+            >
+                <div className="max-w-7xl mx-auto flex items-center justify-between">
+                    {/* Logo */}
+                    <Link href="/" className="group flex items-center gap-2">
+                        <div className="size-10 rounded-xl bg-[#20c997] flex items-center justify-center text-white font-bold text-xl group-hover:bg-[#ff6b6b] transition-colors">
+                            Y
+                        </div>
+                        <span className="text-xl font-bold text-[#1a2e28] tracking-tighter group-hover:text-[#20c997] transition-colors">
+                            Yatin <span className="text-[#20c997] group-hover:text-[#ff6b6b]">Kande</span>
+                        </span>
+                    </Link>
+
+                    {/* Desktop Nav */}
+                    <div className="hidden md:flex items-center gap-1 bg-[#f0f8f6]/50 p-1 rounded-full border border-[#cfe5df]/30 backdrop-blur-sm">
+                        {navLinks.map((link) => {
+                            const isActive = activeSection === link.href.substring(1);
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={cn(
+                                        "px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 relative",
+                                        isActive ? "text-[#20c997]" : "text-[#5a7069] hover:text-[#1a2e28]"
+                                    )}
+                                >
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="active-pill"
+                                            className="absolute inset-0 bg-white shadow-sm rounded-full z-[-1]"
+                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                        />
+                                    )}
+                                    {link.name}
+                                </Link>
+                            );
+                        })}
                     </div>
-                    <span className="text-xl font-bold text-[#1a2e28] tracking-tighter group-hover:text-[#20c997] transition-colors">
-                        Yatin <span className="text-[#20c997] group-hover:text-[#ff6b6b]">Kande</span>
-                    </span>
-                </Link>
 
-                {/* Desktop Nav */}
-                <div className="hidden md:flex items-center gap-1 bg-[#f0f8f6]/50 p-1 rounded-full border border-[#cfe5df]/30 backdrop-blur-sm">
-                    {navLinks.map((link) => {
-                        const isActive = activeSection === link.href.substring(1);
-                        return (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className={cn(
-                                    "px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 relative",
-                                    isActive ? "text-[#20c997]" : "text-[#5a7069] hover:text-[#1a2e28]"
-                                )}
-                            >
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="active-pill"
-                                        className="absolute inset-0 bg-white shadow-sm rounded-full z-[-1]"
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                    />
-                                )}
-                                {link.name}
-                            </Link>
-                        );
-                    })}
-                </div>
+                    {/* Desktop Resume Button */}
+                    <a
+                        href="/Yatin_Kande_Resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hidden md:flex items-center gap-2 px-4 py-2 bg-[#20c997] text-white text-sm font-bold rounded-full hover:bg-[#1aad85] transition-colors shadow-sm"
+                    >
+                        <Download className="size-3.5" />
+                        Resume
+                    </a>
 
-                {/* Mobile Menu Button - Visual Placeholder */}
-                <div className="md:hidden">
-                    <button className="p-2 text-[#1a2e28]">
-                        <div className="w-6 h-0.5 bg-current mb-1.5 rounded-full" />
-                        <div className="w-6 h-0.5 bg-current mb-1.5 rounded-full" />
-                        <div className="w-4 h-0.5 bg-current rounded-full ml-2" />
+                    {/* Mobile Hamburger */}
+                    <button
+                        onClick={() => setMobileOpen(!mobileOpen)}
+                        aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                        className="md:hidden p-2 text-[#1a2e28] rounded-lg hover:bg-[#f0f8f6] transition-colors"
+                    >
+                        <AnimatePresence mode="wait" initial={false}>
+                            {mobileOpen ? (
+                                <motion.div
+                                    key="close"
+                                    initial={{ rotate: -90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: 90, opacity: 0 }}
+                                    transition={{ duration: 0.15 }}
+                                >
+                                    <X className="size-5" />
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="open"
+                                    initial={{ rotate: 90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: -90, opacity: 0 }}
+                                    transition={{ duration: 0.15 }}
+                                    className="flex flex-col gap-1.5"
+                                >
+                                    <div className="w-6 h-0.5 bg-current rounded-full" />
+                                    <div className="w-6 h-0.5 bg-current rounded-full" />
+                                    <div className="w-4 h-0.5 bg-current rounded-full ml-2" />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </button>
                 </div>
-            </div>
-        </motion.nav>
+            </motion.nav>
+
+            {/* Mobile Drawer */}
+            <AnimatePresence>
+                {mobileOpen && (
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            key="backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setMobileOpen(false)}
+                            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[90] md:hidden"
+                        />
+
+                        {/* Drawer */}
+                        <motion.div
+                            key="drawer"
+                            initial={{ opacity: 0, y: -12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -12 }}
+                            transition={{ type: "spring", damping: 28, stiffness: 350 }}
+                            className="fixed top-[64px] left-4 right-4 bg-white/95 backdrop-blur-xl border border-[#cfe5df] rounded-2xl shadow-xl z-[95] md:hidden overflow-hidden"
+                        >
+                            <div className="p-4 flex flex-col gap-1">
+                                {navLinks.map((link) => {
+                                    const isActive = activeSection === link.href.substring(1);
+                                    return (
+                                        <Link
+                                            key={link.href}
+                                            href={link.href}
+                                            onClick={() => setMobileOpen(false)}
+                                            className={cn(
+                                                "px-4 py-3 rounded-xl text-sm font-bold transition-all",
+                                                isActive
+                                                    ? "text-[#20c997] bg-[#20c997]/10"
+                                                    : "text-[#5a7069] hover:text-[#1a2e28] hover:bg-[#f0f8f6]"
+                                            )}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    );
+                                })}
+
+                                <div className="h-px bg-[#cfe5df] my-2" />
+
+                                <a
+                                    href="/Yatin_Kande_Resume.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setMobileOpen(false)}
+                                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#20c997] text-white text-sm font-bold hover:bg-[#1aad85] transition-colors"
+                                >
+                                    <Download className="size-4" />
+                                    Download Resume
+                                </a>
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
+        </>
     );
 }

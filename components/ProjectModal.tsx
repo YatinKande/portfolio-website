@@ -3,9 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Github, ExternalLink, Mail, Check } from "lucide-react";
 import Image from "next/image";
+import { type Project } from "@/lib/data";
 
 interface ProjectModalProps {
-    project: any;
+    project: Project;
     onClose: () => void;
 }
 
@@ -121,7 +122,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                         <div className="h-[1px] flex-1 bg-[#cfe5df]" />
                                     </h4>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                        {project.techDetails.map((td: any) => (
+                                        {project.techDetails.map((td) => (
                                             <div key={td.name} className="flex flex-col gap-2 group/tech">
                                                 <h5 className="text-[14px] font-bold text-[#1a2e28] group-hover/tech:text-[#20c997] transition-colors">{td.name}</h5>
                                                 <div className="h-0.5 w-6 bg-[#20c997] group-hover/tech:w-12 transition-all" />

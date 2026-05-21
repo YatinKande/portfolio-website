@@ -1,5 +1,25 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 
+export type TechDetail = {
+    name: string;
+    description: string;
+};
+
+export type Project = {
+    id: string;
+    title: string;
+    fullTitle: string;
+    intro: string;
+    description: string;
+    features: string[];
+    tech: string[];
+    techDetails: TechDetail[];
+    github: string;
+    image: string;
+    featured: boolean;
+    size: string;
+};
+
 export const personalInfo = {
     name: "Yatin Kande",
     title: "AI & Data Scientist",

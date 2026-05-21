@@ -6,12 +6,12 @@ import { useRouter } from "next/navigation";
 import { Github, X, ArrowLeft, ExternalLink, Mail, Linkedin, ChevronRight, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { projects } from "@/lib/data";
+import { projects, type Project } from "@/lib/data";
 import ProjectModal from "@/components/ProjectModal";
 
 export default function ProjectsPage() {
     const router = useRouter();
-    const [selectedProject, setSelectedProject] = useState<any>(null);
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -50,7 +50,7 @@ export default function ProjectsPage() {
             {/* Projects Grid */}
             <main className="max-w-[1240px] mx-auto px-6 sm:px-10 pb-32">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
-                    {projects.map((project: any, idx) => (
+                    {projects.map((project, idx) => (
                         <motion.div
                             key={project.id || project.title}
                             initial={{ opacity: 0, scale: 0.95, y: 30 }}
@@ -88,7 +88,7 @@ export default function ProjectsPage() {
                                 </p>
 
                                 <div className="flex flex-wrap gap-2 mt-4">
-                                    {project.tech.slice(0, 3).map((tag: any) => (
+                                    {project.tech.slice(0, 3).map((tag) => (
                                         <span
                                             key={tag}
                                             className="px-2.5 py-1 bg-[#f0f8f6] border border-[#20c997]/20 text-[#20c997] text-[10px] font-bold uppercase tracking-wider rounded-md"

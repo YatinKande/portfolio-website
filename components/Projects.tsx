@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { projects } from "@/lib/data";
+import { projects, type Project } from "@/lib/data";
 import { Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +18,7 @@ const PROJECT_GLOWS: Record<string, string> = {
 };
 
 export default function Projects() {
-    const [selectedProject, setSelectedProject] = useState<any>(null);
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
     const featuredTitles = [
         "AWS Docs RAG Bot",
@@ -29,9 +29,9 @@ export default function Projects() {
         "Lip-Read AI using LipNet"
     ];
 
-    const sortedProjects = featuredTitles.map(title =>
-        projects.find(p => p.title === title)
-    ).filter(Boolean);
+    const sortedProjects = featuredTitles
+        .map(title => projects.find(p => p.title === title))
+        .filter((p): p is Project => p !== undefined);
 
     // CSS Grid positioning classes for a compact bento layout
     const getGridClass = (index: number) => {
@@ -74,7 +74,7 @@ export default function Projects() {
 
                 {/* Bento Grid Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-[20px] max-w-[1200px] mx-auto">
-                    {sortedProjects.map((project: any, index) => {
+                    {sortedProjects.map((project, index) => {
                         const isBig = index === 0;
                         const glow = PROJECT_GLOWS[project.title] || "0 0 30px rgba(255, 255, 255, 0.3)";
 

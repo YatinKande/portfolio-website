@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, Download } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { personalInfo } from "@/lib/data";
@@ -148,9 +148,9 @@ export default function Hero() {
                     Skilled in Python, PyTorch, and AWS cloud workflows — delivering models that drive measurable business impact from experimentation to production deployment.
                 </motion.p>
 
-                {/* Step 5: Contact Button */}
+                {/* Step 5: CTA Buttons */}
                 <motion.div
-                    className={`mb-[50px] ${getHeroClass(4)}`}
+                    className={`mb-[50px] flex flex-col sm:flex-row items-center gap-4 ${getHeroClass(4)}`}
                 >
                     <motion.div
                         whileHover={{ y: -5, scale: 1.02 }}
@@ -163,6 +163,21 @@ export default function Hero() {
                             Contact Me
                             <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-[5px]" />
                         </Link>
+                    </motion.div>
+
+                    <motion.div
+                        whileHover={{ y: -5, scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                    >
+                        <a
+                            href="/Yatin_Kande_Resume.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group border-2 border-[#20c997] text-[#20c997] font-bold px-[40px] py-[16px] rounded-full transition-all duration-300 hover:bg-[#20c997] hover:text-white hover:shadow-[0_10px_20px_-5px_rgba(32,201,151,0.3)] inline-flex items-center gap-2 text-[18px]"
+                        >
+                            <Download className="size-5 transition-transform duration-300 group-hover:-translate-y-[2px]" />
+                            Resume
+                        </a>
                     </motion.div>
                 </motion.div>
 

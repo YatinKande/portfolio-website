@@ -13,10 +13,12 @@ export default function Contact() {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSent, setIsSent] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setErrorMessage(null);
 
         try {
             const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE";
@@ -41,20 +43,14 @@ export default function Contact() {
             if (result.success) {
                 setIsSent(true);
                 setFormData({ name: "", email: "", message: "" });
+                setTimeout(() => setIsSent(false), 5000);
             } else {
-                console.error("Submission failed:", result.message);
-                alert("Sorry, there was an error sending your message. Please try again later.");
+                setErrorMessage("Submission failed. Please try again or email yatink@umich.edu directly.");
             }
         } catch (error) {
-            console.error("Submission error:", error);
-            alert("Something went wrong. Please check your connection and try again.");
+            setErrorMessage("Network error. Please check your connection and try again.");
         } finally {
             setIsSubmitting(false);
-
-            // Reset "Sent" state after a delay
-            if (isSent) {
-                setTimeout(() => setIsSent(false), 5000);
-            }
         }
     };
 
@@ -180,7 +176,7 @@ export default function Contact() {
                                         SENDING...
                                     </span>
                                 ) : isSent ? (
-                                    "MESSAGE RECEIVED!"
+                                    "MESSAGE RECEIVED! ✓"
                                 ) : (
                                     <>
                                         SEND MESSAGE
@@ -188,6 +184,17 @@ export default function Contact() {
                                     </>
                                 )}
                             </button>
+
+                            {errorMessage && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -8 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 font-medium"
+                                >
+                                    <span className="mt-0.5 size-2 rounded-full bg-red-500 shrink-0" />
+                                    {errorMessage}
+                                </motion.div>
+                            )}
                         </form>
                     </motion.div>
                 </div>
