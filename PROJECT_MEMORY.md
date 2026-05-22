@@ -1,6 +1,6 @@
 # PROJECT_MEMORY.md
 > Engineering copilot memory file. Read this first before touching any code.
-> Last synced: 2026-05-21
+> Last synced: 2026-05-21 (session 2 — 11 UX improvements + photo swap)
 
 ---
 
@@ -56,7 +56,7 @@
 │   ├── GlitchText.tsx      ← Cycling role text with scramble animation
 │   ├── About.tsx           ← Full-bleed dark section with bio paragraphs + stats
 │   ├── Skills.tsx          ← 7 skill category cards (clean grid)
-│   ├── BackgroundSection.tsx ← Experience/Education tabs with AnimatePresence
+│   ├── BackgroundSection.tsx ← Experience/Education TWO-COLUMN layout (no tabs, both always visible)
 │   ├── Projects.tsx        ← Bento grid of 6 featured projects
 │   ├── ProjectModal.tsx    ← Click-to-expand project detail modal
 │   ├── Certifications.tsx  ← 4 certification cards
@@ -83,9 +83,9 @@
 │   └── utils.ts            ← cn() utility (clsx + tailwind-merge)
 │
 ├── public/
-│   ├── me.jpg              ← Profile photo (used in loader, hero, about bg)
-│   ├── about-visual.jpg    ← Unused secondary about image
-│   ├── Yatin_Kande_Resume.pdf ← Resume PDF (exists but no download link!)
+│   ├── me.jpg              ← Hero circle photo: IMG_2822 (specs, golden hour, cherry blossoms)
+│   ├── me_about.jpg        ← About section watermark: IMG_2807 (smiling, daytime, no glasses)
+│   ├── YatinKande_Resume.pdf ← Resume PDF (linked from Hero, Navbar, mobile drawer)
 │   └── projects/           ← 20+ project screenshot images
 │
 ├── project-backgrounds/    ← Duplicate image set (not in /public, not served)
@@ -363,6 +363,105 @@ User fills form → handleSubmit() → POST https://api.web3forms.com/submit
 
 ---
 
-### OPEN ITEMS AFTER THIS SESSION
-- BUG-03 (employer name) needs Yatin to confirm correct employer for AI/ML internship role
+### OPEN ITEMS AFTER INITIAL SESSION
+- BUG-03 (employer name) — RESOLVED: DataZymes (Feb 2024–Jul 2024, AI/ML), SmartKnower (Mar 2022–Jun 2022, ML)
 - Consider adding a custom domain (e.g. yatinkande.dev) to replace the long vercel subdomain
+
+---
+
+### [2026-05-21] — Resume PDF replacement
+**Commit:** `091b1e9`
+- Replaced `public/YatinKande_Resume.pdf` with updated PDF from Downloads
+- Updated all 4 href references in Navbar.tsx (×2), Hero.tsx, and any other references
+- Gitignore updated: `*Resume*` → `resume_draft*` and `*_private_resume*` to allow public asset
+
+---
+
+### [2026-05-21] — Profile photo: specs hero + smiling about watermark
+**Commit:** `959fdbc` + `454e519`
+
+**Photos:**
+- `public/me.jpg` → IMG_2822: specs/sunglasses on, golden hour cherry blossoms, confident gaze. 3000×3000 crop from top of HEIC, enhanced with ImageMagick unsharp + brightness.
+- `public/me_about.jpg` → IMG_2807: no sunglasses, genuine smile, daytime cherry blossom light. Previously used as me.jpg before swap.
+
+Both photos from the same graduation shoot at UMich, cherry blossom backdrop, white double-breasted suit.
+
+---
+
+### [2026-05-21] — 11 UX/content improvements
+**Commit:** `454e519` → pushed to main → Vercel auto-deploying
+
+**All changes (TypeScript build passes, clean exit code 0):**
+
+#### 1. GlitchText roles (components/GlitchText.tsx)
+- Removed: "Data Analyst", "AI Engineer"
+- Now cycles: **Data Scientist → ML Engineer → GenAI Engineer**
+- Aligns with bio paragraph and actual skill set
+
+#### 2. Hero credibility line (components/Hero.tsx)
+- Added between GlitchText and bio paragraph
+- Content: `MS @ UMich · 3.8 GPA · Ex-DataZymes · [pulsing green badge] Open to Full-time`
+- Markup: flex-wrap row of small uppercase tracking-widest spans + animated badge
+
+#### 3. Hero mobile min-size (components/Hero.tsx)
+- Changed: `w-[150px] h-[150px]` → `w-[120px] h-[120px] sm:w-[150px]`
+- Added `min-w-[120px] min-h-[120px]` to prevent compression below 375px
+
+#### 4. About section two-column layout (components/About.tsx)
+- Changed from: centred wall of text (3 long paragraphs + highlight box)
+- Changed to: md:grid-cols-2 — narrative paragraph left, 4-metric achievement card right
+- Left: ~80-word narrative + 3 bullet highlights
+- Right card: 2×2 grid of achievement stats (84% retrieval, 40% latency, 81% AUC-ROC, 500+ requests)
+- About background: now uses `me_about.jpg` (smiling portrait) instead of `me.jpg`
+
+#### 5. Skills proficiency tags (components/Skills.tsx)
+- Converted skillCategories skills from `string[]` to `{ name: string; level: "Expert"|"Proficient"|"Familiar" }[]`
+- Expert = mint `#20c997`, Proficient = indigo `#6366f1`, Familiar = amber `#f59e0b`
+- Each skill row shows name (left) + level badge (right, shrink-0)
+- Legend row above grid explains the three tiers
+- R removed from Python/SQL/Bash/R bullet (was never "Expert" level on its own)
+
+#### 6. Project card GitHub links (components/Projects.tsx)
+- Added always-visible "Code" badge (GitHub icon + "Code" text) at top-right of each card
+- Uses `e.stopPropagation()` so clicking GitHub link doesn't trigger ProjectModal
+- Styled: `bg-black/50 backdrop-blur-sm border border-white/20`, 11px font
+
+#### 7. Project impact metrics in data (lib/data.ts)
+- Updated `intro` field for all 6 featured project cards:
+  - AWS Docs RAG Bot: "84% retrieval precision on AWS documentation Q&A"
+  - Automotive Multimodal RAG: "Multimodal RAG across text, images & OBD-II diagnostics"
+  - Kinesis Key Entry: "Real-time facial auth via AWS Rekognition & Kinesis streams"
+  - Dataset Concierge Bot: "Serverless AWS chatbot handling 500+ daily dataset requests"
+  - SmartSoil Crop Recommender: "94% accuracy crop recommendation for Indian farmers"
+  - Lip-Read AI: "3D CNN-BiLSTM achieving sub-10% word error rate on GRID dataset"
+
+#### 8. Experience + Education two-column layout (components/BackgroundSection.tsx)
+- Removed: tab toggle (AnimatePresence, activeTab state, useEffect hash listener)
+- Added: `lg:grid-cols-2` grid, both columns always visible
+- Left column: Experience (mint `#20c997` accents, 2 cards)
+- Right column: Education (coral `#ff6b6b` accents, 3 cards)
+- Each card shows bullets.slice(0,3) for experience, achievements for education
+
+#### 9. Certifications progress bars (components/Certifications.tsx + lib/data.ts)
+- Added `expectedCompletion` and `progress` fields to AWS CCP (70%, Aug 2026) and Deep Learning Spec (55%, Sep 2026) in data.ts
+- Certifications.tsx: In Progress certs show amber "In Progress" badge + animated `motion.div` progress bar + "Expected {date}" tag
+- Completed certs unchanged
+
+#### 10. Contact button color (components/Contact.tsx)
+- Changed: `bg-[#1a2e28]` → `bg-[#20c997]` (matches all other CTAs on the site)
+- Hover: `hover:bg-[#1aad85]` (darker green on hover)
+- Shadow: `shadow-[#20c997]/20 hover:shadow-[#20c997]/40`
+
+#### 11. Footer availability signal (app/page.tsx)
+- Changed: "SYSTEM_STATUS: ONLINE | VERSION: 3.1.0"
+- Changed to: pulsing dot + "Open to Full-time · Data Scientist / ML Engineer"
+- Copyright: "© 2026 YATIN KANDE • DATA SCIENCE ECOSYSTEM" → "© 2026 Yatin Kande · Dearborn, MI"
+
+---
+
+### OPEN ITEMS (post 2026-05-21)
+- `/analytics` page still not linked in nav
+- No custom domain yet
+- `aboutPageContent` in lib/data.ts is a dead export (never consumed)
+- ProjectModal: no keyboard focus trap
+- Skills.tsx has its own hardcoded skillCategories — does not consume lib/data.ts skills (duplication)
