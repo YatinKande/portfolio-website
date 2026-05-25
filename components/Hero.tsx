@@ -122,10 +122,9 @@ export default function Hero() {
 
                 {/* Step 4: Summary Paragraph */}
                 <motion.p
-                    className={`text-[15px] lg:text-[16px] text-slate-400 leading-[1.7] max-w-2xl mx-auto mb-[35px] ${getHeroClass(3)}`}
+                    className={`text-[15px] lg:text-[17px] text-slate-400 leading-[1.7] max-w-xl mx-auto mb-[35px] ${getHeroClass(3)}`}
                 >
-                    Data Scientist specializing in RAG pipelines, AI Agents, LLMs and Computer Vision —
-                    delivering models that drive measurable business impact from experimentation to production.
+                    Building production AI systems — <span className="text-slate-300 font-medium">RAG pipelines, AI Agents, LLMs & Computer Vision</span> — that ship and scale.
                 </motion.p>
 
                 {/* Step 5: CTA Buttons */}
