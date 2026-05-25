@@ -17,6 +17,16 @@ const PROJECT_GLOWS: Record<string, string> = {
     "Lip-Read AI using LipNet": "0 0 30px rgba(233, 30, 99, 0.5)"
 };
 
+// Domain category chips — colour-coded by AI/ML subdomain
+const PROJECT_CATEGORIES: Record<string, { label: string; color: string; bg: string }> = {
+    "AWS Docs RAG Bot":           { label: "RAG",          color: "#c4b5fd", bg: "rgba(124,58,237,0.25)" },
+    "Automotive Multimodal RAG":  { label: "Multimodal",   color: "#fdba74", bg: "rgba(249,115,22,0.25)" },
+    "Dataset Concierge Bot":      { label: "Serverless",   color: "#67e8f9", bg: "rgba(6,182,212,0.25)" },
+    "Kinesis Key Entry":          { label: "Computer Vision", color: "#7dd3fc", bg: "rgba(14,165,233,0.25)" },
+    "SmartSoil Crop Recommender": { label: "ML",           color: "#6ee7b7", bg: "rgba(32,201,151,0.25)" },
+    "Lip-Read AI using LipNet":   { label: "Deep Learning",color: "#f9a8d4", bg: "rgba(236,72,153,0.25)" },
+};
+
 export default function Projects() {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -108,6 +118,20 @@ export default function Projects() {
 
                                     {/* Dark Overlay (gradient makes text at bottom readable) */}
                                     <div className="absolute inset-0 z-1 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+
+                                    {/* Domain category chip — top-left */}
+                                    {PROJECT_CATEGORIES[project.title] && (
+                                        <div
+                                            className="absolute top-4 left-4 z-20 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm border"
+                                            style={{
+                                                color: PROJECT_CATEGORIES[project.title].color,
+                                                backgroundColor: PROJECT_CATEGORIES[project.title].bg,
+                                                borderColor: PROJECT_CATEGORIES[project.title].color + "50",
+                                            }}
+                                        >
+                                            {PROJECT_CATEGORIES[project.title].label}
+                                        </div>
+                                    )}
 
                                     {/* GitHub link — always visible top-right */}
                                     {project.github && (

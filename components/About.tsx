@@ -1,8 +1,30 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useInView, useMotionValue, animate } from "framer-motion";
 import { GraduationCap, Briefcase, TrendingUp, Zap } from "lucide-react";
 import NextImage from "next/image";
+
+// Animated count-up number — starts at 0, eases to target when section enters view
+function CountUp({ to, decimals = 0, suffix = "" }: { to: number; decimals?: number; suffix?: string }) {
+    const ref = useRef<HTMLSpanElement>(null);
+    const isInView = useInView(ref, { once: true, margin: "-60px" });
+    const motionVal = useMotionValue(0);
+    const [display, setDisplay] = useState(decimals > 0 ? "0.0" : "0");
+
+    useEffect(() => {
+        if (!isInView) return;
+        const controls = animate(motionVal, to, {
+            duration: 1.8,
+            ease: [0.22, 1, 0.36, 1],
+            onUpdate: (v) => setDisplay(v.toFixed(decimals)),
+        });
+        return () => controls.stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isInView]);
+
+    return <span ref={ref}>{display}{suffix}</span>;
+}
 
 const achievements = [
     { icon: TrendingUp, stat: "84%", label: "Retrieval precision", sub: "Multi-modal RAG system" },
@@ -113,17 +135,23 @@ export default function About() {
                     className="flex flex-wrap justify-center items-center gap-8 md:gap-16"
                 >
                     <div className="flex flex-col items-center">
-                        <div className="text-3xl md:text-5xl font-bold text-[#ff6b6b]">3.8</div>
+                        <div className="text-3xl md:text-5xl font-bold text-[#ff6b6b]">
+                            <CountUp to={3.8} decimals={1} />
+                        </div>
                         <div className="text-[10px] md:text-xs uppercase tracking-widest text-slate-300 mt-1 font-bold">UMich GPA</div>
                     </div>
                     <div className="hidden md:block h-12 w-[1px] bg-white/20" />
                     <div className="flex flex-col items-center">
-                        <div className="text-3xl md:text-5xl font-bold text-[#ff6b6b]">2</div>
+                        <div className="text-3xl md:text-5xl font-bold text-[#ff6b6b]">
+                            <CountUp to={2} />
+                        </div>
                         <div className="text-[10px] md:text-xs uppercase tracking-widest text-slate-300 mt-1 font-bold">AI/ML Internships</div>
                     </div>
                     <div className="hidden md:block h-12 w-[1px] bg-white/20" />
                     <div className="flex flex-col items-center">
-                        <div className="text-3xl md:text-5xl font-bold text-[#ff6b6b]">10+</div>
+                        <div className="text-3xl md:text-5xl font-bold text-[#ff6b6b]">
+                            <CountUp to={10} suffix="+" />
+                        </div>
                         <div className="text-[10px] md:text-xs uppercase tracking-widest text-slate-300 mt-1 font-bold">ML and AI Projects</div>
                     </div>
                 </motion.div>

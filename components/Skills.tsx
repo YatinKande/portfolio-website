@@ -31,6 +31,12 @@ const LEVEL_STYLES: Record<Proficiency, string> = {
     Familiar: "bg-[#f59e0b]/15 text-[#f59e0b] border border-[#f59e0b]/30",
 };
 
+/*
+ * 3-colour domain grouping:
+ *  🟢 Mint    #20c997 — Core AI/ML specialisations (output-facing)
+ *  🟣 Indigo  #6366f1 — Research & infrastructure (tool-facing)
+ *  🔴 Coral   #ff6b6b — Programming foundations
+ */
 const skillCategories: SkillCategory[] = [
     {
         title: "Machine Learning",
@@ -40,37 +46,7 @@ const skillCategories: SkillCategory[] = [
             { name: "Feature engineering", level: "Expert" },
             { name: "Hyperparameter tuning & model evaluation", level: "Expert" },
         ],
-        accent: "#20c997",
-    },
-    {
-        title: "Deep Learning / Computer Vision",
-        icon: Eye,
-        skills: [
-            { name: "PyTorch, TensorFlow, YOLOv5, 3D CNN-BiLSTM", level: "Expert" },
-            { name: "Real-time inference optimization", level: "Proficient" },
-            { name: "Data augmentation & transfer learning", level: "Proficient" },
-        ],
-        accent: "#ff6b6b",
-    },
-    {
-        title: "Cloud / Applications",
-        icon: Cloud,
-        skills: [
-            { name: "AWS Lex & Lambda serverless", level: "Proficient" },
-            { name: "SQS, SNS, DynamoDB, API Gateway", level: "Proficient" },
-            { name: "Lightweight scalable microservices", level: "Familiar" },
-        ],
-        accent: "#20c997",
-    },
-    {
-        title: "Programming & Databases",
-        icon: Database,
-        skills: [
-            { name: "Python, SQL, Bash", level: "Expert" },
-            { name: "PostgreSQL, MySQL, MongoDB, Snowflake", level: "Proficient" },
-            { name: "API integration & clean code practices", level: "Proficient" },
-        ],
-        accent: "#ff6b6b",
+        accent: "#20c997",   // 🟢 Core ML — mint
     },
     {
         title: "NLP & GenAI",
@@ -80,7 +56,7 @@ const skillCategories: SkillCategory[] = [
             { name: "Prompt engineering, embeddings, hybrid search", level: "Expert" },
             { name: "Semantic chunking, metadata filtering", level: "Proficient" },
         ],
-        accent: "#20c997",
+        accent: "#20c997",   // 🟢 Core GenAI — mint
     },
     {
         title: "MLOps & Deployment",
@@ -91,7 +67,27 @@ const skillCategories: SkillCategory[] = [
             { name: "AWS SageMaker, serverless architecture", level: "Familiar" },
             { name: "Model tracking, versioning, reproducibility", level: "Proficient" },
         ],
-        accent: "#ff6b6b",
+        accent: "#20c997",   // 🟢 Production ML — mint
+    },
+    {
+        title: "Deep Learning / Computer Vision",
+        icon: Eye,
+        skills: [
+            { name: "PyTorch, TensorFlow, YOLOv5, 3D CNN-BiLSTM", level: "Expert" },
+            { name: "Real-time inference optimization", level: "Proficient" },
+            { name: "Data augmentation & transfer learning", level: "Proficient" },
+        ],
+        accent: "#6366f1",   // 🟣 Research / DL infra — indigo
+    },
+    {
+        title: "Cloud / Applications",
+        icon: Cloud,
+        skills: [
+            { name: "AWS Lex & Lambda serverless", level: "Proficient" },
+            { name: "SQS, SNS, DynamoDB, API Gateway", level: "Proficient" },
+            { name: "Lightweight scalable microservices", level: "Familiar" },
+        ],
+        accent: "#6366f1",   // 🟣 Cloud infra — indigo
     },
     {
         title: "Data Engineering & Big Data",
@@ -100,7 +96,17 @@ const skillCategories: SkillCategory[] = [
             { name: "Apache Spark, PySpark, Kafka, Airflow", level: "Proficient" },
             { name: "AWS S3, Lambda, DynamoDB pipelines", level: "Proficient" },
         ],
-        accent: "#20c997",
+        accent: "#6366f1",   // 🟣 Data infra — indigo
+    },
+    {
+        title: "Programming & Databases",
+        icon: Database,
+        skills: [
+            { name: "Python, SQL, Bash", level: "Expert" },
+            { name: "PostgreSQL, MySQL, MongoDB, Snowflake", level: "Proficient" },
+            { name: "API integration & clean code practices", level: "Proficient" },
+        ],
+        accent: "#ff6b6b",   // 🔴 Foundations — coral
     },
 ];
 
@@ -136,7 +142,7 @@ export default function Skills() {
                         scalable data pipelines, and high-performance ML models.
                     </motion.p>
 
-                    {/* Legend */}
+                    {/* Proficiency legend */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
@@ -148,6 +154,26 @@ export default function Skills() {
                             <span key={lvl} className={`text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider ${LEVEL_STYLES[lvl]}`}>
                                 {lvl}
                             </span>
+                        ))}
+                    </motion.div>
+
+                    {/* Domain colour legend */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 }}
+                        className="flex items-center justify-center gap-6 mt-3 flex-wrap"
+                    >
+                        {[
+                            { color: "#20c997", label: "Core AI/ML" },
+                            { color: "#6366f1", label: "Research & Infra" },
+                            { color: "#ff6b6b", label: "Foundations" },
+                        ].map(({ color, label }) => (
+                            <div key={label} className="flex items-center gap-1.5">
+                                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color }} />
+                                <span className="text-[11px] text-[#5a7069] font-medium uppercase tracking-wider">{label}</span>
+                            </div>
                         ))}
                     </motion.div>
                 </div>
@@ -163,10 +189,22 @@ export default function Skills() {
                             transition={{ delay: index * 0.1, duration: 0.5 }}
                             whileHover={{ y: -5 }}
                             className="bg-white rounded-2xl p-8 border border-[#cfe5df] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_45px_rgb(32,201,151,0.1)] transition-all group relative overflow-hidden h-full flex flex-col"
+                            style={{
+                                ["--card-accent" as string]: category.accent,
+                            }}
                         >
+                            {/* Subtle dot-matrix background pattern — same motif as project cards */}
+                            <div
+                                className="absolute inset-0 opacity-[0.035] pointer-events-none"
+                                style={{
+                                    backgroundImage: "radial-gradient(circle, #000 1px, transparent 1px)",
+                                    backgroundSize: "22px 22px",
+                                }}
+                            />
+
                             {/* Accent Bar */}
                             <div
-                                className="absolute top-0 left-0 w-full h-1 opacity-60 group-hover:opacity-100 transition-opacity"
+                                className="absolute top-0 left-0 w-full h-1 opacity-50 group-hover:opacity-100 transition-opacity"
                                 style={{ backgroundColor: category.accent }}
                             />
 
