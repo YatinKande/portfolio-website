@@ -4,27 +4,6 @@ import { motion } from "framer-motion";
 import { education, experience } from "@/lib/data";
 import { Briefcase, GraduationCap, MapPin, Calendar } from "lucide-react";
 
-// Institution-specific colours — UMich gets official maize, others get coral
-function getEduColors(institution: string) {
-    if (institution.toLowerCase().includes("michigan")) {
-        return {
-            dot:    "#FFCB05",
-            glow:   "rgba(255,203,5,0.65)",
-            border: "#FFCB05",
-            bg:     "rgba(255,203,5,0.12)",
-            text:   "#FFCB05",
-            hover:  "#FFCB05",
-        };
-    }
-    return {
-        dot:    "#ff6b6b",
-        glow:   "rgba(255,107,107,0.6)",
-        border: "#ff6b6b",
-        bg:     "rgba(255,107,107,0.10)",
-        text:   "#ff6b6b",
-        hover:  "#ff6b6b",
-    };
-}
 
 export default function BackgroundSection() {
     return (
@@ -131,9 +110,7 @@ export default function BackgroundSection() {
 
                         <div className="space-y-6 relative">
                             <div className="absolute left-[5px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-[#ff6b6b] to-transparent opacity-30" />
-                            {education.map((item, idx) => {
-                                const c = getEduColors(item.institution);
-                                return (
+                            {education.map((item, idx) => (
                                 <motion.div
                                     key={idx}
                                     initial={{ opacity: 0, y: 20 }}
@@ -142,33 +119,15 @@ export default function BackgroundSection() {
                                     transition={{ delay: 0.1 + idx * 0.1 }}
                                     className="relative pl-8 group"
                                 >
-                                    {/* Institution-coloured timeline dot */}
-                                    <div
-                                        className="absolute left-0 top-1.5 w-3 h-3 rounded-full group-hover:scale-125 transition-transform"
-                                        style={{
-                                            backgroundColor: c.dot,
-                                            boxShadow: `0 0 12px ${c.glow}`,
-                                        }}
-                                    />
-                                    <div
-                                        className="bg-white/[0.03] backdrop-blur-md border border-white/10 p-5 rounded-2xl hover:bg-white/[0.05] transition-colors border-l-2"
-                                        style={{ borderLeftColor: c.border }}
-                                    >
+                                    <div className="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-[#ff6b6b] shadow-[0_0_12px_rgba(255,107,107,0.6)] group-hover:scale-125 transition-transform" />
+                                    <div className="bg-white/[0.03] backdrop-blur-md border border-white/10 p-5 rounded-2xl hover:bg-white/[0.05] transition-colors border-l-2 border-l-[#ff6b6b]">
                                         <div className="flex flex-col gap-1 mb-3">
-                                            <h4
-                                                className="text-base font-bold text-white transition-colors leading-tight group-hover:opacity-90"
-                                                style={{ ["--hover-col" as string]: c.hover }}
-                                            >
+                                            <h4 className="text-base font-bold text-white group-hover:text-[#ff6b6b] transition-colors leading-tight">
                                                 {item.degree}
                                             </h4>
-                                            <span className="font-semibold text-sm" style={{ color: c.text }}>
-                                                {item.institution}
-                                            </span>
+                                            <span className="text-[#ff6b6b] font-semibold text-sm">{item.institution}</span>
                                             <div className="flex flex-wrap gap-2 mt-1">
-                                                <span
-                                                    className="flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full"
-                                                    style={{ color: c.text, backgroundColor: c.bg }}
-                                                >
+                                                <span className="flex items-center gap-1 text-[#ff6b6b] text-xs font-medium bg-[#ff6b6b]/10 px-2 py-0.5 rounded-full">
                                                     <Calendar className="size-3" />{item.year}
                                                 </span>
                                                 <span className="flex items-center gap-1 text-gray-400 text-xs">
@@ -179,15 +138,7 @@ export default function BackgroundSection() {
                                         {item.achievements?.length > 0 && (
                                             <div className="flex flex-wrap gap-2">
                                                 {item.achievements.map((achievement, aIdx) => (
-                                                    <span
-                                                        key={aIdx}
-                                                        className="px-3 py-1 rounded-xl font-bold text-xs border"
-                                                        style={{
-                                                            color: c.text,
-                                                            backgroundColor: c.bg,
-                                                            borderColor: c.border + "30",
-                                                        }}
-                                                    >
+                                                    <span key={aIdx} className="bg-[#ff6b6b]/10 border border-[#ff6b6b]/20 px-3 py-1 rounded-xl text-[#ff6b6b] font-bold text-xs">
                                                         {achievement}
                                                     </span>
                                                 ))}
@@ -195,8 +146,7 @@ export default function BackgroundSection() {
                                         )}
                                     </div>
                                 </motion.div>
-                                );
-                            })}
+                            ))}
                         </div>
                     </motion.div>
                 </div>

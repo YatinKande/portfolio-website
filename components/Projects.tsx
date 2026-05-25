@@ -57,18 +57,20 @@ export default function Projects() {
     };
 
     return (
-        <section className="py-[60px] bg-[#f0f8f6]">
-            <div className="max-w-[1240px] px-5 mx-auto">
+        <section id="projects" className="py-[80px] bg-[#0a0f1e] relative overflow-hidden">
+            {/* Subtle noise texture consistent with Experience section */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+            <div className="max-w-[1240px] px-5 mx-auto relative z-10">
                 {/* Section Header */}
                 <div className="text-center mb-12">
-
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-[32px] md:text-[42px] font-bold text-[#1a2e28] mb-4 tracking-tight"
+                        className="text-[32px] md:text-[42px] font-bold text-white mb-4 tracking-tight"
                     >
-                        Projects 💼
+                        Featured <span className="text-[#20c997]">Projects</span>
                     </motion.h2>
 
                     <motion.p
@@ -76,9 +78,9 @@ export default function Projects() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-[#5a7069] text-[16px] md:text-[17px] font-medium max-w-2xl mx-auto leading-relaxed"
+                        className="text-gray-400 text-[16px] md:text-[17px] font-medium max-w-2xl mx-auto leading-relaxed"
                     >
-                        Showcasing real-world applications of AI, data engineering, and full-stack development
+                        Real-world AI systems — RAG pipelines, computer vision, serverless ML and beyond
                     </motion.p>
                 </div>
 
@@ -177,10 +179,10 @@ export default function Projects() {
                 </div>
 
                 {/* View All Projects Button */}
-                <div className="mt-[40px] flex justify-center">
+                <div className="mt-[48px] flex justify-center">
                     <Link
                         href="/projects"
-                        className="group relative inline-flex items-center gap-2 px-[32px] py-[12px] border-2 border-[#20c997] text-[#20c997] font-bold rounded-full transition-all hover:bg-[#20c997] hover:text-white hover:shadow-[0_6px_16px_rgba(32,201,151,0.3)] hover:-translate-y-[2px] active:scale-95"
+                        className="group relative inline-flex items-center gap-2 px-[36px] py-[13px] border-2 border-[#20c997] text-[#20c997] font-bold rounded-full transition-all hover:bg-[#20c997] hover:text-white hover:shadow-[0_8px_24px_rgba(32,201,151,0.25)] hover:-translate-y-[2px] active:scale-95"
                     >
                         <span className="text-[15px]">View All Projects →</span>
                     </Link>

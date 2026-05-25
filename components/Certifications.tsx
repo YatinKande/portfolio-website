@@ -54,8 +54,6 @@ export default function Certifications() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                     {certifications.map((cert, idx) => {
                         const isInProgress = cert.year === "In Progress";
-                        const progress = (cert as { progress?: number }).progress;
-                        const expectedCompletion = (cert as { expectedCompletion?: string }).expectedCompletion;
 
                         const provider = PROVIDER_STYLES[cert.issuer] ?? {
                             iconBg: "#f0f9f7", iconColor: "#20c997", borderAccent: "#20c997", iconHoverBg: "#20c997"
@@ -145,36 +143,6 @@ export default function Certifications() {
                                     </div>
                                 </div>
 
-                                {/* Progress indicator for in-progress certs */}
-                                {isInProgress && progress !== undefined && (
-                                    <div className="mt-2">
-                                        <div className="flex justify-between items-center mb-1.5">
-                                            <span className="text-[11px] font-semibold text-[#5a7069] uppercase tracking-wider">
-                                                {progress}% complete
-                                            </span>
-                                            {expectedCompletion && (
-                                                <span
-                                                    className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
-                                                    style={{ color: provider.iconColor, backgroundColor: provider.iconColor + "18" }}
-                                                >
-                                                    Expected {expectedCompletion}
-                                                </span>
-                                            )}
-                                        </div>
-                                        <div className="h-1.5 w-full bg-[#cfe5df] rounded-full overflow-hidden">
-                                            <motion.div
-                                                initial={{ width: 0 }}
-                                                whileInView={{ width: `${progress}%` }}
-                                                viewport={{ once: true }}
-                                                transition={{ duration: 1.2, ease: "easeOut", delay: idx * 0.1 + 0.3 }}
-                                                className="h-full rounded-full"
-                                                style={{
-                                                    background: `linear-gradient(90deg, ${provider.iconColor}, ${provider.borderAccent}cc)`,
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                )}
                             </motion.div>
                         );
                     })}

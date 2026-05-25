@@ -11,30 +11,17 @@ import {
     Layers,
 } from "lucide-react";
 
-type Proficiency = "Expert" | "Proficient" | "Familiar";
-
-interface SkillItem {
-    name: string;
-    level: Proficiency;
-}
-
 interface SkillCategory {
     title: string;
     icon: React.ElementType;
-    skills: SkillItem[];
+    skills: string[];
     accent: string;
 }
 
-const LEVEL_STYLES: Record<Proficiency, string> = {
-    Expert: "bg-[#20c997]/15 text-[#20c997] border border-[#20c997]/30",
-    Proficient: "bg-[#6366f1]/15 text-[#6366f1] border border-[#6366f1]/30",
-    Familiar: "bg-[#f59e0b]/15 text-[#f59e0b] border border-[#f59e0b]/30",
-};
-
 /*
- * 3-colour domain grouping:
- *  🟢 Mint    #20c997 — Core AI/ML specialisations (output-facing)
- *  🟣 Indigo  #6366f1 — Research & infrastructure (tool-facing)
+ * 3-colour domain grouping (accent bar only — no proficiency labels):
+ *  🟢 Mint    #20c997 — Core AI/ML output (ML, GenAI, MLOps)
+ *  🟣 Indigo  #6366f1 — Research & infrastructure (DL/CV, Cloud, Data Eng)
  *  🔴 Coral   #ff6b6b — Programming foundations
  */
 const skillCategories: SkillCategory[] = [
@@ -42,71 +29,82 @@ const skillCategories: SkillCategory[] = [
         title: "Machine Learning",
         icon: Brain,
         skills: [
-            { name: "Scikit-learn, XGBoost, LightGBM", level: "Expert" },
-            { name: "Feature engineering", level: "Expert" },
-            { name: "Hyperparameter tuning & model evaluation", level: "Expert" },
+            "Scikit-learn · XGBoost · LightGBM",
+            "Feature Engineering & Selection",
+            "Cross-validation & Model Evaluation",
+            "Gradient Boosting & Ensemble Methods",
+            "Classification, Regression & Clustering",
         ],
-        accent: "#20c997",   // 🟢 Core ML — mint
+        accent: "#20c997",
     },
     {
         title: "NLP & GenAI",
         icon: MessageSquare,
         skills: [
-            { name: "RAG, LangChain, FAISS, Hugging Face", level: "Expert" },
-            { name: "Prompt engineering, embeddings, hybrid search", level: "Expert" },
-            { name: "Semantic chunking, metadata filtering", level: "Proficient" },
+            "RAG Pipelines & Vector Search",
+            "LangChain · FAISS · Hugging Face",
+            "AI Agents & Tool-Use Frameworks",
+            "Prompt Engineering & Chain-of-Thought",
+            "Embeddings & Hybrid Retrieval",
         ],
-        accent: "#20c997",   // 🟢 Core GenAI — mint
+        accent: "#20c997",
     },
     {
         title: "MLOps & Deployment",
         icon: Settings,
         skills: [
-            { name: "End-to-end training → deployment workflows", level: "Expert" },
-            { name: "Docker, MLflow, CI/CD pipelines", level: "Proficient" },
-            { name: "AWS SageMaker, serverless architecture", level: "Familiar" },
-            { name: "Model tracking, versioning, reproducibility", level: "Proficient" },
+            "Docker · MLflow · CI/CD Pipelines",
+            "FastAPI & REST API Development",
+            "AWS SageMaker & Serverless Deploy",
+            "Model Versioning & Experiment Tracking",
+            "End-to-end ML Workflow Design",
         ],
-        accent: "#20c997",   // 🟢 Production ML — mint
+        accent: "#20c997",
     },
     {
         title: "Deep Learning / Computer Vision",
         icon: Eye,
         skills: [
-            { name: "PyTorch, TensorFlow, YOLOv5, 3D CNN-BiLSTM", level: "Expert" },
-            { name: "Real-time inference optimization", level: "Proficient" },
-            { name: "Data augmentation & transfer learning", level: "Proficient" },
+            "PyTorch · TensorFlow · Keras",
+            "YOLOv5 · Object Detection & Tracking",
+            "3D CNN · BiLSTM · Transformers",
+            "Transfer Learning & Fine-tuning",
+            "Real-time Inference Optimization",
         ],
-        accent: "#6366f1",   // 🟣 Research / DL infra — indigo
+        accent: "#6366f1",
     },
     {
         title: "Cloud / Applications",
         icon: Cloud,
         skills: [
-            { name: "AWS Lex & Lambda serverless", level: "Proficient" },
-            { name: "SQS, SNS, DynamoDB, API Gateway", level: "Proficient" },
-            { name: "Lightweight scalable microservices", level: "Familiar" },
+            "AWS Lambda · S3 · API Gateway",
+            "AWS Lex · Kinesis · Rekognition",
+            "DynamoDB · SQS · SNS",
+            "Serverless & Microservices Architecture",
         ],
-        accent: "#6366f1",   // 🟣 Cloud infra — indigo
+        accent: "#6366f1",
     },
     {
         title: "Data Engineering & Big Data",
         icon: Layers,
         skills: [
-            { name: "Apache Spark, PySpark, Kafka, Airflow", level: "Proficient" },
-            { name: "AWS S3, Lambda, DynamoDB pipelines", level: "Proficient" },
+            "Apache Spark · PySpark · Kafka",
+            "Apache Airflow · ETL Pipeline Design",
+            "AWS Glue · Redshift · S3 Pipelines",
+            "Data Validation & Quality Engineering",
         ],
-        accent: "#6366f1",   // 🟣 Data infra — indigo
+        accent: "#6366f1",
     },
     {
         title: "Programming & Databases",
         icon: Database,
         skills: [
-            { name: "Python, SQL, Bash", level: "Expert" },
-            { name: "PostgreSQL, MySQL, MongoDB, Snowflake", level: "Proficient" },
-            { name: "API integration & clean code practices", level: "Proficient" },
+            "Python · SQL · Bash",
+            "PostgreSQL · MySQL · MongoDB · Snowflake",
+            "Pandas · NumPy · Data Analysis",
+            "Git · REST APIs · Code Review",
         ],
-        accent: "#ff6b6b",   // 🔴 Foundations — coral
+        accent: "#ff6b6b",
     },
 ];
 
@@ -138,44 +136,9 @@ export default function Skills() {
                         transition={{ delay: 0.2 }}
                         className="mt-6 text-[#5a7069] max-w-2xl mx-auto font-medium"
                     >
-                        Specialized tech stack focused on building end-to-end intelligent systems,
-                        scalable data pipelines, and high-performance ML models.
+                        End-to-end stack for building intelligent systems — from
+                        raw data and model training to production-grade AI deployment.
                     </motion.p>
-
-                    {/* Proficiency legend */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 }}
-                        className="flex items-center justify-center gap-4 mt-4 flex-wrap"
-                    >
-                        {(["Expert", "Proficient", "Familiar"] as Proficiency[]).map((lvl) => (
-                            <span key={lvl} className={`text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider ${LEVEL_STYLES[lvl]}`}>
-                                {lvl}
-                            </span>
-                        ))}
-                    </motion.div>
-
-                    {/* Domain colour legend */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4 }}
-                        className="flex items-center justify-center gap-6 mt-3 flex-wrap"
-                    >
-                        {[
-                            { color: "#20c997", label: "Core AI/ML" },
-                            { color: "#6366f1", label: "Research & Infra" },
-                            { color: "#ff6b6b", label: "Foundations" },
-                        ].map(({ color, label }) => (
-                            <div key={label} className="flex items-center gap-1.5">
-                                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color }} />
-                                <span className="text-[11px] text-[#5a7069] font-medium uppercase tracking-wider">{label}</span>
-                            </div>
-                        ))}
-                    </motion.div>
                 </div>
 
                 {/* Grid */}
@@ -186,25 +149,22 @@ export default function Skills() {
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1, duration: 0.5 }}
+                            transition={{ delay: index * 0.08, duration: 0.5 }}
                             whileHover={{ y: -5 }}
-                            className="bg-white rounded-2xl p-8 border border-[#cfe5df] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_45px_rgb(32,201,151,0.1)] transition-all group relative overflow-hidden h-full flex flex-col"
-                            style={{
-                                ["--card-accent" as string]: category.accent,
-                            }}
+                            className="bg-white rounded-2xl p-8 border border-[#cfe5df] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_45px_rgba(0,0,0,0.08)] transition-all group relative overflow-hidden h-full flex flex-col"
                         >
-                            {/* Subtle dot-matrix background pattern — same motif as project cards */}
+                            {/* Subtle dot-matrix background pattern */}
                             <div
-                                className="absolute inset-0 opacity-[0.035] pointer-events-none"
+                                className="absolute inset-0 opacity-[0.03] pointer-events-none"
                                 style={{
                                     backgroundImage: "radial-gradient(circle, #000 1px, transparent 1px)",
                                     backgroundSize: "22px 22px",
                                 }}
                             />
 
-                            {/* Accent Bar */}
+                            {/* Accent Bar — domain colour */}
                             <div
-                                className="absolute top-0 left-0 w-full h-1 opacity-50 group-hover:opacity-100 transition-opacity"
+                                className="absolute top-0 left-0 w-full h-[3px] opacity-50 group-hover:opacity-100 transition-opacity"
                                 style={{ backgroundColor: category.accent }}
                             />
 
@@ -215,24 +175,25 @@ export default function Skills() {
                                     style={{ backgroundColor: `${category.accent}15` }}
                                 >
                                     <category.icon
-                                        size={28}
+                                        size={26}
                                         style={{ color: category.accent }}
                                     />
                                 </div>
-                                <h3 className="text-xl font-bold text-[#1a2e28] leading-tight">
+                                <h3 className="text-[17px] font-bold text-[#1a2e28] leading-tight">
                                     {category.title}
                                 </h3>
                             </div>
 
-                            {/* Skills List */}
-                            <ul className="space-y-3 flex-grow">
+                            {/* Skills List — clean bullets, no proficiency labels */}
+                            <ul className="space-y-2.5 flex-grow">
                                 {category.skills.map((skill, sIndex) => (
-                                    <li key={sIndex} className="flex items-start justify-between gap-3">
-                                        <span className="text-[#5a7069] text-[14px] leading-relaxed flex-1">
-                                            {skill.name}
-                                        </span>
-                                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide shrink-0 mt-0.5 ${LEVEL_STYLES[skill.level]}`}>
-                                            {skill.level}
+                                    <li key={sIndex} className="flex items-start gap-2.5">
+                                        <span
+                                            className="mt-[7px] shrink-0 w-[5px] h-[5px] rounded-full"
+                                            style={{ backgroundColor: category.accent + "bb" }}
+                                        />
+                                        <span className="text-[#5a7069] text-[13.5px] leading-relaxed">
+                                            {skill}
                                         </span>
                                     </li>
                                 ))}

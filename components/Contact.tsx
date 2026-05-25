@@ -114,7 +114,7 @@ export default function Contact() {
                             Let's architect something <span className="text-[#20c997]">extraordinary</span>.
                         </h2>
                         <p className="text-xl text-[#5a7069] leading-relaxed mb-8">
-                            I'm currently specialized in RAG ecosystems and Computer Vision deployment. Whether you have a specific role in mind or just want to discuss the future of AI, my inbox is always open.
+                            I build production AI systems — RAG pipelines, AI Agents, LLM applications, and Computer Vision at scale. These are exactly what the market demands right now, and I ship them end-to-end. Whether you have a role in mind or want to explore what modern AI can do for your team, my inbox is always open.
                         </p>
                         <div className="h-1 w-24 bg-[#ff6b6b] rounded-full mb-8" />
                     </motion.div>
