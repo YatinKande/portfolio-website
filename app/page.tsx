@@ -22,12 +22,11 @@ export default function LandingPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isHydrated, setIsHydrated] = useState(false);
 
-    const duration = 2500; // 2.5s for loading fill
+    const duration = 2500;
 
     useEffect(() => {
         setIsHydrated(true);
 
-        // Check if loader has already been seen in this session
         const loaderSeen = sessionStorage.getItem("loaderSeen");
         if (loaderSeen) {
             setIsLoading(false);
@@ -46,17 +45,13 @@ export default function LandingPage() {
             if (newProgress < 100) {
                 requestAnimationFrame(updateProgress);
             } else {
-                // Loading complete (3.0s total with 0.5s delay)
                 setTimeout(() => {
                     setStatus("DEPLOYMENT_COMPLETE");
-                    // Step 2 starts at 3.2s
                     setTimeout(() => {
                         setPhase("transitioning");
-                        // Loader completely removed after transition (4.0s)
                         setTimeout(() => {
                             setIsLoading(false);
                             setPhase("complete");
-                            // Mark loader as seen for this session
                             sessionStorage.setItem("loaderSeen", "true");
                         }, 800);
                     }, 200);
@@ -70,12 +65,10 @@ export default function LandingPage() {
         return () => clearTimeout(initialDelay);
     }, []);
 
-    // Manual hash scroll handler
     useEffect(() => {
         if (!isLoading && isHydrated) {
             const hash = window.location.hash;
             if (hash) {
-                // Small delay to ensure all animations/layouts are settled
                 const timeoutId = setTimeout(() => {
                     const targetId = hash.replace("#", "");
                     const element = document.getElementById(targetId);
@@ -98,15 +91,15 @@ export default function LandingPage() {
     if (!isHydrated) return null;
 
     return (
-        <main className="min-h-screen bg-[#111318] selection:bg-[#2dd4bf]/20 relative overflow-hidden">
-            {/* Subtle animated dot grid on dark bg */}
+        <main className="min-h-screen bg-[#111318] selection:bg-white/10 relative overflow-hidden">
+            {/* Very subtle white dot grid */}
             <div className="fixed inset-0 pointer-events-none">
                 <motion.div
                     animate={{ backgroundPosition: ["0px 0px", "40px 40px"] }}
                     transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 opacity-[0.04]"
+                    className="absolute inset-0 opacity-[0.025]"
                     style={{
-                        backgroundImage: "radial-gradient(#2dd4bf 1px, transparent 1px)",
+                        backgroundImage: "radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)",
                         backgroundSize: "40px 40px"
                     }}
                 />
@@ -127,8 +120,8 @@ export default function LandingPage() {
                             transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
                             className="relative mb-[30px] z-20"
                         >
-                            <div className="absolute inset-0 rounded-full bg-[#2dd4bf]/25 blur-[40px] animate-pulse" />
-                            <div className="relative w-[140px] h-[140px] md:w-[180px] md:h-[180px] rounded-full border-[4px] border-[#2dd4bf] shadow-[0_0_40px_rgba(45,212,191,0.35)] overflow-hidden">
+                            <div className="absolute inset-0 rounded-full bg-white/10 blur-[40px] animate-pulse" />
+                            <div className="relative w-[140px] h-[140px] md:w-[180px] md:h-[180px] rounded-full border-[3px] border-white shadow-[0_0_40px_rgba(255,255,255,0.12)] overflow-hidden">
                                 <NextImage
                                     src="/me.jpg"
                                     alt="Yatin Kande"
@@ -139,7 +132,7 @@ export default function LandingPage() {
                             </div>
                         </motion.div>
 
-                        {/* Loader UI wrapper for fading out */}
+                        {/* Loader UI wrapper */}
                         <motion.div
                             animate={{
                                 opacity: phase === "transitioning" ? 0 : 1,
@@ -166,7 +159,7 @@ export default function LandingPage() {
                             {/* Loading Section */}
                             <div className="w-full max-w-[300px] md:max-w-[450px] mb-[35px]">
                                 <div className="flex justify-between items-end mb-[12px] font-mono text-[13px]">
-                                    <div className={status === "DEPLOYMENT_COMPLETE" ? "text-[#2dd4bf] font-bold" : "text-[#2dd4bf]/70"}>
+                                    <div className={status === "DEPLOYMENT_COMPLETE" ? "text-white font-bold" : "text-white/50"}>
                                         {status}
                                         <motion.span
                                             animate={{ opacity: [1, 0] }}
@@ -175,11 +168,11 @@ export default function LandingPage() {
                                             |
                                         </motion.span>
                                     </div>
-                                    <div className="text-[#2dd4bf] opacity-60 font-bold">{Math.floor(progress)}%</div>
+                                    <div className="text-white/40 font-bold">{Math.floor(progress)}%</div>
                                 </div>
-                                <div className="h-[6px] w-full bg-white/10 rounded-[3px] overflow-hidden">
+                                <div className="h-[4px] w-full bg-white/10 rounded-[3px] overflow-hidden">
                                     <motion.div
-                                        className="h-full bg-gradient-to-r from-[#ff6b6b] to-[#20c997] shadow-[0_0_15px_rgba(32,201,151,0.5)]"
+                                        className="h-full bg-white/70"
                                         style={{ width: `${progress}%` }}
                                         transition={{ ease: "easeInOut" }}
                                     />
@@ -202,8 +195,8 @@ export default function LandingPage() {
                                             transition={{ delay: stat.delay, duration: 0.3 }}
                                             className="flex items-center gap-3"
                                         >
-                                            <div className="p-2 rounded-lg bg-[#2dd4bf]/10">
-                                                <stat.icon className="text-[#2dd4bf] size-5" />
+                                            <div className="p-2 rounded-lg bg-white/[0.07]">
+                                                <stat.icon className="text-white/70 size-5" />
                                             </div>
                                             <span className="text-white font-bold text-[16px] whitespace-nowrap">
                                                 {stat.text}
@@ -299,8 +292,8 @@ export default function LandingPage() {
                             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
                                 {/* Availability signal */}
                                 <div className="flex items-center gap-3">
-                                    <div className="size-2.5 rounded-full bg-[#2dd4bf] animate-pulse" />
-                                    <span className="text-[10px] font-mono text-[#2dd4bf]/80 uppercase tracking-widest font-bold">
+                                    <div className="size-2 rounded-full bg-white animate-pulse" />
+                                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest font-bold">
                                         Open to Full-time · Data Scientist / ML Engineer
                                     </span>
                                 </div>
@@ -308,10 +301,10 @@ export default function LandingPage() {
                                 {/* Dashboard link */}
                                 <a
                                     href="/dashboard"
-                                    className="group flex items-center gap-2 text-[10px] font-mono text-[#2dd4bf]/40 hover:text-[#2dd4bf] uppercase tracking-widest transition-colors"
+                                    className="group flex items-center gap-2 text-[10px] font-mono text-white/20 hover:text-white/50 uppercase tracking-widest transition-colors"
                                     title="Interactive Portfolio Dashboard"
                                 >
-                                    <span className="size-1.5 rounded-full bg-[#2dd4bf]/30 group-hover:bg-[#2dd4bf] transition-colors animate-pulse" />
+                                    <span className="size-1.5 rounded-full bg-white/15 group-hover:bg-white/30 transition-colors" />
                                     View Dashboard →
                                 </a>
 

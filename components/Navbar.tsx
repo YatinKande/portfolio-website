@@ -67,11 +67,11 @@ export default function Navbar() {
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="group flex items-center gap-2">
-                        <div className="size-10 rounded-xl bg-[#2dd4bf] flex items-center justify-center text-[#111318] font-bold text-xl group-hover:bg-[#f97316] transition-colors">
+                        <div className="size-10 rounded-xl bg-white flex items-center justify-center text-[#111318] font-bold text-xl group-hover:bg-white/80 transition-colors">
                             Y
                         </div>
-                        <span className="text-xl font-bold text-white tracking-tighter group-hover:text-[#2dd4bf] transition-colors">
-                            Yatin <span className="text-[#2dd4bf] group-hover:text-[#f97316]">Kande</span>
+                        <span className="text-xl font-bold text-white tracking-tighter">
+                            Yatin <span className="text-white/50 group-hover:text-white transition-colors">Kande</span>
                         </span>
                     </Link>
 
@@ -85,7 +85,7 @@ export default function Navbar() {
                                     href={link.href}
                                     className={cn(
                                         "px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 relative",
-                                        isActive ? "text-[#2dd4bf]" : "text-slate-400 hover:text-white"
+                                        isActive ? "text-white" : "text-slate-400 hover:text-white"
                                     )}
                                 >
                                     {isActive && (
@@ -106,7 +106,7 @@ export default function Navbar() {
                         href="/YatinKande_Resume.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hidden md:flex items-center gap-2 px-4 py-2 bg-[#2dd4bf] text-[#111318] text-sm font-bold rounded-full hover:bg-[#2dd4bf]/90 transition-all shadow-[0_0_20px_rgba(45,212,191,0.25)] hover:shadow-[0_0_28px_rgba(45,212,191,0.4)]"
+                        className="hidden md:flex items-center gap-2 px-4 py-2 bg-white text-[#111318] text-sm font-bold rounded-full hover:bg-white/90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_28px_rgba(255,255,255,0.18)]"
                     >
                         <Download className="size-3.5" />
                         Resume
@@ -179,7 +179,7 @@ export default function Navbar() {
                                             className={cn(
                                                 "px-4 py-3 rounded-xl text-sm font-bold transition-all",
                                                 isActive
-                                                    ? "text-[#2dd4bf] bg-[#2dd4bf]/10"
+                                                    ? "text-white bg-white/10"
                                                     : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
                                             )}
                                         >
@@ -193,7 +193,7 @@ export default function Navbar() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={() => setMobileOpen(false)}
-                                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#2dd4bf] text-[#111318] text-sm font-bold hover:bg-[#2dd4bf]/90 transition-colors"
+                                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white text-[#111318] text-sm font-bold hover:bg-white/90 transition-colors"
                                 >
                                     <Download className="size-4" />
                                     Download Resume

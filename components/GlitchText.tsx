@@ -30,25 +30,21 @@ export default function GlitchText({ startTime = 0 }: GlitchTextProps) {
         const cycleInterval = setInterval(() => {
             setIsGlitching(true);
 
-            // Animation sequence for transition (0.3s total)
             const nextIndex = (index + 1) % ROLES.length;
             const nextRole = ROLES[nextIndex];
 
-            // Phase 1: Scramble current text
             let frames = 0;
             const scrambleInterval = setInterval(() => {
                 setDisplayText(scramble(ROLES[index]));
                 frames++;
                 if (frames >= 3) {
                     clearInterval(scrambleInterval);
-                    // Phase 2: Scramble next text
                     let framesNext = 0;
                     const scrambleNextInterval = setInterval(() => {
                         setDisplayText(scramble(nextRole));
                         framesNext++;
                         if (framesNext >= 3) {
                             clearInterval(scrambleNextInterval);
-                            // Phase 3: Set actual next role
                             setDisplayText(nextRole);
                             setIsGlitching(false);
                             setIndex(nextIndex);
@@ -57,7 +53,7 @@ export default function GlitchText({ startTime = 0 }: GlitchTextProps) {
                 }
             }, 50);
 
-        }, 2300); // 2s show + 0.3s glitch
+        }, 2300);
 
         return () => clearInterval(cycleInterval);
     }, [index, scramble]);
@@ -68,11 +64,11 @@ export default function GlitchText({ startTime = 0 }: GlitchTextProps) {
                 className={`
                     font-mono font-medium tracking-[2px] uppercase transition-all duration-75
                     text-[14px] md:text-[16px] lg:text-[18px]
-                    ${isGlitching ? 'text-coral scale-105 skew-x-12 animate-flicker' : 'text-slate-400'}
+                    ${isGlitching ? 'scale-105 skew-x-12 animate-flicker' : ''}
                 `}
                 style={{
-                    color: isGlitching ? (Math.random() > 0.5 ? '#f97316' : '#2dd4bf') : '#94a3b8',
-                    textShadow: isGlitching ? (Math.random() > 0.5 ? '2px 0 #2dd4bf' : '-2px 0 #f97316') : 'none'
+                    color: isGlitching ? 'rgba(255,255,255,0.9)' : '#94a3b8',
+                    textShadow: isGlitching ? '2px 0 rgba(255,255,255,0.4), -2px 0 rgba(255,255,255,0.2)' : 'none'
                 }}
             >
                 {displayText}

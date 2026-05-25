@@ -21,7 +21,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={onClose}
-                    className="absolute inset-0 bg-[#0a1512]/90 backdrop-blur-xl"
+                    className="absolute inset-0 bg-black/80 backdrop-blur-xl"
                 />
 
                 <motion.div
@@ -30,46 +30,46 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 40 }}
                     transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                    className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden bg-white rounded-[40px] shadow-2xl flex flex-col lg:flex-row"
+                    className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden bg-[#111318] border border-white/[0.08] rounded-[32px] shadow-2xl flex flex-col lg:flex-row"
                 >
-                    {/* Modal Left - Sticky Image Sidebar */}
-                    <div className="lg:w-[40%] relative bg-[#f0f8f6] min-h-[300px] lg:min-h-full">
+                    {/* Modal Left - Image Sidebar */}
+                    <div className="lg:w-[38%] relative bg-[#0d0f14] min-h-[240px] lg:min-h-full">
                         {project.image && (
                             <Image
                                 src={project.image}
                                 alt={project.title}
                                 fill
-                                className="object-cover"
+                                className="object-cover opacity-60"
                             />
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/95 hidden lg:block" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-white/95 to-transparent lg:hidden" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#111318] hidden lg:block" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#111318] to-transparent lg:hidden" />
 
-                        <div className="absolute top-10 left-10 z-20">
-                            <div className="px-4 py-2 bg-white/90 backdrop-blur-sm border border-[#cfe5df] rounded-full shadow-sm">
-                                <span className="text-[12px] font-bold text-[#20c997] uppercase tracking-[3px]">Project Spotlight</span>
+                        <div className="absolute top-8 left-8 z-20">
+                            <div className="px-3 py-1.5 bg-white/[0.08] backdrop-blur-sm border border-white/15 rounded-full">
+                                <span className="text-[11px] font-bold text-white/60 uppercase tracking-[3px]">Project Spotlight</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Modal Right - Content */}
-                    <div className="flex-1 overflow-y-auto p-10 md:p-16 relative flex flex-col custom-scrollbar bg-white">
+                    <div className="flex-1 overflow-y-auto p-8 md:p-12 relative flex flex-col modal-scrollbar bg-[#111318]">
                         <button
                             onClick={onClose}
-                            className="absolute top-10 right-10 p-3 rounded-full bg-[#f0f8f6] text-[#1a2e28] hover:bg-[#ff6b35] hover:text-white transition-all transform hover:rotate-90 shadow-sm z-30"
+                            className="absolute top-8 right-8 p-2.5 rounded-full bg-white/[0.07] text-white/60 hover:bg-white/15 hover:text-white transition-all transform hover:rotate-90 z-30"
                         >
-                            <X size={26} />
+                            <X size={22} />
                         </button>
 
-                        <div className="mb-12">
-                            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight text-[#1a2e28]">
+                        <div className="mb-10">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-5 tracking-tight leading-tight text-white">
                                 {project.fullTitle || project.title}
                             </h2>
-                            <div className="flex flex-wrap gap-2.5">
+                            <div className="flex flex-wrap gap-2">
                                 {project.tech.map((tag: string) => (
                                     <span
                                         key={tag}
-                                        className="px-4 py-1.5 bg-[#f0f8f6] border border-[#20c997]/30 text-[#20c997] text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm"
+                                        className="px-3 py-1 bg-white/[0.07] border border-white/15 text-white/60 text-[11px] font-bold uppercase tracking-wider rounded-full"
                                     >
                                         {tag}
                                     </span>
@@ -77,14 +77,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                             </div>
                         </div>
 
-                        <div className="space-y-12 flex-1">
+                        <div className="space-y-10 flex-1">
                             {project.description && (
                                 <section>
-                                    <h4 className="text-[12px] font-bold text-[#20c997] uppercase tracking-[4px] mb-5 flex items-center gap-4">
+                                    <h4 className="text-[11px] font-bold text-white/40 uppercase tracking-[4px] mb-4 flex items-center gap-4">
                                         <span>Overview</span>
-                                        <div className="h-[1px] flex-1 bg-[#cfe5df]" />
+                                        <div className="h-[1px] flex-1 bg-white/10" />
                                     </h4>
-                                    <p className="text-[16px] text-[#5a7069] leading-[1.8] font-medium">
+                                    <p className="text-[15px] text-slate-300 leading-[1.8] font-medium">
                                         {project.description}
                                     </p>
                                 </section>
@@ -92,23 +92,23 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
                             {project.features && (
                                 <section>
-                                    <h4 className="text-[12px] font-bold text-[#20c997] uppercase tracking-[4px] mb-6 flex items-center gap-4">
+                                    <h4 className="text-[11px] font-bold text-white/40 uppercase tracking-[4px] mb-5 flex items-center gap-4">
                                         <span>Key Features</span>
-                                        <div className="h-[1px] flex-1 bg-[#cfe5df]" />
+                                        <div className="h-[1px] flex-1 bg-white/10" />
                                     </h4>
-                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         {project.features.map((feature: string, i: number) => (
                                             <motion.li
                                                 key={i}
                                                 initial={{ opacity: 0, x: -15 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ delay: 0.3 + (i * 0.1) }}
-                                                className="flex items-start gap-4 p-4 bg-[#f0f8f6]/50 rounded-2xl border border-[#cfe5df] border-dashed hover:border-solid hover:bg-white hover:shadow-md transition-all duration-300"
+                                                className="flex items-start gap-3 p-4 bg-white/[0.04] rounded-2xl border border-white/[0.07] hover:border-white/15 hover:bg-white/[0.06] transition-all duration-300"
                                             >
-                                                <div className="w-6 h-6 shrink-0 rounded-full bg-[#20c997]/20 flex items-center justify-center mt-0.5">
-                                                    <Check className="w-4 h-4 text-[#20c997]" />
+                                                <div className="w-5 h-5 shrink-0 rounded-full bg-white/10 flex items-center justify-center mt-0.5">
+                                                    <Check className="w-3 h-3 text-white/60" />
                                                 </div>
-                                                <span className="text-[14px] text-[#1a2e28] font-medium leading-relaxed">{feature}</span>
+                                                <span className="text-[13px] text-slate-300 font-medium leading-relaxed">{feature}</span>
                                             </motion.li>
                                         ))}
                                     </ul>
@@ -117,16 +117,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
                             {project.techDetails && (
                                 <article>
-                                    <h4 className="text-[12px] font-bold text-[#20c997] uppercase tracking-[4px] mb-6 flex items-center gap-4">
+                                    <h4 className="text-[11px] font-bold text-white/40 uppercase tracking-[4px] mb-5 flex items-center gap-4">
                                         <span>Technologies Used</span>
-                                        <div className="h-[1px] flex-1 bg-[#cfe5df]" />
+                                        <div className="h-[1px] flex-1 bg-white/10" />
                                     </h4>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                         {project.techDetails.map((td) => (
                                             <div key={td.name} className="flex flex-col gap-2 group/tech">
-                                                <h5 className="text-[14px] font-bold text-[#1a2e28] group-hover/tech:text-[#20c997] transition-colors">{td.name}</h5>
-                                                <div className="h-0.5 w-6 bg-[#20c997] group-hover/tech:w-12 transition-all" />
-                                                <p className="text-[13px] text-[#5a7069] leading-relaxed italic">{td.description}</p>
+                                                <h5 className="text-[14px] font-bold text-white group-hover/tech:text-white/70 transition-colors">{td.name}</h5>
+                                                <div className="h-[1px] w-6 bg-white/20 group-hover/tech:w-12 transition-all" />
+                                                <p className="text-[13px] text-slate-400 leading-relaxed">{td.description}</p>
                                             </div>
                                         ))}
                                     </div>
@@ -134,12 +134,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                             )}
                         </div>
 
-                        <div className="mt-20 pt-10 border-t border-[#f0f8f6] flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div className="mt-16 pt-8 border-t border-white/[0.07] flex flex-col sm:flex-row items-center justify-between gap-6">
                             <div className="flex items-center gap-4">
-                                <a href="mailto:yatink@umich.edu" className="p-3 bg-white border border-[#cfe5df] rounded-full text-[#5a7069] hover:bg-[#20c997] hover:text-white transition-all shadow-sm">
-                                    <Mail size={20} />
+                                <a href="mailto:yatink@umich.edu" className="p-2.5 bg-white/[0.07] border border-white/10 rounded-full text-white/50 hover:bg-white/15 hover:text-white transition-all">
+                                    <Mail size={18} />
                                 </a>
-                                <p className="text-[13px] font-bold text-[#5a7069]">Interested in this tech?</p>
+                                <p className="text-[13px] font-bold text-slate-400">Interested in this tech?</p>
                             </div>
 
                             <div className="flex items-center gap-4">
@@ -148,11 +148,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                         href={project.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-3 px-8 py-4 bg-white border-2 border-[#20c997] text-[#20c997] font-bold rounded-2xl hover:bg-[#20c997] hover:text-white transition-all group scale-105 active:scale-100 shadow-[0_10px_20px_rgba(32,201,151,0.15)]"
+                                        className="flex items-center gap-2.5 px-6 py-3 bg-white text-[#111318] font-bold rounded-xl hover:bg-white/90 transition-all group shadow-[0_8px_20px_rgba(255,255,255,0.1)]"
                                     >
-                                        <Github className="w-5 h-5" />
-                                        <span className="tracking-wide">View on GitHub</span>
-                                        <ExternalLink className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity" />
+                                        <Github className="w-4 h-4" />
+                                        <span className="tracking-wide text-sm">View on GitHub</span>
+                                        <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
                                     </a>
                                 )}
                             </div>
@@ -162,19 +162,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
 
             <style jsx global>{`
-                .custom-scrollbar::-webkit-scrollbar {
-                    width: 8px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-track {
-                    background: #f0f8f6;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb {
-                    background: #cfe5df;
-                    border-radius: 10px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-                    background: #20c997;
-                }
+                .modal-scrollbar::-webkit-scrollbar { width: 6px; }
+                .modal-scrollbar::-webkit-scrollbar-track { background: #111318; }
+                .modal-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+                .modal-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
             `}</style>
         </AnimatePresence>
     );

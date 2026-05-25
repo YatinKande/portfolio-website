@@ -5,7 +5,6 @@ import { motion, useInView, useMotionValue, animate } from "framer-motion";
 import { GraduationCap, Briefcase, TrendingUp, Zap } from "lucide-react";
 import NextImage from "next/image";
 
-// Animated count-up number — starts at 0, eases to target when section enters view
 function CountUp({ to, decimals = 0, suffix = "" }: { to: number; decimals?: number; suffix?: string }) {
     const ref = useRef<HTMLSpanElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-60px" });
@@ -60,7 +59,7 @@ export default function About() {
                     <h2 className="text-5xl md:text-6xl font-bold text-white mb-4 text-center">
                         About Me
                     </h2>
-                    <div className="h-1.5 w-24 bg-[#2dd4bf] rounded-full" />
+                    <div className="h-[2px] w-24 bg-white/25 rounded-full" />
                 </motion.div>
 
                 {/* Two-column layout */}
@@ -82,15 +81,15 @@ export default function About() {
                         {/* Highlight bullets */}
                         <ul className="space-y-3">
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
-                                <GraduationCap className="size-5 text-[#2dd4bf] shrink-0" />
+                                <GraduationCap className="size-5 text-white shrink-0" />
                                 <span>MS Data Science at UMich — 3.8 GPA</span>
                             </li>
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
-                                <Briefcase className="size-5 text-[#2dd4bf] shrink-0" />
+                                <Briefcase className="size-5 text-white shrink-0" />
                                 <span>AI/ML Internships at DataZymes &amp; SmartKnower</span>
                             </li>
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
-                                <Zap className="size-5 text-[#2dd4bf] shrink-0" />
+                                <Zap className="size-5 text-white shrink-0" />
                                 <span>ML · Deep Learning · GenAI · Cloud Deployment</span>
                             </li>
                         </ul>
@@ -104,7 +103,7 @@ export default function About() {
                         transition={{ duration: 0.7, delay: 0.15 }}
                         className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 md:p-8"
                     >
-                        <h3 className="text-xs font-bold text-[#2dd4bf] uppercase tracking-[0.25em] mb-6">
+                        <h3 className="text-xs font-bold text-white/50 uppercase tracking-[0.25em] mb-6">
                             Key Achievements
                         </h3>
                         <div className="grid grid-cols-2 gap-4">
@@ -115,9 +114,9 @@ export default function About() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.25 + idx * 0.08 }}
-                                    className="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-[#2dd4bf]/40 transition-colors"
+                                    className="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-white/20 transition-colors"
                                 >
-                                    <div className="text-2xl font-bold text-[#f97316] mb-1">{item.stat}</div>
+                                    <div className="text-2xl font-bold text-white mb-1">{item.stat}</div>
                                     <div className="text-white text-sm font-semibold leading-tight mb-0.5">{item.label}</div>
                                     <div className="text-slate-400 text-xs">{item.sub}</div>
                                 </motion.div>
@@ -135,21 +134,21 @@ export default function About() {
                     className="flex flex-wrap justify-center items-center gap-8 md:gap-16"
                 >
                     <div className="flex flex-col items-center">
-                        <div className="text-3xl md:text-5xl font-bold text-[#f97316]">
+                        <div className="text-3xl md:text-5xl font-bold text-white">
                             <CountUp to={3.8} decimals={1} />
                         </div>
                         <div className="text-[10px] md:text-xs uppercase tracking-widest text-slate-300 mt-1 font-bold">UMich GPA</div>
                     </div>
                     <div className="hidden md:block h-12 w-[1px] bg-white/20" />
                     <div className="flex flex-col items-center">
-                        <div className="text-3xl md:text-5xl font-bold text-[#f97316]">
+                        <div className="text-3xl md:text-5xl font-bold text-white">
                             <CountUp to={2} />
                         </div>
                         <div className="text-[10px] md:text-xs uppercase tracking-widest text-slate-300 mt-1 font-bold">AI/ML Internships</div>
                     </div>
                     <div className="hidden md:block h-12 w-[1px] bg-white/20" />
                     <div className="flex flex-col items-center">
-                        <div className="text-3xl md:text-5xl font-bold text-[#f97316]">
+                        <div className="text-3xl md:text-5xl font-bold text-white">
                             <CountUp to={10} suffix="+" />
                         </div>
                         <div className="text-[10px] md:text-xs uppercase tracking-widest text-slate-300 mt-1 font-bold">ML and AI Projects</div>

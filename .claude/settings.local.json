@@ -5,7 +5,26 @@
       "Bash(npx tsc *)",
       "Bash(echo \"EXIT:$?\")",
       "Bash(echo \"BUILD_EXIT:$?\")",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "mcp__9cc64b80-1516-47e0-a6ec-69085a4b0643__list_teams",
+      "mcp__9cc64b80-1516-47e0-a6ec-69085a4b0643__list_projects",
+      "mcp__9cc64b80-1516-47e0-a6ec-69085a4b0643__list_deployments",
+      "mcp__9cc64b80-1516-47e0-a6ec-69085a4b0643__get_project",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(cp \"/Users/yatinkande/Downloads/YatinKande_DataScientist_Resume \\(2\\).pdf\" \"/Users/yatinkande/Documents/03_Projects/Portfolio_Website/public/YatinKande_Resume.pdf\" && echo \"Copied\" && rm \"/Users/yatinkande/Documents/03_Projects/Portfolio_Website/public/Yatin_Kande_Resume.pdf\" && echo \"Old file removed\" && ls -lh /Users/yatinkande/Documents/03_Projects/Portfolio_Website/public/*.pdf)",
+      "Bash(convert --version)",
+      "Bash(magick '/Users/yatinkande/Downloads/COnvo photos/IMG_2807.heic' -crop 3000x3000+12+0 +repage -unsharp 0x0.75+0.75+0.008 -brightness-contrast 3x8 -quality 90 /tmp/me_preview.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight /tmp/me_preview.jpg)",
+      "Bash(cp /tmp/me_preview.jpg /Users/yatinkande/Documents/03_Projects/Portfolio_Website/public/me.jpg && echo \"Copied\" && ls -lh /Users/yatinkande/Documents/03_Projects/Portfolio_Website/public/me.jpg)",
+      "Bash(magick '/Users/yatinkande/Downloads/COnvo photos/IMG_2822.heic' -crop 3000x3000+12+0 +repage -unsharp 0x0.75+0.75+0.008 -brightness-contrast 5x10 -quality 90 /Users/yatinkande/Documents/03_Projects/Portfolio_Website/public/me.jpg)",
+      "Bash(npx next *)",
+      "Bash(node_modules/.bin/next build *)",
+      "Bash(next build *)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/theme-preview.html)",
+      "Bash(sips -s format jpeg '/Users/yatinkande/Downloads/COnvo photos/IMG_2822.heic' --out /tmp/me_new_hero.jpg -Z 1200)"
     ]
   }
 }
