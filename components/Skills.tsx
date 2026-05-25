@@ -132,7 +132,7 @@ export default function Skills() {
                         viewport={{ once: true }}
                         className="text-4xl md:text-5xl font-bold text-white mb-4"
                     >
-                        Technical <span className="text-[#2dd4bf]">Skills</span>
+                        Technical <span className="bg-gradient-to-r from-[#2dd4bf] to-[#a78bfa] bg-clip-text text-transparent">Skills</span>
                     </motion.h2>
                     <motion.div
                         initial={{ opacity: 0, width: 0 }}

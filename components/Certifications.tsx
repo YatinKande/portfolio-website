@@ -42,7 +42,7 @@ export default function Certifications() {
                         viewport={{ once: true }}
                         className="text-4xl md:text-5xl font-bold text-white text-center mb-4"
                     >
-                        Professional <span className="text-[#f97316]">Certifications</span>
+                        Professional <span className="bg-gradient-to-r from-[#f97316] to-[#f97316]/70 bg-clip-text text-transparent">Certifications</span>
                     </motion.h2>
                     <motion.div
                         initial={{ opacity: 0, width: 0 }}

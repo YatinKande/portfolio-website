@@ -19,7 +19,7 @@ export default function BackgroundSection() {
                         viewport={{ once: true }}
                         className="text-[32px] md:text-[42px] font-bold text-white mb-2 tracking-tight"
                     >
-                        Experience & Education
+                        Experience <span className="bg-gradient-to-r from-[#2dd4bf] to-[#f97316] bg-clip-text text-transparent">&</span> Education
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}

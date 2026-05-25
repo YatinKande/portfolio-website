@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronDown, Download } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -13,35 +13,11 @@ export default function Hero() {
     const [visibleIndices, setVisibleIndices] = useState<number[]>([]);
     const [animComplete, setAnimComplete] = useState(false);
 
-    // 1. Scroll-triggered blur effect
-    useEffect(() => {
-        const handleScroll = () => {
-            const photoContainer = document.getElementById("hero-profile-photo");
-            if (!photoContainer) return;
-
-            requestAnimationFrame(() => {
-                const scrollY = window.scrollY;
-                const heroHeight = window.innerHeight;
-                const startThreshold = heroHeight * 0.1;
-
-                if (scrollY <= startThreshold) {
-                    photoContainer.style.filter = "blur(0px)";
-                    photoContainer.style.opacity = "1";
-                    return;
-                }
-
-                let progress = (scrollY - startThreshold) / (heroHeight * 0.9);
-                if (progress < 0) progress = 0;
-                if (progress > 1) progress = 1;
-
-                photoContainer.style.filter = `blur(${progress * 12}px)`;
-                photoContainer.style.opacity = `${1 - progress}`;
-            });
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    // Smooth scroll-parallax using Framer Motion (GPU-accelerated, no jank)
+    const { scrollY } = useScroll();
+    const photoOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+    const photoScale = useTransform(scrollY, [0, 500], [1, 0.9]);
+    const photoY = useTransform(scrollY, [0, 500], [0, -50]);
 
     // 2. Cinematic Entrance Animation
     useEffect(() => {
@@ -90,17 +66,21 @@ export default function Hero() {
 
             <div className="flex flex-col items-center text-center z-10 w-full max-w-4xl mx-auto">
 
-                {/* Step 1: Profile Photo */}
+                {/* Step 1: Profile Photo — scroll wrapper (parallax fade) + inner entrance animation */}
+                <motion.div
+                    style={{ opacity: photoOpacity, y: photoY, scale: photoScale }}
+                    className="relative mb-[30px]"
+                >
                 <motion.div
                     id="hero-profile-photo"
-                    layoutId="profile-photo"
-                    transition={{ type: "tween", duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
-                    className={`relative mb-[30px] opacity-100 ${animComplete ? '' : 'hero-visible'}`}
-                    style={{ willChange: "filter, opacity" }}
+                    initial={{ opacity: 0, scale: 0.88, y: -8 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ duration: 0.9, ease: [0.34, 1.2, 0.64, 1], delay: 0.15 }}
+                    className="relative"
                 >
                     {/* Pulsing glow ring */}
                     <div className="absolute inset-0 rounded-full bg-[#2dd4bf]/20 blur-2xl animate-pulse" />
-                    <div className="relative w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[200px] md:h-[200px] min-w-[120px] min-h-[120px] rounded-full border-[4px] border-[#2dd4bf] shadow-[0_0_40px_rgba(45,212,191,0.35)] overflow-hidden z-10">
+                    <div className="relative w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] md:w-[200px] md:h-[200px] min-w-[140px] min-h-[140px] rounded-full border-[4px] border-[#2dd4bf] shadow-[0_0_50px_rgba(45,212,191,0.4)] overflow-hidden z-10">
                         <NextImage
                             src="/me.jpg"
                             alt="Yatin Kande"
@@ -109,6 +89,7 @@ export default function Hero() {
                             priority
                         />
                     </div>
+                </motion.div>
                 </motion.div>
 
                 {/* Step 2: Name */}

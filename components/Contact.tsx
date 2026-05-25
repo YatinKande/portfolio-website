@@ -115,7 +115,7 @@ export default function Contact() {
                         viewport={{ once: true }}
                     >
                         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                            Let's architect something <span className="text-[#2dd4bf]">extraordinary</span>.
+                            Let's architect something <span className="bg-gradient-to-r from-[#2dd4bf] to-[#a78bfa] bg-clip-text text-transparent">extraordinary</span>.
                         </h2>
                         <p className="text-lg text-slate-400 leading-relaxed mb-8">
                             I build production AI systems — RAG pipelines, AI Agents, LLM applications, and Computer Vision at scale. These are exactly what the market demands right now, and I ship them end-to-end. Whether you have a role in mind or want to explore what modern AI can do for your team, my inbox is always open.

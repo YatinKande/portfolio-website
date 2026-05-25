@@ -70,7 +70,7 @@ export default function Projects() {
                         viewport={{ once: true }}
                         className="text-[32px] md:text-[42px] font-bold text-white mb-4 tracking-tight"
                     >
-                        Featured <span className="text-[#2dd4bf]">Projects</span>
+                        Featured <span className="bg-gradient-to-r from-[#2dd4bf] to-[#a78bfa] bg-clip-text text-transparent">Projects</span>
                     </motion.h2>
 
                     <motion.p

@@ -13,6 +13,7 @@ import { BarChart3, GraduationCap, Briefcase, Rocket } from "lucide-react";
 import NextImage from "next/image";
 import GlitchText from "@/components/GlitchText";
 import Navbar from "@/components/Navbar";
+import ScrollProgress from "@/components/ScrollProgress";
 
 export default function LandingPage() {
     const [progress, setProgress] = useState(0);
@@ -121,25 +122,18 @@ export default function LandingPage() {
                     >
                         {/* Profile Photo */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{
-                                opacity: 1,
-                                scale: 1
-                            }}
-                            transition={{
-                                duration: 0.8,
-                                ease: [0.4, 0, 0.2, 1]
-                            }}
-                            layoutId="profile-photo"
+                            initial={{ opacity: 0, scale: 0.85, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
                             className="relative mb-[30px] z-20"
                         >
                             <div className="absolute inset-0 rounded-full bg-[#2dd4bf]/25 blur-[40px] animate-pulse" />
-                            <div className="relative w-[120px] h-[120px] md:w-[160px] md:h-[160px] rounded-full border-[5px] border-[#2dd4bf] shadow-[0_0_40px_rgba(45,212,191,0.35)] overflow-hidden">
+                            <div className="relative w-[140px] h-[140px] md:w-[180px] md:h-[180px] rounded-full border-[4px] border-[#2dd4bf] shadow-[0_0_40px_rgba(45,212,191,0.35)] overflow-hidden">
                                 <NextImage
                                     src="/me.jpg"
                                     alt="Yatin Kande"
                                     fill
-                                    className="object-cover scale-110"
+                                    className="object-cover"
                                     priority
                                 />
                             </div>
@@ -241,6 +235,7 @@ export default function LandingPage() {
                         transition={{ duration: 1.2, ease: "easeOut" }}
                         className="relative z-10"
                     >
+                        <ScrollProgress />
                         <Navbar />
 
                         <motion.section
