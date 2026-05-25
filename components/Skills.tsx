@@ -16,13 +16,14 @@ interface SkillCategory {
     icon: React.ElementType;
     skills: string[];
     accent: string;
+    glow: string;
 }
 
 /*
  * 3-colour domain grouping (accent bar only — no proficiency labels):
- *  🟢 Mint    #20c997 — Core AI/ML output (ML, GenAI, MLOps)
- *  🟣 Indigo  #6366f1 — Research & infrastructure (DL/CV, Cloud, Data Eng)
- *  🔴 Coral   #ff6b6b — Programming foundations
+ *  🩵 Electric Teal #2dd4bf — Core AI/ML output (ML, GenAI, MLOps)
+ *  🟣 Violet       #a78bfa — Research & infrastructure (DL/CV, Cloud, Data Eng)
+ *  🟠 Orange       #f97316 — Programming foundations
  */
 const skillCategories: SkillCategory[] = [
     {
@@ -35,7 +36,8 @@ const skillCategories: SkillCategory[] = [
             "Gradient Boosting & Ensemble Methods",
             "Classification, Regression & Clustering",
         ],
-        accent: "#20c997",
+        accent: "#2dd4bf",
+        glow: "rgba(45,212,191,0.08)",
     },
     {
         title: "NLP & GenAI",
@@ -47,7 +49,8 @@ const skillCategories: SkillCategory[] = [
             "Prompt Engineering & Chain-of-Thought",
             "Embeddings & Hybrid Retrieval",
         ],
-        accent: "#20c997",
+        accent: "#2dd4bf",
+        glow: "rgba(45,212,191,0.08)",
     },
     {
         title: "MLOps & Deployment",
@@ -59,7 +62,8 @@ const skillCategories: SkillCategory[] = [
             "Model Versioning & Experiment Tracking",
             "End-to-end ML Workflow Design",
         ],
-        accent: "#20c997",
+        accent: "#2dd4bf",
+        glow: "rgba(45,212,191,0.08)",
     },
     {
         title: "Deep Learning / Computer Vision",
@@ -71,7 +75,8 @@ const skillCategories: SkillCategory[] = [
             "Transfer Learning & Fine-tuning",
             "Real-time Inference Optimization",
         ],
-        accent: "#6366f1",
+        accent: "#a78bfa",
+        glow: "rgba(167,139,250,0.08)",
     },
     {
         title: "Cloud / Applications",
@@ -82,7 +87,8 @@ const skillCategories: SkillCategory[] = [
             "DynamoDB · SQS · SNS",
             "Serverless & Microservices Architecture",
         ],
-        accent: "#6366f1",
+        accent: "#a78bfa",
+        glow: "rgba(167,139,250,0.08)",
     },
     {
         title: "Data Engineering & Big Data",
@@ -93,7 +99,8 @@ const skillCategories: SkillCategory[] = [
             "AWS Glue · Redshift · S3 Pipelines",
             "Data Validation & Quality Engineering",
         ],
-        accent: "#6366f1",
+        accent: "#a78bfa",
+        glow: "rgba(167,139,250,0.08)",
     },
     {
         title: "Programming & Databases",
@@ -104,37 +111,42 @@ const skillCategories: SkillCategory[] = [
             "Pandas · NumPy · Data Analysis",
             "Git · REST APIs · Code Review",
         ],
-        accent: "#ff6b6b",
+        accent: "#f97316",
+        glow: "rgba(249,115,22,0.08)",
     },
 ];
 
 export default function Skills() {
     return (
-        <section id="skills" className="py-24 px-6 bg-[#f8fdfc]">
-            <div className="max-w-7xl mx-auto">
+        <section id="skills" className="py-24 px-6 bg-[#111318] relative overflow-hidden">
+            {/* Subtle ambient glows */}
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#2dd4bf]/[0.04] blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[350px] h-[350px] rounded-full bg-[#a78bfa]/[0.04] blur-[100px] pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto relative z-10">
                 {/* Header */}
-                <div className="text-center mb-12">
+                <div className="text-center mb-14">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold text-[#1a2e28] mb-4"
+                        className="text-4xl md:text-5xl font-bold text-white mb-4"
                     >
-                        Technical <span className="text-[#20c997]">Skills</span>
+                        Technical <span className="text-[#2dd4bf]">Skills</span>
                     </motion.h2>
                     <motion.div
                         initial={{ opacity: 0, width: 0 }}
                         whileInView={{ opacity: 1, width: "80px" }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="h-1 bg-[#ff6b6b] mx-auto rounded-full"
+                        className="h-1 bg-[#f97316] mx-auto rounded-full"
                     />
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="mt-6 text-[#5a7069] max-w-2xl mx-auto font-medium"
+                        className="mt-6 text-slate-400 max-w-2xl mx-auto font-medium"
                     >
                         End-to-end stack for building intelligent systems — from
                         raw data and model training to production-grade AI deployment.
@@ -142,7 +154,7 @@ export default function Skills() {
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {skillCategories.map((category, index) => (
                         <motion.div
                             key={category.title}
@@ -150,18 +162,20 @@ export default function Skills() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.08, duration: 0.5 }}
-                            whileHover={{ y: -5 }}
-                            className="bg-white rounded-2xl p-8 border border-[#cfe5df] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_45px_rgba(0,0,0,0.08)] transition-all group relative overflow-hidden h-full flex flex-col"
+                            whileHover={{ y: -6 }}
+                            className="bg-[#1c2030] rounded-2xl p-8 border border-white/[0.07] shadow-[0_8px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.5)] transition-all group relative overflow-hidden h-full flex flex-col"
+                            style={{
+                                boxShadow: `0 8px 30px rgba(0,0,0,0.3)`,
+                            }}
+                            onMouseEnter={e => {
+                                (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 48px rgba(0,0,0,0.5), 0 0 40px ${category.glow}`;
+                                (e.currentTarget as HTMLElement).style.borderColor = `${category.accent}30`;
+                            }}
+                            onMouseLeave={e => {
+                                (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 30px rgba(0,0,0,0.3)`;
+                                (e.currentTarget as HTMLElement).style.borderColor = `rgba(255,255,255,0.07)`;
+                            }}
                         >
-                            {/* Subtle dot-matrix background pattern */}
-                            <div
-                                className="absolute inset-0 opacity-[0.03] pointer-events-none"
-                                style={{
-                                    backgroundImage: "radial-gradient(circle, #000 1px, transparent 1px)",
-                                    backgroundSize: "22px 22px",
-                                }}
-                            />
-
                             {/* Accent Bar — domain colour */}
                             <div
                                 className="absolute top-0 left-0 w-full h-[3px] opacity-50 group-hover:opacity-100 transition-opacity"
@@ -172,14 +186,14 @@ export default function Skills() {
                             <div className="flex items-center gap-4 mb-6">
                                 <div
                                     className="p-3 rounded-xl transition-colors"
-                                    style={{ backgroundColor: `${category.accent}15` }}
+                                    style={{ backgroundColor: `${category.accent}18` }}
                                 >
                                     <category.icon
                                         size={26}
                                         style={{ color: category.accent }}
                                     />
                                 </div>
-                                <h3 className="text-[17px] font-bold text-[#1a2e28] leading-tight">
+                                <h3 className="text-[17px] font-bold text-white leading-tight">
                                     {category.title}
                                 </h3>
                             </div>
@@ -192,7 +206,7 @@ export default function Skills() {
                                             className="mt-[7px] shrink-0 w-[5px] h-[5px] rounded-full"
                                             style={{ backgroundColor: category.accent + "bb" }}
                                         />
-                                        <span className="text-[#5a7069] text-[13.5px] leading-relaxed">
+                                        <span className="text-slate-400 text-[13.5px] leading-relaxed group-hover:text-slate-300 transition-colors">
                                             {skill}
                                         </span>
                                     </li>

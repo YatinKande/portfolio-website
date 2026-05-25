@@ -6,10 +6,10 @@ import { certifications } from "@/lib/data";
 
 // Provider-branded colours — each issuer gets its real brand identity
 const PROVIDER_STYLES: Record<string, { iconBg: string; iconColor: string; borderAccent: string; iconHoverBg: string }> = {
-    "Oracle":                { iconBg: "#fef2f0", iconColor: "#C74634", borderAccent: "#C74634", iconHoverBg: "#C74634" },
-    "Google":                { iconBg: "#eff6ff", iconColor: "#4285F4", borderAccent: "#4285F4", iconHoverBg: "#4285F4" },
-    "Amazon Web Services":   { iconBg: "#fff7ed", iconColor: "#FF9900", borderAccent: "#FF9900", iconHoverBg: "#FF9900" },
-    "DeepLearning.AI":       { iconBg: "#f5f3ff", iconColor: "#7c3aed", borderAccent: "#7c3aed", iconHoverBg: "#7c3aed" },
+    "Oracle":                { iconBg: "rgba(199,70,52,0.15)",  iconColor: "#C74634", borderAccent: "#C74634", iconHoverBg: "#C74634" },
+    "Google":                { iconBg: "rgba(66,133,244,0.15)", iconColor: "#4285F4", borderAccent: "#4285F4", iconHoverBg: "#4285F4" },
+    "Amazon Web Services":   { iconBg: "rgba(255,153,0,0.15)",  iconColor: "#FF9900", borderAccent: "#FF9900", iconHoverBg: "#FF9900" },
+    "DeepLearning.AI":       { iconBg: "rgba(124,58,237,0.15)", iconColor: "#7c3aed", borderAccent: "#7c3aed", iconHoverBg: "#7c3aed" },
 };
 
 const PROVIDER_ICONS: Record<string, React.ElementType> = {
@@ -21,15 +21,18 @@ const PROVIDER_ICONS: Record<string, React.ElementType> = {
 
 export default function Certifications() {
     return (
-        <section id="certifications" className="py-24 px-6 bg-[#f8fdfc]">
-            <div className="max-w-7xl mx-auto">
+        <section id="certifications" className="py-24 px-6 bg-[#111318] relative overflow-hidden">
+            {/* Ambient glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-[#2dd4bf]/[0.03] blur-[100px] pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto relative z-10">
                 {/* Section Header */}
                 <div className="flex flex-col items-center mb-16 px-4">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="p-3 bg-[#20c997]/10 rounded-2xl text-[#20c997] mb-6"
+                        className="p-3 bg-[#2dd4bf]/10 rounded-2xl text-[#2dd4bf] mb-6"
                     >
                         <Trophy size={32} />
                     </motion.div>
@@ -37,16 +40,16 @@ export default function Certifications() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold text-[#1a2e28] text-center mb-4"
+                        className="text-4xl md:text-5xl font-bold text-white text-center mb-4"
                     >
-                        Professional <span className="text-[#ff6b6b]">Certifications</span>
+                        Professional <span className="text-[#f97316]">Certifications</span>
                     </motion.h2>
                     <motion.div
                         initial={{ opacity: 0, width: 0 }}
                         whileInView={{ opacity: 1, width: "100px" }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="h-1 bg-[#20c997] rounded-full"
+                        className="h-1 bg-[#2dd4bf] rounded-full"
                     />
                 </div>
 
@@ -56,7 +59,7 @@ export default function Certifications() {
                         const isInProgress = cert.year === "In Progress";
 
                         const provider = PROVIDER_STYLES[cert.issuer] ?? {
-                            iconBg: "#f0f9f7", iconColor: "#20c997", borderAccent: "#20c997", iconHoverBg: "#20c997"
+                            iconBg: "rgba(45,212,191,0.15)", iconColor: "#2dd4bf", borderAccent: "#2dd4bf", iconHoverBg: "#2dd4bf"
                         };
                         const Icon = PROVIDER_ICONS[cert.issuer] ?? Award;
 
@@ -68,16 +71,13 @@ export default function Certifications() {
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.1 }}
                                 whileHover={{ y: -8 }}
-                                className="group relative bg-white border-2 border-[#cfe5df] p-6 lg:p-8 rounded-[24px] transition-all duration-300 overflow-hidden"
-                                style={{
-                                    ["--hover-border" as string]: provider.borderAccent,
-                                }}
-                                onMouseEnter={e => (e.currentTarget.style.borderColor = provider.borderAccent + "80")}
-                                onMouseLeave={e => (e.currentTarget.style.borderColor = "#cfe5df")}
+                                className="group relative bg-[#1c2030] border-2 border-white/[0.07] p-6 lg:p-8 rounded-[24px] transition-all duration-300 overflow-hidden"
+                                onMouseEnter={e => (e.currentTarget.style.borderColor = provider.borderAccent + "50")}
+                                onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
                             >
                                 {/* Provider-coloured left accent strip */}
                                 <div
-                                    className="absolute left-0 top-0 bottom-0 w-1 rounded-l-[22px] opacity-70 group-hover:opacity-100 transition-opacity"
+                                    className="absolute left-0 top-0 bottom-0 w-1 rounded-l-[22px] opacity-60 group-hover:opacity-100 transition-opacity"
                                     style={{ backgroundColor: provider.borderAccent }}
                                 />
 
@@ -103,10 +103,7 @@ export default function Certifications() {
                                         </div>
                                         {/* Content */}
                                         <div className="flex-1 min-w-0">
-                                            <h3
-                                                className="text-lg font-bold text-[#1a2e28] leading-tight mb-1 transition-colors"
-                                                style={{ ["--hover-color" as string]: provider.iconColor }}
-                                            >
+                                            <h3 className="text-lg font-bold text-white leading-tight mb-1 transition-colors">
                                                 {cert.name}
                                             </h3>
                                             {/* Issuer with provider colour dot */}
@@ -115,7 +112,7 @@ export default function Certifications() {
                                                     className="inline-block w-2 h-2 rounded-full shrink-0"
                                                     style={{ backgroundColor: provider.iconColor }}
                                                 />
-                                                <span className="text-[#5a7069] font-medium text-sm">{cert.issuer}</span>
+                                                <span className="text-slate-400 font-medium text-sm">{cert.issuer}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -123,26 +120,25 @@ export default function Certifications() {
                                     {/* Badge */}
                                     <div className="shrink-0 flex flex-col items-end gap-2">
                                         {isInProgress ? (
-                                            <span className="flex items-center gap-1.5 text-[11px] font-bold text-amber-600 uppercase tracking-widest bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+                                            <span className="flex items-center gap-1.5 text-[11px] font-bold text-amber-400 uppercase tracking-widest bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
                                                 <Clock size={10} />
                                                 In Progress
                                             </span>
                                         ) : (
-                                            <span className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-700 uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                                            <span className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400 uppercase tracking-widest bg-emerald-400/10 px-3 py-1 rounded-full border border-emerald-400/20">
                                                 <CheckCircle2 size={10} />
                                                 {cert.year}
                                             </span>
                                         )}
                                         <ArrowUpRight
                                             className="transition-colors self-end"
-                                            style={{ color: "#cfe5df" }}
+                                            style={{ color: "rgba(255,255,255,0.2)" }}
                                             onMouseEnter={e => ((e.currentTarget as SVGElement).style.color = provider.iconColor)}
-                                            onMouseLeave={e => ((e.currentTarget as SVGElement).style.color = "#cfe5df")}
+                                            onMouseLeave={e => ((e.currentTarget as SVGElement).style.color = "rgba(255,255,255,0.2)")}
                                             size={20}
                                         />
                                     </div>
                                 </div>
-
                             </motion.div>
                         );
                     })}

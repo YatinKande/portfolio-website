@@ -6,43 +6,43 @@
 
 @layer base {
   :root {
-    /* Mint Coral Palette */
-    --background: 165 30% 96%;
-    /* #f0f8f6 (light mint) */
-    --foreground: 164 28% 14%;
-    /* #1a2e28 (dark forest green) */
+    /* Charcoal + Electric Palette */
+    --background: 224 13% 9%;
+    /* #111318 dark charcoal */
+    --foreground: 210 40% 98%;
+    /* #f8fafc white */
 
-    --card: 0 0% 100%;
-    /* #ffffff (pure white) */
-    --card-foreground: 164 28% 14%;
+    --card: 224 15% 14%;
+    /* #1c2030 dark card */
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 164 28% 14%;
+    --popover: 224 15% 14%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 162 73% 46%;
-    /* #20c997 (mint green/teal) */
-    --primary-foreground: 0 0% 100%;
+    --primary: 174 60% 51%;
+    /* #2dd4bf electric teal */
+    --primary-foreground: 224 13% 9%;
 
-    --secondary: 0 100% 71%;
-    /* #ff6b6b (coral red) */
+    --secondary: 25 95% 53%;
+    /* #f97316 electric orange */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 164 15% 92%;
-    /* #e6f2ef (soft mint-gray) */
-    --muted-foreground: 164 12% 40%;
-    /* #5a7069 */
+    --muted: 224 10% 20%;
+    /* dark muted */
+    --muted-foreground: 215 20% 65%;
+    /* slate-400 */
 
-    --accent: 0 100% 71%;
-    /* Coral red as accent */
+    --accent: 25 95% 53%;
+    /* orange as accent */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 165 24% 85%;
-    /* #cfe5df (light mint-gray) */
-    --input: 165 24% 85%;
-    --ring: 162 73% 46%;
+    --border: 224 13% 16%;
+    /* dark border */
+    --input: 224 13% 16%;
+    --ring: 174 60% 51%;
 
     --radius: 1rem;
   }
@@ -55,7 +55,7 @@
 
   body {
     @apply text-foreground font-sans;
-    background: radial-gradient(circle at center, #f0f8f6 0%, #e6f2ef 100%);
+    background: #111318;
     background-attachment: fixed;
     min-height: 100vh;
   }
@@ -71,43 +71,43 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-[#ff6b6b] to-[#20c997] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#f97316] to-[#2dd4bf] bg-clip-text text-transparent;
   }
 
   .text-glow {
-    text-shadow: 0 0 10px rgba(32, 201, 151, 0.3);
+    text-shadow: 0 0 10px rgba(45, 212, 191, 0.4);
   }
 
   .glass-card {
-    @apply bg-white backdrop-blur-lg border border-[#cfe5df];
+    @apply bg-[#1c2030] backdrop-blur-lg border border-white/10;
     border-radius: 1rem;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
 
   .glass-card:hover {
-    @apply border-[#20c997]/50 scale-[1.02];
-    box-shadow: 0 8px 24px rgba(32, 201, 151, 0.15);
+    @apply border-[#2dd4bf]/30 scale-[1.02];
+    box-shadow: 0 8px 24px rgba(45, 212, 191, 0.12);
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f0f8f6;
+  background: #0d0f14;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cfe5df;
+  background: #2a2e3d;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #20c997;
+  background: #2dd4bf;
 }
 
 /* Smooth scroll behavior */

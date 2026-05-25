@@ -68,11 +68,11 @@ export default function GlitchText({ startTime = 0 }: GlitchTextProps) {
                 className={`
                     font-mono font-medium tracking-[2px] uppercase transition-all duration-75
                     text-[14px] md:text-[16px] lg:text-[18px]
-                    ${isGlitching ? 'text-coral scale-105 skew-x-12 animate-flicker' : 'text-[#5a7069]'}
+                    ${isGlitching ? 'text-coral scale-105 skew-x-12 animate-flicker' : 'text-slate-400'}
                 `}
                 style={{
-                    color: isGlitching ? (Math.random() > 0.5 ? '#ff6b6b' : '#20c997') : '#5a7069',
-                    textShadow: isGlitching ? (Math.random() > 0.5 ? '2px 0 #20c997' : '-2px 0 #ff6b6b') : 'none'
+                    color: isGlitching ? (Math.random() > 0.5 ? '#f97316' : '#2dd4bf') : '#94a3b8',
+                    textShadow: isGlitching ? (Math.random() > 0.5 ? '2px 0 #2dd4bf' : '-2px 0 #f97316') : 'none'
                 }}
             >
                 {displayText}

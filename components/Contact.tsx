@@ -60,27 +60,31 @@ export default function Contact() {
     };
 
     const socialLinks = [
-        { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/yatin-kande/", color: "#0077b5" },
-        { name: "GitHub", icon: Github, url: "https://github.com/YatinKande", color: "#181717" },
+        { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/yatin-kande/", color: "#0a66c2" },
+        { name: "GitHub", icon: Github, url: "https://github.com/YatinKande", color: "#e2e8f0" },
     ];
 
     return (
-        <section id="contact" className="py-24 px-6 bg-[#f0f8f6]">
-            <div className="max-w-5xl mx-auto">
+        <section id="contact" className="py-24 px-6 bg-[#0d0f14] relative overflow-hidden">
+            {/* Ambient glow */}
+            <div className="absolute bottom-0 right-0 w-[500px] h-[400px] rounded-full bg-[#2dd4bf]/[0.04] blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 left-0 w-[400px] h-[300px] rounded-full bg-[#f97316]/[0.03] blur-[100px] pointer-events-none" />
+
+            <div className="max-w-5xl mx-auto relative z-10">
                 {/* Header Info Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 px-4">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="bg-white p-6 rounded-2xl border border-[#cfe5df] flex items-center gap-5 shadow-sm hover:border-[#20c997] transition-all"
+                        className="bg-[#1c2030] p-6 rounded-2xl border border-white/[0.07] flex items-center gap-5 shadow-[0_8px_30px_rgba(0,0,0,0.3)] hover:border-[#2dd4bf]/30 transition-all"
                     >
-                        <div className="size-14 rounded-xl bg-[#20c997]/10 flex items-center justify-center text-[#20c997]">
+                        <div className="size-14 rounded-xl bg-[#2dd4bf]/10 flex items-center justify-center text-[#2dd4bf]">
                             <Mail size={28} />
                         </div>
                         <div>
-                            <p className="text-sm font-bold text-[#5a7069] uppercase tracking-wider mb-1">Email Me</p>
-                            <a href={`mailto:${personalInfo.email}`} className="text-xl font-bold text-[#1a2e28] hover:text-[#20c997] transition-colors">
+                            <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Email Me</p>
+                            <a href={`mailto:${personalInfo.email}`} className="text-lg font-bold text-white hover:text-[#2dd4bf] transition-colors">
                                 {personalInfo.email}
                             </a>
                         </div>
@@ -91,14 +95,14 @@ export default function Contact() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="bg-white p-6 rounded-2xl border border-[#cfe5df] flex items-center gap-5 shadow-sm hover:border-[#20c997] transition-all"
+                        className="bg-[#1c2030] p-6 rounded-2xl border border-white/[0.07] flex items-center gap-5 shadow-[0_8px_30px_rgba(0,0,0,0.3)] hover:border-[#2dd4bf]/30 transition-all"
                     >
-                        <div className="size-14 rounded-xl bg-[#20c997]/10 flex items-center justify-center text-[#20c997]">
+                        <div className="size-14 rounded-xl bg-[#2dd4bf]/10 flex items-center justify-center text-[#2dd4bf]">
                             <MapPin size={28} />
                         </div>
                         <div>
-                            <p className="text-sm font-bold text-[#5a7069] uppercase tracking-wider mb-1">Location</p>
-                            <p className="text-xl font-bold text-[#1a2e28]">{personalInfo.location}</p>
+                            <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1">Location</p>
+                            <p className="text-lg font-bold text-white">{personalInfo.location}</p>
                         </div>
                     </motion.div>
                 </div>
@@ -110,13 +114,13 @@ export default function Contact() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-[#1a2e28] mb-6 leading-tight">
-                            Let's architect something <span className="text-[#20c997]">extraordinary</span>.
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                            Let's architect something <span className="text-[#2dd4bf]">extraordinary</span>.
                         </h2>
-                        <p className="text-xl text-[#5a7069] leading-relaxed mb-8">
+                        <p className="text-lg text-slate-400 leading-relaxed mb-8">
                             I build production AI systems — RAG pipelines, AI Agents, LLM applications, and Computer Vision at scale. These are exactly what the market demands right now, and I ship them end-to-end. Whether you have a role in mind or want to explore what modern AI can do for your team, my inbox is always open.
                         </p>
-                        <div className="h-1 w-24 bg-[#ff6b6b] rounded-full mb-8" />
+                        <div className="h-1 w-24 bg-[#f97316] rounded-full mb-8" />
                     </motion.div>
 
                     {/* Right Column Form */}
@@ -124,29 +128,29 @@ export default function Contact() {
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="bg-white border-2 border-[#cfe5df] rounded-3xl p-8 md:p-10 shadow-xl relative"
+                        className="bg-[#1c2030] border-2 border-white/[0.07] rounded-3xl p-8 md:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative"
                     >
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-[#1a2e28] uppercase tracking-widest ml-1">Full Name</label>
+                                    <label className="text-xs font-bold text-slate-300 uppercase tracking-widest ml-1">Full Name</label>
                                     <input
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className="w-full bg-[#f8fdfc] border-2 border-[#cfe5df] rounded-xl px-5 py-4 outline-none focus:border-[#20c997] transition-all text-[#1a2e28] font-medium placeholder:text-[#5a7069]/40"
+                                        className="w-full bg-[#111318] border-2 border-white/[0.08] rounded-xl px-5 py-4 outline-none focus:border-[#2dd4bf] transition-all text-white font-medium placeholder:text-slate-600"
                                         placeholder="Enter your name"
                                         required
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-[#1a2e28] uppercase tracking-widest ml-1">Email Address</label>
+                                    <label className="text-xs font-bold text-slate-300 uppercase tracking-widest ml-1">Email Address</label>
                                     <input
                                         name="email"
                                         type="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full bg-[#f8fdfc] border-2 border-[#cfe5df] rounded-xl px-5 py-4 outline-none focus:border-[#20c997] transition-all text-[#1a2e28] font-medium placeholder:text-[#5a7069]/40"
+                                        className="w-full bg-[#111318] border-2 border-white/[0.08] rounded-xl px-5 py-4 outline-none focus:border-[#2dd4bf] transition-all text-white font-medium placeholder:text-slate-600"
                                         placeholder="email@example.com"
                                         required
                                     />
@@ -154,12 +158,12 @@ export default function Contact() {
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-[#1a2e28] uppercase tracking-widest ml-1">Your Message</label>
+                                <label className="text-xs font-bold text-slate-300 uppercase tracking-widest ml-1">Your Message</label>
                                 <textarea
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="w-full h-40 bg-[#f8fdfc] border-2 border-[#cfe5df] rounded-xl px-5 py-4 outline-none focus:border-[#20c997] transition-all resize-none text-[#1a2e28] font-medium placeholder:text-[#5a7069]/40"
+                                    className="w-full h-40 bg-[#111318] border-2 border-white/[0.08] rounded-xl px-5 py-4 outline-none focus:border-[#2dd4bf] transition-all resize-none text-white font-medium placeholder:text-slate-600"
                                     placeholder="How can I help you?"
                                     required
                                 />
@@ -168,11 +172,11 @@ export default function Contact() {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="group w-full py-4 bg-[#20c997] text-white font-bold rounded-xl hover:bg-[#1aad85] transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 shadow-lg shadow-[#20c997]/20 hover:shadow-[#20c997]/40"
+                                className="group w-full py-4 bg-[#2dd4bf] text-[#111318] font-bold rounded-xl hover:bg-[#2dd4bf]/90 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 shadow-[0_8px_24px_rgba(45,212,191,0.25)] hover:shadow-[0_12px_32px_rgba(45,212,191,0.4)]"
                             >
                                 {isSubmitting ? (
                                     <span className="flex items-center gap-2">
-                                        <div className="size-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        <div className="size-4 border-2 border-[#111318]/30 border-t-[#111318] rounded-full animate-spin" />
                                         SENDING...
                                     </span>
                                 ) : isSent ? (
@@ -189,7 +193,7 @@ export default function Contact() {
                                 <motion.div
                                     initial={{ opacity: 0, y: -8 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 font-medium"
+                                    className="flex items-start gap-3 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-sm text-red-400 font-medium"
                                 >
                                     <span className="mt-0.5 size-2 rounded-full bg-red-500 shrink-0" />
                                     {errorMessage}
@@ -206,7 +210,7 @@ export default function Contact() {
                     viewport={{ once: true }}
                     className="mt-20 flex flex-col items-center"
                 >
-                    <div className="text-xs font-bold text-[#5a7069] uppercase tracking-[0.3em] mb-8 opacity-60">
+                    <div className="text-xs font-bold text-slate-500 uppercase tracking-[0.3em] mb-8">
                         Digital Footprint
                     </div>
                     <div className="flex gap-6">
@@ -223,10 +227,10 @@ export default function Contact() {
                                 whileHover={{ y: -8, scale: 1.1 }}
                                 className="group relative"
                             >
-                                <div className="size-16 rounded-full bg-white border-2 border-[#cfe5df] flex items-center justify-center text-[#1a2e28] group-hover:border-[#20c997] group-hover:bg-[#20c997]/5 transition-all shadow-md">
-                                    <social.icon size={28} className="group-hover:scale-110 transition-transform" style={{ color: social.color }} />
+                                <div className="size-16 rounded-full bg-[#1c2030] border-2 border-white/[0.07] flex items-center justify-center group-hover:border-[#2dd4bf]/40 group-hover:bg-[#2dd4bf]/5 transition-all shadow-[0_4px_16px_rgba(0,0,0,0.3)]">
+                                    <social.icon size={26} className="group-hover:scale-110 transition-transform" style={{ color: social.color }} />
                                 </div>
-                                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs font-bold text-[#20c997] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest">
+                                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs font-bold text-[#2dd4bf] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest">
                                     {social.name}
                                 </span>
                             </motion.a>

@@ -23,7 +23,7 @@ const PROJECT_CATEGORIES: Record<string, { label: string; color: string; bg: str
     "Automotive Multimodal RAG":  { label: "Multimodal",   color: "#fdba74", bg: "rgba(249,115,22,0.25)" },
     "Dataset Concierge Bot":      { label: "Serverless",   color: "#67e8f9", bg: "rgba(6,182,212,0.25)" },
     "Kinesis Key Entry":          { label: "Computer Vision", color: "#7dd3fc", bg: "rgba(14,165,233,0.25)" },
-    "SmartSoil Crop Recommender": { label: "ML",           color: "#6ee7b7", bg: "rgba(32,201,151,0.25)" },
+    "SmartSoil Crop Recommender": { label: "ML",           color: "#6ee7b7", bg: "rgba(45,212,191,0.25)" },
     "Lip-Read AI using LipNet":   { label: "Deep Learning",color: "#f9a8d4", bg: "rgba(236,72,153,0.25)" },
 };
 
@@ -70,7 +70,7 @@ export default function Projects() {
                         viewport={{ once: true }}
                         className="text-[32px] md:text-[42px] font-bold text-white mb-4 tracking-tight"
                     >
-                        Featured <span className="text-[#20c997]">Projects</span>
+                        Featured <span className="text-[#2dd4bf]">Projects</span>
                     </motion.h2>
 
                     <motion.p
@@ -182,7 +182,7 @@ export default function Projects() {
                 <div className="mt-[48px] flex justify-center">
                     <Link
                         href="/projects"
-                        className="group relative inline-flex items-center gap-2 px-[36px] py-[13px] border-2 border-[#20c997] text-[#20c997] font-bold rounded-full transition-all hover:bg-[#20c997] hover:text-white hover:shadow-[0_8px_24px_rgba(32,201,151,0.25)] hover:-translate-y-[2px] active:scale-95"
+                        className="group relative inline-flex items-center gap-2 px-[36px] py-[13px] border-2 border-[#2dd4bf] text-[#2dd4bf] font-bold rounded-full transition-all hover:bg-[#20c997] hover:text-white hover:shadow-[0_8px_24px_rgba(45,212,191,0.25)] hover:-translate-y-[2px] active:scale-95"
                     >
                         <span className="text-[15px]">View All Projects →</span>
                     </Link>

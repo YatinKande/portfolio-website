@@ -97,23 +97,15 @@ export default function LandingPage() {
     if (!isHydrated) return null;
 
     return (
-        <main className="min-h-screen bg-[#f0f8f6] selection:bg-[#ff6b6b]/30 relative overflow-hidden">
-            {/* Background Animated Gradient & Particles Overlay */}
+        <main className="min-h-screen bg-[#111318] selection:bg-[#2dd4bf]/20 relative overflow-hidden">
+            {/* Subtle animated dot grid on dark bg */}
             <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#20c997]/5 via-transparent to-[#ff6b6b]/5 animate-pulse" />
-                {/* Floating Dots Pattern with slow drift */}
                 <motion.div
-                    animate={{
-                        backgroundPosition: ["0px 0px", "40px 40px"],
-                    }}
-                    transition={{
-                        duration: 10,
-                        repeat: Infinity,
-                        ease: "linear"
-                    }}
-                    className="absolute inset-0 opacity-[0.15]"
+                    animate={{ backgroundPosition: ["0px 0px", "40px 40px"] }}
+                    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 opacity-[0.04]"
                     style={{
-                        backgroundImage: "radial-gradient(#20c997 1.5px, transparent 1.5px)",
+                        backgroundImage: "radial-gradient(#2dd4bf 1px, transparent 1px)",
                         backgroundSize: "40px 40px"
                     }}
                 />
@@ -141,8 +133,8 @@ export default function LandingPage() {
                             layoutId="profile-photo"
                             className="relative mb-[30px] z-20"
                         >
-                            <div className="absolute inset-0 rounded-full bg-[#20c997]/30 blur-[40px] animate-pulse" />
-                            <div className="relative w-[120px] h-[120px] md:w-[160px] md:h-[160px] rounded-full border-[5px] border-[#20c997] shadow-[0_0_40px_rgba(32,201,151,0.35)] overflow-hidden">
+                            <div className="absolute inset-0 rounded-full bg-[#2dd4bf]/25 blur-[40px] animate-pulse" />
+                            <div className="relative w-[120px] h-[120px] md:w-[160px] md:h-[160px] rounded-full border-[5px] border-[#2dd4bf] shadow-[0_0_40px_rgba(45,212,191,0.35)] overflow-hidden">
                                 <NextImage
                                     src="/me.jpg"
                                     alt="Yatin Kande"
@@ -169,7 +161,7 @@ export default function LandingPage() {
                                 transition={{ delay: 0.4, duration: 0.3 }}
                                 className="mb-[40px]"
                             >
-                                <h1 className="text-[32px] md:text-[42px] font-bold text-[#1a2e28] tracking-tight leading-none mb-2">
+                                <h1 className="text-[32px] md:text-[42px] font-bold text-white tracking-tight leading-none mb-2">
                                     Yatin Kande
                                 </h1>
                                 <div className="mt-4">
@@ -180,7 +172,7 @@ export default function LandingPage() {
                             {/* Loading Section */}
                             <div className="w-full max-w-[300px] md:max-w-[450px] mb-[35px]">
                                 <div className="flex justify-between items-end mb-[12px] font-mono text-[13px]">
-                                    <div className={status === "DEPLOYMENT_COMPLETE" ? "text-[#00ff9d] font-bold" : "text-[#20c997]"}>
+                                    <div className={status === "DEPLOYMENT_COMPLETE" ? "text-[#2dd4bf] font-bold" : "text-[#2dd4bf]/70"}>
                                         {status}
                                         <motion.span
                                             animate={{ opacity: [1, 0] }}
@@ -189,9 +181,9 @@ export default function LandingPage() {
                                             |
                                         </motion.span>
                                     </div>
-                                    <div className="text-[#20c997] opacity-60 font-bold">{Math.floor(progress)}%</div>
+                                    <div className="text-[#2dd4bf] opacity-60 font-bold">{Math.floor(progress)}%</div>
                                 </div>
-                                <div className="h-[6px] w-full bg-[#cfe5df] rounded-[3px] overflow-hidden">
+                                <div className="h-[6px] w-full bg-white/10 rounded-[3px] overflow-hidden">
                                     <motion.div
                                         className="h-full bg-gradient-to-r from-[#ff6b6b] to-[#20c997] shadow-[0_0_15px_rgba(32,201,151,0.5)]"
                                         style={{ width: `${progress}%` }}
@@ -205,7 +197,7 @@ export default function LandingPage() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1, duration: 0.6 }}
-                                className="bg-white/85 backdrop-blur-[12px] border border-[#cfe5df] rounded-[16px] p-8 shadow-[0_8px_32px_rgba(0,0,0,0.06)] mb-[25px]"
+                                className="bg-[#1c2030]/90 backdrop-blur-[12px] border border-white/10 rounded-[16px] p-8 shadow-[0_8px_32px_rgba(0,0,0,0.4)] mb-[25px]"
                             >
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[30px] gap-y-[20px]">
                                     {stats.map((stat, i) => (
@@ -216,10 +208,10 @@ export default function LandingPage() {
                                             transition={{ delay: stat.delay, duration: 0.3 }}
                                             className="flex items-center gap-3"
                                         >
-                                            <div className="p-2 rounded-lg bg-[#20c997]/10">
-                                                <stat.icon className="text-[#20c997] size-5" />
+                                            <div className="p-2 rounded-lg bg-[#2dd4bf]/10">
+                                                <stat.icon className="text-[#2dd4bf] size-5" />
                                             </div>
-                                            <span className="text-[#1a2e28] font-bold text-[16px] whitespace-nowrap">
+                                            <span className="text-white font-bold text-[16px] whitespace-nowrap">
                                                 {stat.text}
                                             </span>
                                         </motion.div>
@@ -232,7 +224,7 @@ export default function LandingPage() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 1.8, duration: 0.5 }}
-                                className="italic text-[15px] text-[#789088] font-medium"
+                                className="italic text-[15px] text-slate-500 font-medium"
                             >
                                 "Transforming raw data into strategic intelligence"
                             </motion.p>
@@ -308,12 +300,12 @@ export default function LandingPage() {
                             <Contact />
                         </motion.section>
 
-                        <footer className="py-12 bg-[#1a2e28] border-t border-[#cfe5df]/20 px-6">
+                        <footer className="py-12 bg-[#080a0d] border-t border-white/[0.06] px-6">
                             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
                                 {/* Availability signal */}
                                 <div className="flex items-center gap-3">
-                                    <div className="size-2.5 rounded-full bg-[#20c997] animate-pulse" />
-                                    <span className="text-[10px] font-mono text-[#20c997]/80 uppercase tracking-widest font-bold">
+                                    <div className="size-2.5 rounded-full bg-[#2dd4bf] animate-pulse" />
+                                    <span className="text-[10px] font-mono text-[#2dd4bf]/80 uppercase tracking-widest font-bold">
                                         Open to Full-time · Data Scientist / ML Engineer
                                     </span>
                                 </div>
@@ -321,15 +313,15 @@ export default function LandingPage() {
                                 {/* Dashboard link */}
                                 <a
                                     href="/dashboard"
-                                    className="group flex items-center gap-2 text-[10px] font-mono text-[#20c997]/50 hover:text-[#20c997] uppercase tracking-widest transition-colors"
+                                    className="group flex items-center gap-2 text-[10px] font-mono text-[#2dd4bf]/40 hover:text-[#2dd4bf] uppercase tracking-widest transition-colors"
                                     title="Interactive Portfolio Dashboard"
                                 >
-                                    <span className="size-1.5 rounded-full bg-[#20c997]/40 group-hover:bg-[#20c997] transition-colors animate-pulse" />
+                                    <span className="size-1.5 rounded-full bg-[#2dd4bf]/30 group-hover:bg-[#2dd4bf] transition-colors animate-pulse" />
                                     View Dashboard →
                                 </a>
 
                                 {/* Copyright + location */}
-                                <div className="text-[10px] font-mono text-[#cfe5df]/30 uppercase tracking-[0.2em]">
+                                <div className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em]">
                                     © 2026 Yatin Kande · Dearborn, MI
                                 </div>
                             </div>
