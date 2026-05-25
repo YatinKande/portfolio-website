@@ -22,163 +22,94 @@ export default async function Image() {
                     overflow: "hidden",
                 }}
             >
-                {/* Teal glow — bottom left */}
+                {/* Soft white glow — centre */}
                 <div
                     style={{
                         position: "absolute",
-                        left: "-120px",
-                        bottom: "-80px",
-                        width: "560px",
-                        height: "560px",
+                        left: "50%",
+                        top: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: "700px",
+                        height: "700px",
                         borderRadius: "50%",
-                        background: "radial-gradient(circle, rgba(45,212,191,0.13) 0%, transparent 70%)",
-                    }}
-                />
-                {/* Orange glow — top right */}
-                <div
-                    style={{
-                        position: "absolute",
-                        right: "-80px",
-                        top: "-80px",
-                        width: "460px",
-                        height: "460px",
-                        borderRadius: "50%",
-                        background: "radial-gradient(circle, rgba(249,115,22,0.10) 0%, transparent 70%)",
-                    }}
-                />
-                {/* Violet glow — center */}
-                <div
-                    style={{
-                        position: "absolute",
-                        left: "38%",
-                        top: "30%",
-                        width: "320px",
-                        height: "320px",
-                        borderRadius: "50%",
-                        background: "radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%)",
+                        background: "radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)",
                     }}
                 />
 
-                {/* Avatar badge */}
+                {/* Avatar badge — white on dark */}
                 <div
                     style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        width: "84px",
-                        height: "84px",
-                        borderRadius: "24px",
-                        background: "#2dd4bf",
-                        marginBottom: "30px",
-                        boxShadow: "0 0 40px rgba(45,212,191,0.35)",
+                        width: "80px",
+                        height: "80px",
+                        borderRadius: "20px",
+                        background: "rgba(255,255,255,0.08)",
+                        border: "1.5px solid rgba(255,255,255,0.18)",
+                        marginBottom: "28px",
                     }}
                 >
-                    <span style={{ color: "#111318", fontSize: 46, fontWeight: 800 }}>YK</span>
+                    <span style={{ color: "#ffffff", fontSize: 36, fontWeight: 700, letterSpacing: "-1px" }}>YK</span>
                 </div>
 
                 {/* Name */}
                 <div
                     style={{
-                        fontSize: 76,
+                        fontSize: 80,
                         fontWeight: 800,
                         color: "#ffffff",
-                        letterSpacing: "-2.5px",
-                        marginBottom: "10px",
+                        letterSpacing: "-3px",
+                        marginBottom: "14px",
                     }}
                 >
                     Yatin Kande
                 </div>
 
-                {/* Title — teal accent */}
+                {/* Title — muted white */}
                 <div
                     style={{
-                        fontSize: 28,
-                        color: "#2dd4bf",
-                        fontWeight: 600,
-                        marginBottom: "8px",
-                        letterSpacing: "0.5px",
+                        fontSize: 26,
+                        color: "rgba(255,255,255,0.5)",
+                        fontWeight: 500,
+                        marginBottom: "36px",
+                        letterSpacing: "1px",
                     }}
                 >
                     AI/ML Engineer · RAG · Computer Vision · LLMs
                 </div>
+
+                {/* Thin divider */}
+                <div
+                    style={{
+                        width: "48px",
+                        height: "2px",
+                        background: "rgba(255,255,255,0.25)",
+                        borderRadius: "2px",
+                        marginBottom: "36px",
+                    }}
+                />
 
                 {/* Credibility row */}
                 <div
                     style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: "10px",
-                        marginBottom: "32px",
-                        fontSize: 16,
-                        color: "rgba(148,163,184,1)",
+                        gap: "12px",
+                        fontSize: 15,
+                        color: "rgba(255,255,255,0.35)",
                         fontWeight: 600,
-                        letterSpacing: "2px",
+                        letterSpacing: "2.5px",
                         textTransform: "uppercase",
                     }}
                 >
                     <span>MS @ UMich</span>
-                    <span style={{ color: "#2dd4bf" }}>·</span>
+                    <span style={{ color: "rgba(255,255,255,0.15)" }}>·</span>
                     <span>3.8 GPA</span>
-                    <span style={{ color: "#2dd4bf" }}>·</span>
+                    <span style={{ color: "rgba(255,255,255,0.15)" }}>·</span>
                     <span>Ex-DataZymes</span>
-                    <span style={{ color: "#2dd4bf" }}>·</span>
-                    {/* Open to Full-time pill */}
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "6px",
-                            padding: "4px 14px",
-                            borderRadius: "999px",
-                            background: "rgba(45,212,191,0.12)",
-                            border: "1px solid rgba(45,212,191,0.35)",
-                            color: "#2dd4bf",
-                            fontSize: 14,
-                            fontWeight: 700,
-                            letterSpacing: "1.5px",
-                        }}
-                    >
-                        <div
-                            style={{
-                                width: "7px",
-                                height: "7px",
-                                borderRadius: "50%",
-                                background: "#2dd4bf",
-                            }}
-                        />
-                        OPEN TO FULL-TIME
-                    </div>
-                </div>
-
-                {/* Divider */}
-                <div
-                    style={{
-                        width: "80px",
-                        height: "3px",
-                        background: "#f97316",
-                        borderRadius: "2px",
-                        marginBottom: "32px",
-                    }}
-                />
-
-                {/* Tags row */}
-                <div style={{ display: "flex", gap: "12px" }}>
-                    {["RAG Pipelines", "AI Agents", "Computer Vision", "AWS · GCP"].map((tag) => (
-                        <div
-                            key={tag}
-                            style={{
-                                padding: "9px 20px",
-                                borderRadius: "24px",
-                                border: "1px solid rgba(45,212,191,0.25)",
-                                color: "rgba(255,255,255,0.75)",
-                                fontSize: 15,
-                                fontWeight: 600,
-                                background: "rgba(45,212,191,0.07)",
-                            }}
-                        >
-                            {tag}
-                        </div>
-                    ))}
+                    <span style={{ color: "rgba(255,255,255,0.15)" }}>·</span>
+                    <span style={{ color: "rgba(255,255,255,0.55)" }}>Open to Full-time</span>
                 </div>
             </div>
         ),
