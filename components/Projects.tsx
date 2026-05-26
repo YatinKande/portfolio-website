@@ -70,8 +70,8 @@ export default function Projects() {
 
                                     <div className="absolute inset-0 p-[30px] flex flex-col justify-end z-10">
                                         <div className="relative z-20">
-                                            <h3 className={`font-bold text-white mb-[10px] leading-[1.2] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] ${isBig ? 'text-[36px]' : 'text-[24px]'}`}>{project.title}</h3>
-                                            <p className={`text-white/80 font-normal mb-[15px] leading-[1.5] drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)] ${isBig ? 'text-[17px]' : 'text-[14px]'}`}>{project.intro || project.description}</p>
+                                            <h3 className={`font-bold text-white mb-[10px] leading-[1.2] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] ${isBig ? 'text-[22px] sm:text-[28px] lg:text-[36px]' : 'text-[18px] sm:text-[20px]'}`}>{project.title}</h3>
+                                            <p className={`text-white/80 font-normal mb-[15px] leading-[1.5] drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)] ${isBig ? 'text-[13px] lg:text-[17px]' : 'text-[12px] sm:text-[13px]'}`}>{project.intro || project.description}</p>
                                             <div className="flex flex-wrap gap-[8px]">
                                                 {project.tech.slice(0, 3).map((t: string) => (
                                                     <span key={t} className="px-[14px] py-[6px] rounded-[20px] bg-white/15 border border-white/25 text-[11px] font-semibold text-white uppercase">{t}</span>

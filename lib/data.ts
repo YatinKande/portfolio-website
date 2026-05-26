@@ -26,8 +26,8 @@ export const personalInfo = {
     email: "yatink@umich.edu",
     phone: "+1 313-413-8327",
     location: "Dearborn, MI, USA",
-    bio: "I architect high-performance machine learning systems and computer vision pipelines with a focus on end-to-end reliability. I specialize in the full lifecycle of data products—from high-dimensional feature engineering and GPU-accelerated training to deploying scalable inference APIs.\n\nMy focus is on bridging the gap between Generative AI research and real-world deployment. By combining rigorous statistical validation with intuitive data storytelling, I ensure complex models deliver measurable business value and production-ready performance.",
-    headline: "Architecting Intelligent Systems with Precision and Scalability",
+    bio: "I build production AI systems — autonomous AI Agents, multi-source RAG pipelines, and end-to-end LLM applications — and ship them from architecture to deployment. Currently deep in the agentic AI stack: designing multi-step AI Agents with tool-use and function calling, orchestrating complex workflows with LangGraph and LangChain, and grounding responses with hybrid vector retrieval over FAISS.\n\nFrom computer vision (YOLOv5, 3D CNN-BiLSTM) and distributed ML (Apache Spark) to serverless LLMOps on AWS, I engineer AI systems that meet production standards and scale.",
+    headline: "Building Agentic AI Systems — RAG Pipelines, LLM Agents & Production MLOps",
     hobbies: {
         work: ["Deep Learning Research", "Open Source Contributing", "Cloud Architecture", "Interactive Data Viz"],
         nonWork: ["Astrophotography: Celestial Analysis", "Strategic Chess: Pattern Recognition", "Backcountry Trekking"]

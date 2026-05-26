@@ -11,7 +11,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     if (!project) return null;
     return (
         <AnimatePresence>
-            <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 md:p-8">
+            <div className="fixed inset-0 z-[1000] flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-8">
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="absolute inset-0 bg-black/80 backdrop-blur-xl" />
 
                 <motion.div
@@ -20,10 +20,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 40 }}
                     transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                    className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden bg-[#111318] border border-white/[0.08] rounded-[32px] shadow-2xl flex flex-col lg:flex-row"
+                    className="relative w-full max-w-5xl max-h-[92vh] sm:max-h-[90vh] overflow-hidden bg-[#111318] border border-white/[0.08] rounded-t-[24px] sm:rounded-[32px] shadow-2xl flex flex-col lg:flex-row"
                 >
                     {/* Image Sidebar */}
-                    <div className="lg:w-[38%] relative bg-[#0d0f14] min-h-[240px] lg:min-h-full">
+                    <div className="lg:w-[38%] relative bg-[#0d0f14] min-h-[160px] sm:min-h-[220px] lg:min-h-full">
                         {project.image && <Image src={project.image} alt={project.title} fill className="object-cover opacity-60" />}
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#111318] hidden lg:block" />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#111318] to-transparent lg:hidden" />
@@ -35,13 +35,13 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 overflow-y-auto p-8 md:p-12 relative flex flex-col modal-scrollbar bg-[#111318]">
-                        <button onClick={onClose} className="absolute top-8 right-8 p-2.5 rounded-full bg-white/[0.07] text-white/60 hover:bg-[#F59E0B]/15 hover:text-[#F59E0B] transition-all transform hover:rotate-90 z-30">
+                    <div className="flex-1 overflow-y-auto p-5 sm:p-8 md:p-10 relative flex flex-col modal-scrollbar bg-[#111318]">
+                        <button onClick={onClose} className="absolute top-4 right-4 sm:top-8 sm:right-8 p-2.5 rounded-full bg-white/[0.07] text-white/60 hover:bg-[#F59E0B]/15 hover:text-[#F59E0B] transition-all transform hover:rotate-90 z-30">
                             <X size={22} />
                         </button>
 
-                        <div className="mb-10">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-5 tracking-tight leading-tight text-white">{project.fullTitle || project.title}</h2>
+                        <div className="mb-6 sm:mb-10 pt-6 sm:pt-0">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-5 tracking-tight leading-tight text-white">{project.fullTitle || project.title}</h2>
                             <div className="flex flex-wrap gap-2">
                                 {project.tech.map((tag: string) => (
                                     <span key={tag} className="px-3 py-1 bg-[#F59E0B]/10 border border-[#F59E0B]/20 text-[#F59E0B]/80 text-[11px] font-bold uppercase tracking-wider rounded-full">{tag}</span>
@@ -95,7 +95,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                             )}
                         </div>
 
-                        <div className="mt-16 pt-8 border-t border-white/[0.07] flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div className="mt-8 sm:mt-16 pt-6 sm:pt-8 border-t border-white/[0.07] flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
                             <div className="flex items-center gap-4">
                                 <a href="mailto:yatink@umich.edu" className="p-2.5 bg-[#F59E0B]/10 border border-[#F59E0B]/15 rounded-full text-[#F59E0B]/60 hover:bg-[#F59E0B]/20 hover:text-[#F59E0B] transition-all">
                                     <Mail size={18} />

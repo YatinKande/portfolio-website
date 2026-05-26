@@ -11,6 +11,11 @@ import GlitchText from "./GlitchText";
 export default function Hero() {
     const [visibleIndices, setVisibleIndices] = useState<number[]>([]);
     const [animComplete, setAnimComplete] = useState(false);
+    // Skip photo entrance animation when coming from the loader (photo already shown there)
+    const [skipPhotoAnim] = useState<boolean>(() => {
+        if (typeof window === 'undefined') return false;
+        return !sessionStorage.getItem('loaderSeen'); // true = loader is running right now
+    });
 
     const { scrollY } = useScroll();
     const photoOpacity = useTransform(scrollY, [0, 500], [1, 0]);
@@ -56,9 +61,9 @@ export default function Hero() {
                 <motion.div style={{ opacity: photoOpacity, y: photoY, scale: photoScale }} className="relative mb-[30px]">
                     <motion.div
                         id="hero-profile-photo"
-                        initial={{ opacity: 0, scale: 0.88, y: -8 }}
+                        initial={skipPhotoAnim ? false : { opacity: 0, scale: 0.88, y: -8 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={{ duration: 0.9, ease: [0.34, 1.2, 0.64, 1], delay: 0.15 }}
+                        transition={skipPhotoAnim ? {} : { duration: 0.9, ease: [0.34, 1.2, 0.64, 1], delay: 0.15 }}
                         className="relative"
                     >
                         <div className="absolute inset-0 rounded-full bg-[#F59E0B]/15 blur-2xl animate-pulse" />

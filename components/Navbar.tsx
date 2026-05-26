@@ -44,6 +44,12 @@ export default function Navbar() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    // Lock body scroll when mobile drawer is open
+    useEffect(() => {
+        document.body.style.overflow = mobileOpen ? 'hidden' : '';
+        return () => { document.body.style.overflow = ''; };
+    }, [mobileOpen]);
+
     return (
         <>
             <motion.nav

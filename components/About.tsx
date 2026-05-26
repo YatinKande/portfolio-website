@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView, useMotionValue, animate } from "framer-motion";
-import { GraduationCap, Briefcase, TrendingUp, Zap } from "lucide-react";
+import { GraduationCap, Briefcase, TrendingUp, Zap, Bot } from "lucide-react";
 import NextImage from "next/image";
 
 function CountUp({ to, decimals = 0, suffix = "" }: { to: number; decimals?: number; suffix?: string }) {
@@ -26,10 +26,10 @@ function CountUp({ to, decimals = 0, suffix = "" }: { to: number; decimals?: num
 }
 
 const achievements = [
-    { icon: TrendingUp, stat: "84%", label: "Retrieval precision", sub: "Multi-modal RAG system" },
-    { icon: Zap, stat: "40%", label: "Latency reduction", sub: "YOLOv5 CV pipeline" },
-    { icon: TrendingUp, stat: "81%", label: "AUC-ROC score", sub: "XGBoost churn model" },
-    { icon: Zap, stat: "500+", label: "Daily requests", sub: "Serverless AWS chatbot" },
+    { icon: TrendingUp, stat: "84%", label: "Retrieval precision", sub: "Agentic RAG · FAISS + LangChain" },
+    { icon: Zap, stat: "40%", label: "Latency reduction", sub: "YOLOv5 · Apache Spark CV pipeline" },
+    { icon: TrendingUp, stat: "81%", label: "AUC-ROC score", sub: "XGBoost · feature-engineered churn model" },
+    { icon: Zap, stat: "500+", label: "Daily requests", sub: "Serverless LLM bot · AWS Lex + Lambda" },
 ];
 
 export default function About() {
@@ -41,7 +41,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-[rgba(13,15,20,0.88)] md:hidden" />
             </div>
 
-            <div className="relative z-10 w-full max-w-6xl mx-auto px-4 py-24 md:py-32">
+            <div className="relative z-10 w-full max-w-6xl mx-auto py-24 md:py-32">
                 <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="flex flex-col items-center mb-14">
                     <h2 className="text-5xl md:text-6xl font-bold text-white mb-4 text-center">About Me</h2>
                     <div className="h-[2px] w-24 bg-[#F59E0B]/50 rounded-full" />
@@ -51,15 +51,15 @@ export default function About() {
                     {/* Left: Narrative */}
                     <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
                         <p className="text-slate-200 text-base md:text-lg leading-relaxed mb-6">
-                            I build end-to-end ML systems — from distributed Spark pipelines to GenAI RAG architectures. Pursuing my MS in Data Science at UMich (3.8 GPA), I've shipped production ML at DataZymes and SmartKnower, cutting inference latency by 40% and achieving 81% AUC-ROC on churn prediction.
+                            I build production AI systems — autonomous AI Agents, multi-source RAG pipelines, and end-to-end LLM applications — and ship them from architecture to deployment. With an MS in Data Science from UMich (3.8 GPA), I've delivered measurable impact at DataZymes and SmartKnower: 40% inference latency reduction, 84% retrieval precision on a multimodal RAG system, and 81% AUC-ROC on a production churn model.
                         </p>
-                        <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-8">
-                            Today I focus on the full stack of modern AI — classical ML, deep learning, computer vision, and large language model systems. I believe the most valuable models are the ones that actually ship.
+                        <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6">
+                            Right now I'm deep in the agentic AI stack — designing LLM systems that reason, plan, and act. I build multi-step AI Agents with tool-use and function calling, orchestrate complex workflows with LangGraph and LangChain, and ground responses with hybrid vector retrieval over FAISS. From computer vision and deep learning to serverless LLMOps on AWS, I engineer AI that actually ships.
                         </p>
-                        <ul className="space-y-3">
+                        <ul className="space-y-3 mb-6">
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
                                 <GraduationCap className="size-5 text-[#F59E0B] shrink-0" />
-                                <span>MS Data Science at UMich — 3.8 GPA</span>
+                                <span>MS Data Science from UMich — 3.8 GPA</span>
                             </li>
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
                                 <Briefcase className="size-5 text-[#F59E0B] shrink-0" />
@@ -67,9 +67,21 @@ export default function About() {
                             </li>
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
                                 <Zap className="size-5 text-[#F59E0B] shrink-0" />
-                                <span>ML · Deep Learning · GenAI · Cloud Deployment</span>
+                                <span>RAG · AI Agents · LLMs · Computer Vision · MLOps</span>
+                            </li>
+                            <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
+                                <Bot className="size-5 text-[#F59E0B] shrink-0" />
+                                <span>Building agentic workflows with LangGraph &amp; LangChain tool-use</span>
                             </li>
                         </ul>
+                        {/* Current focus tech pills */}
+                        <div className="flex flex-wrap gap-2">
+                            {['AI Agents', 'LangGraph', 'LangChain', 'RAG + FAISS', 'LLM APIs', 'AWS LLMOps', 'Prompt Engineering'].map(tag => (
+                                <span key={tag} className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider bg-[#F59E0B]/[0.07] border border-[#F59E0B]/15 text-[#F59E0B]/60 rounded-full">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
                     </motion.div>
 
                     {/* Right: Achievement stats */}
@@ -101,15 +113,15 @@ export default function About() {
                         { value: 2, decimals: 0, label: "AI/ML Internships" },
                         { value: 10, decimals: 0, suffix: "+", label: "ML and AI Projects" },
                     ].map((stat, i) => (
-                        <>
-                            {i > 0 && <div key={`div-${i}`} className="hidden md:block h-12 w-[1px] bg-white/20" />}
-                            <div key={`stat-${i}`} className="flex flex-col items-center">
+                        <div key={i} className="contents">
+                            {i > 0 && <div className="hidden md:block h-12 w-[1px] bg-white/20" />}
+                            <div className="flex flex-col items-center">
                                 <div className="text-3xl md:text-5xl font-bold text-[#F59E0B]">
                                     <CountUp to={stat.value} decimals={stat.decimals} suffix={stat.suffix || ""} />
                                 </div>
                                 <div className="text-[10px] md:text-xs uppercase tracking-widest text-slate-300 mt-1 font-bold">{stat.label}</div>
                             </div>
-                        </>
+                        </div>
                     ))}
                 </motion.div>
             </div>

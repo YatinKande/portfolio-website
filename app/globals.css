@@ -47,17 +47,21 @@
   body {
     @apply text-foreground font-sans;
     background: #111318;
-    background-attachment: fixed;
+    /* background-attachment: fixed removed — iOS Safari does not support it correctly */
     min-height: 100vh;
+    /* Prevent double-tap zoom on iOS / Android without disabling user zoom */
+    touch-action: manipulation;
   }
 }
 
 * {
+  /* Suppress blue tap-highlight on Android */
+  -webkit-tap-highlight-color: transparent;
+  /* Note: transform removed — Framer Motion manages its own transform transitions */
   transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @layer utilities {
