@@ -23,31 +23,23 @@ export default function Navbar() {
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
-
             const sections = navLinks.map(link => link.href.substring(1));
             const scrollPosition = window.scrollY + window.innerHeight / 3;
-
             let currentSection = "";
             for (const section of sections) {
                 const element = document.getElementById(section);
-                if (element) {
-                    const { offsetTop } = element;
-                    if (scrollPosition >= offsetTop) {
-                        currentSection = section;
-                    }
+                if (element && scrollPosition >= element.offsetTop) {
+                    currentSection = section;
                 }
             }
             setActiveSection(currentSection);
         };
-
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 768) setMobileOpen(false);
-        };
+        const handleResize = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
@@ -67,11 +59,11 @@ export default function Navbar() {
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="group flex items-center gap-2">
-                        <div className="size-10 rounded-xl bg-white flex items-center justify-center text-[#111318] font-bold text-xl group-hover:bg-white/80 transition-colors">
+                        <div className="size-10 rounded-xl bg-[#F59E0B] flex items-center justify-center text-[#111318] font-bold text-xl group-hover:bg-[#F59E0B]/80 transition-colors">
                             Y
                         </div>
                         <span className="text-xl font-bold text-white tracking-tighter">
-                            Yatin <span className="text-white/50 group-hover:text-white transition-colors">Kande</span>
+                            Yatin <span className="text-white/50 group-hover:text-[#F59E0B] transition-colors">Kande</span>
                         </span>
                     </Link>
 
@@ -85,13 +77,13 @@ export default function Navbar() {
                                     href={link.href}
                                     className={cn(
                                         "px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 relative",
-                                        isActive ? "text-white" : "text-slate-400 hover:text-white"
+                                        isActive ? "text-[#F59E0B]" : "text-slate-400 hover:text-white"
                                     )}
                                 >
                                     {isActive && (
                                         <motion.div
                                             layoutId="active-pill"
-                                            className="absolute inset-0 bg-white/10 rounded-full z-[-1]"
+                                            className="absolute inset-0 bg-[#F59E0B]/10 rounded-full z-[-1]"
                                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                         />
                                     )}
@@ -106,7 +98,7 @@ export default function Navbar() {
                         href="/YatinKande_Resume.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hidden md:flex items-center gap-2 px-4 py-2 bg-white text-[#111318] text-sm font-bold rounded-full hover:bg-white/90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_28px_rgba(255,255,255,0.18)]"
+                        className="hidden md:flex items-center gap-2 px-4 py-2 bg-[#F59E0B] text-[#111318] text-sm font-bold rounded-full hover:bg-[#F59E0B]/90 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:shadow-[0_0_28px_rgba(245,158,11,0.35)]"
                     >
                         <Download className="size-3.5" />
                         Resume
@@ -120,24 +112,11 @@ export default function Navbar() {
                     >
                         <AnimatePresence mode="wait" initial={false}>
                             {mobileOpen ? (
-                                <motion.div
-                                    key="close"
-                                    initial={{ rotate: -90, opacity: 0 }}
-                                    animate={{ rotate: 0, opacity: 1 }}
-                                    exit={{ rotate: 90, opacity: 0 }}
-                                    transition={{ duration: 0.15 }}
-                                >
+                                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
                                     <X className="size-5" />
                                 </motion.div>
                             ) : (
-                                <motion.div
-                                    key="open"
-                                    initial={{ rotate: 90, opacity: 0 }}
-                                    animate={{ rotate: 0, opacity: 1 }}
-                                    exit={{ rotate: -90, opacity: 0 }}
-                                    transition={{ duration: 0.15 }}
-                                    className="flex flex-col gap-1.5"
-                                >
+                                <motion.div key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }} className="flex flex-col gap-1.5">
                                     <div className="w-6 h-0.5 bg-current rounded-full" />
                                     <div className="w-6 h-0.5 bg-current rounded-full" />
                                     <div className="w-4 h-0.5 bg-current rounded-full ml-2" />
@@ -152,14 +131,7 @@ export default function Navbar() {
             <AnimatePresence>
                 {mobileOpen && (
                     <>
-                        <motion.div
-                            key="backdrop"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setMobileOpen(false)}
-                            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[90] md:hidden"
-                        />
+                        <motion.div key="backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setMobileOpen(false)} className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[90] md:hidden" />
                         <motion.div
                             key="drawer"
                             initial={{ opacity: 0, y: -12 }}
@@ -178,9 +150,7 @@ export default function Navbar() {
                                             onClick={() => setMobileOpen(false)}
                                             className={cn(
                                                 "px-4 py-3 rounded-xl text-sm font-bold transition-all",
-                                                isActive
-                                                    ? "text-white bg-white/10"
-                                                    : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
+                                                isActive ? "text-[#F59E0B] bg-[#F59E0B]/10" : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
                                             )}
                                         >
                                             {link.name}
@@ -193,7 +163,7 @@ export default function Navbar() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={() => setMobileOpen(false)}
-                                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white text-[#111318] text-sm font-bold hover:bg-white/90 transition-colors"
+                                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#F59E0B] text-[#111318] text-sm font-bold hover:bg-[#F59E0B]/90 transition-colors"
                                 >
                                     <Download className="size-4" />
                                     Download Resume

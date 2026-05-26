@@ -67,8 +67,8 @@ export default function GlitchText({ startTime = 0 }: GlitchTextProps) {
                     ${isGlitching ? 'scale-105 skew-x-12 animate-flicker' : ''}
                 `}
                 style={{
-                    color: isGlitching ? 'rgba(255,255,255,0.9)' : '#94a3b8',
-                    textShadow: isGlitching ? '2px 0 rgba(255,255,255,0.4), -2px 0 rgba(255,255,255,0.2)' : 'none'
+                    color: isGlitching ? '#F59E0B' : '#94a3b8',
+                    textShadow: isGlitching ? '2px 0 rgba(245,158,11,0.5), -2px 0 rgba(245,158,11,0.3)' : 'none'
                 }}
             >
                 {displayText}

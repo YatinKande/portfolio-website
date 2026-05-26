@@ -6,26 +6,26 @@
 
 @layer base {
   :root {
-    /* Dark + White palette */
-    --background: 224 13% 9%;   /* #111318 dark charcoal */
-    --foreground: 210 40% 98%;  /* #f8fafc white */
+    /* Dark + Amber palette */
+    --background: 224 13% 9%;    /* #111318 dark charcoal */
+    --foreground: 210 40% 98%;   /* white */
 
-    --card: 224 15% 14%;        /* #1c2030 dark card */
+    --card: 224 15% 14%;         /* #1c2030 dark card */
     --card-foreground: 210 40% 98%;
 
     --popover: 224 15% 14%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 0 0% 100%;       /* white */
+    --primary: 38 92% 50%;       /* #F59E0B amber */
     --primary-foreground: 224 13% 9%;
 
-    --secondary: 215 20% 65%;   /* slate-400 */
+    --secondary: 215 20% 65%;    /* slate-400 */
     --secondary-foreground: 0 0% 100%;
 
     --muted: 224 10% 20%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 0 0% 100%;        /* white */
+    --accent: 38 92% 50%;        /* amber */
     --accent-foreground: 224 13% 9%;
 
     --destructive: 0 84.2% 60.2%;
@@ -33,7 +33,7 @@
 
     --border: 224 13% 16%;
     --input: 224 13% 16%;
-    --ring: 0 0% 100%;
+    --ring: 38 92% 50%;
 
     --radius: 1rem;
   }
@@ -62,11 +62,11 @@
 
 @layer utilities {
   .text-gradient {
-    @apply text-white;
+    @apply text-[#F59E0B];
   }
 
   .text-glow {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
   }
 
   .glass-card {
@@ -77,8 +77,8 @@
   }
 
   .glass-card:hover {
-    @apply border-white/20 scale-[1.02];
-    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
+    @apply border-[#F59E0B]/20 scale-[1.02];
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.06);
   }
 }
 
@@ -98,7 +98,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(245, 158, 11, 0.5);
 }
 
 /* Smooth scroll behavior */
