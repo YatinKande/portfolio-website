@@ -53,9 +53,9 @@ export default function Contact() {
 
             <div className="max-w-5xl mx-auto relative z-10">
                 {/* Info Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
                     {[
-                        { icon: Mail, label: "Email Me", content: <a href={`mailto:${personalInfo.email}`} className="text-lg font-bold text-white hover:text-[#F59E0B] transition-colors">{personalInfo.email}</a> },
+                        { icon: Mail, label: "Email Me", content: <a href={`mailto:${personalInfo.email}`} className="text-base md:text-lg font-bold text-white hover:text-[#F59E0B] transition-colors break-all">{personalInfo.email}</a> },
                         { icon: MapPin, label: "Location", content: <p className="text-lg font-bold text-white">{personalInfo.location}</p> },
                     ].map((card, i) => (
                         <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-[#1c2030] p-6 rounded-2xl border border-white/[0.07] flex items-center gap-5 shadow-[0_8px_30px_rgba(0,0,0,0.3)] hover:border-[#F59E0B]/20 transition-all">
@@ -83,7 +83,7 @@ export default function Contact() {
                     </motion.div>
 
                     {/* Right: Form */}
-                    <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-[#1c2030] border border-white/[0.07] rounded-3xl p-8 md:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative">
+                    <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-[#1c2030] border border-white/[0.07] rounded-3xl p-5 sm:p-8 md:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative">
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">

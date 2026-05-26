@@ -1,12 +1,61 @@
 # BUGS.md
 > Active bugs tracked for the Yatin Kande Portfolio.
-> Last updated: 2026-05-21
+> Last updated: 2026-05-26
 
 ---
 
 ## ACTIVE BUGS
 
-None currently open. All tracked bugs resolved as of 2026-05-21.
+None currently open. All tracked bugs resolved as of 2026-05-26.
+
+---
+
+## RESOLVED BUGS (2026-05-26)
+
+### [2026-05-26] BUG-R20 — Loader→hero photo re-animates (jank on first visit)
+- **File:** `components/Hero.tsx`
+- **Root cause:** Hero photo had `initial={{ opacity: 0, scale: 0.88, y: -8 }}` — re-ran entrance animation even though loader already showed the same photo. Position mismatch (loader center vs hero top) made it visually jarring.
+- **Fix:** `skipPhotoAnim` lazy state checks `!sessionStorage.getItem('loaderSeen')` at Hero mount. True → `initial={false}` (no entrance animation). False (subsequent visits) → normal spring-in.
+
+### [2026-05-26] BUG-R19 — iOS background-attachment:fixed causes white/broken background
+- **File:** `app/globals.css`
+- **Fix:** Removed `background-attachment: fixed` from body. iOS Safari does not support it correctly.
+
+### [2026-05-26] BUG-R18 — Global CSS transform transition fights Framer Motion on mobile
+- **File:** `app/globals.css`
+- **Fix:** Removed `transform` from `* { transition: ... }`. Framer Motion manages its own transform transitions — the CSS override caused sluggish animations.
+
+### [2026-05-26] BUG-R17 — Android tap blue-flash on all interactive elements
+- **File:** `app/globals.css`
+- **Fix:** Added `-webkit-tap-highlight-color: transparent` to `*`.
+
+### [2026-05-26] BUG-R16 — 300ms double-tap zoom delay on iOS/Android
+- **File:** `app/globals.css`
+- **Fix:** Added `touch-action: manipulation` to body.
+
+### [2026-05-26] BUG-R15 — Loader content overflows viewport on small phones (iPhone SE etc.)
+- **File:** `app/page.tsx`
+- **Fix:** All loader spacing responsive (`mb-4 sm:mb-original`), stats `grid-cols-2` on mobile, compact card padding `p-4 sm:p-8`, `overflow-y-auto` safety.
+
+### [2026-05-26] BUG-R14 — Projects bento big card title text-[36px] on 320px mobile cards
+- **File:** `components/Projects.tsx`
+- **Fix:** `text-[22px] sm:text-[28px] lg:text-[36px]` for title; `text-[13px] lg:text-[17px]` for description.
+
+### [2026-05-26] BUG-R13 — About + Contact double padding on mobile (40px/side)
+- **Files:** `components/About.tsx`, `components/Contact.tsx`
+- **Fix:** Removed `px-4` from inner containers (parent section already had `px-6`).
+
+### [2026-05-26] BUG-R12 — Mobile menu allows body scroll behind drawer
+- **File:** `components/Navbar.tsx`
+- **Fix:** `useEffect` sets `document.body.style.overflow = 'hidden'` when `mobileOpen`, clears on close.
+
+### [2026-05-26] BUG-R11b — Email address overflows card on narrow screens
+- **File:** `components/Contact.tsx`
+- **Fix:** Added `break-all` to email anchor.
+
+### [2026-05-26] BUG-R10b — ProjectModal image header too tall on mobile phones
+- **File:** `components/ProjectModal.tsx`
+- **Fix:** `min-h-[160px] sm:min-h-[220px] lg:min-h-full`. Modal uses bottom-sheet pattern on mobile.
 
 ---
 
