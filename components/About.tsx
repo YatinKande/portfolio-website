@@ -26,10 +26,10 @@ function CountUp({ to, decimals = 0, suffix = "" }: { to: number; decimals?: num
 }
 
 const achievements = [
-    { icon: TrendingUp, stat: "84%", label: "Retrieval precision", sub: "Agentic RAG · FAISS + LangChain" },
-    { icon: Zap, stat: "40%", label: "Latency reduction", sub: "YOLOv5 · Apache Spark CV pipeline" },
-    { icon: TrendingUp, stat: "81%", label: "AUC-ROC score", sub: "XGBoost · feature-engineered churn model" },
-    { icon: Zap, stat: "500+", label: "Daily requests", sub: "Serverless LLM bot · AWS Lex + Lambda" },
+    { icon: TrendingUp, stat: "84%", label: "Retrieval precision", sub: "Hybrid RAG · FAISS + BM25 via LangChain" },
+    { icon: Zap, stat: "40%", label: "Latency reduction", sub: "YOLOv5 · batched CV inference" },
+    { icon: TrendingUp, stat: "81%", label: "AUC-ROC score", sub: "XGBoost · SMOTE-balanced churn model" },
+    { icon: Zap, stat: "500+", label: "Daily requests", sub: "Serverless chatbot · AWS Lex + Lambda" },
 ];
 
 export default function About() {
@@ -51,10 +51,10 @@ export default function About() {
                     {/* Left: Narrative */}
                     <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
                         <p className="text-slate-200 text-base md:text-lg leading-relaxed mb-6">
-                            I build production AI systems — autonomous AI Agents, multi-source RAG pipelines, and end-to-end LLM applications — and ship them from architecture to deployment. With an MS in Data Science from UMich (3.8 GPA), I've delivered measurable impact at DataZymes and SmartKnower: 40% inference latency reduction, 84% retrieval precision on a multimodal RAG system, and 81% AUC-ROC on a production churn model.
+                            I'm a data scientist and AI/ML engineer with an M.S. in Data Science from the University of Michigan (3.8 GPA). Across internships at Fortisys, DataZymes, and SmartKnower, I've cut computer-vision inference latency by 40%, hit 84% retrieval precision on a production RAG system, and scored 81% AUC-ROC on a churn model that flagged at-risk customers a month before they left.
                         </p>
                         <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6">
-                            Right now I'm deep in the agentic AI stack — designing LLM systems that reason, plan, and act. I build multi-step AI Agents with tool-use and function calling, orchestrate complex workflows with LangGraph and LangChain, and ground responses with hybrid vector retrieval over FAISS. From computer vision and deep learning to serverless LLMOps on AWS, I engineer AI that actually ships.
+                            That range is intentional — I'm just as comfortable digging into a dataset as a data analyst, building a predictive model as a data scientist, or shipping the finished system as an ML or AI engineer, and I'm open to full-time roles across all four. Right now, most of my energy is going into applied AI: designing multi-step agents with tool-use and function calling, orchestrating LangGraph and LangChain workflows, and building enterprise automation in Microsoft Copilot Studio.
                         </p>
                         <ul className="space-y-3 mb-6">
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
@@ -63,20 +63,20 @@ export default function About() {
                             </li>
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
                                 <Briefcase className="size-5 text-[#F59E0B] shrink-0" />
-                                <span>AI/ML Internships at DataZymes &amp; SmartKnower</span>
+                                <span>AI/ML experience at Fortisys, DataZymes &amp; SmartKnower</span>
                             </li>
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
                                 <Zap className="size-5 text-[#F59E0B] shrink-0" />
-                                <span>RAG · AI Agents · LLMs · Computer Vision · MLOps</span>
+                                <span>Open to Data Analyst, Data Scientist, ML &amp; AI Engineer roles</span>
                             </li>
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
                                 <Bot className="size-5 text-[#F59E0B] shrink-0" />
-                                <span>Building agentic workflows with LangGraph &amp; LangChain tool-use</span>
+                                <span>Currently building agentic AI with LangGraph, LangChain &amp; Copilot Studio</span>
                             </li>
                         </ul>
                         {/* Current focus tech pills */}
                         <div className="flex flex-wrap gap-2">
-                            {['AI Agents', 'LangGraph', 'LangChain', 'RAG + FAISS', 'LLM APIs', 'AWS LLMOps', 'Prompt Engineering'].map(tag => (
+                            {['AI Agents', 'LangGraph', 'LangChain', 'RAG + FAISS', 'Copilot Studio', 'AWS LLMOps', 'Prompt Engineering'].map(tag => (
                                 <span key={tag} className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider bg-[#F59E0B]/[0.07] border border-[#F59E0B]/15 text-[#F59E0B]/60 rounded-full">
                                     {tag}
                                 </span>
@@ -110,7 +110,7 @@ export default function About() {
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
                     {[
                         { value: 3.8, decimals: 1, label: "UMich GPA" },
-                        { value: 2, decimals: 0, label: "AI/ML Internships" },
+                        { value: 3, decimals: 0, label: "AI/ML Internships" },
                         { value: 10, decimals: 0, suffix: "+", label: "ML and AI Projects" },
                     ].map((stat, i) => (
                         <div key={i} className="contents">

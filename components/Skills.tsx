@@ -14,7 +14,7 @@ const skillCategories: SkillCategory[] = [
     { title: "NLP & GenAI", icon: MessageSquare, skills: ["RAG Pipelines & Vector Search", "LangChain · FAISS · Hugging Face", "AI Agents & Tool-Use Frameworks", "Prompt Engineering & Chain-of-Thought", "Embeddings & Hybrid Retrieval"] },
     { title: "MLOps & Deployment", icon: Settings, skills: ["Docker · MLflow · CI/CD Pipelines", "FastAPI & REST API Development", "AWS SageMaker & Serverless Deploy", "Model Versioning & Experiment Tracking", "End-to-end ML Workflow Design"] },
     { title: "Deep Learning / Computer Vision", icon: Eye, skills: ["PyTorch · TensorFlow · Keras", "YOLOv5 · Object Detection & Tracking", "3D CNN · BiLSTM · Transformers", "Transfer Learning & Fine-tuning", "Real-time Inference Optimization"] },
-    { title: "Cloud / Applications", icon: Cloud, skills: ["AWS Lambda · S3 · API Gateway", "AWS Lex · Kinesis · Rekognition", "DynamoDB · SQS · SNS", "Serverless & Microservices Architecture"] },
+    { title: "Cloud / Applications", icon: Cloud, skills: ["AWS Lambda · S3 · API Gateway", "AWS Lex · Kinesis · Rekognition", "DynamoDB · SQS · SNS", "Microsoft Copilot Studio · Power Platform · Power BI", "Multi-cloud: AWS, Azure & GCP"] },
     { title: "Data Engineering & Big Data", icon: Layers, skills: ["Apache Spark · PySpark · Kafka", "Apache Airflow · ETL Pipeline Design", "AWS Glue · Redshift · S3 Pipelines", "Data Validation & Quality Engineering"] },
     { title: "Programming & Databases", icon: Database, skills: ["Python · SQL · Bash", "PostgreSQL · MySQL · MongoDB · Snowflake", "Pandas · NumPy · Data Analysis", "Git · REST APIs · Code Review"] },
 ];

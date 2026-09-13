@@ -26,8 +26,8 @@ export const personalInfo = {
     email: "yatink@umich.edu",
     phone: "+1 313-413-8327",
     location: "Dearborn, MI, USA",
-    bio: "I build production AI systems — autonomous AI Agents, multi-source RAG pipelines, and end-to-end LLM applications — and ship them from architecture to deployment. Currently deep in the agentic AI stack: designing multi-step AI Agents with tool-use and function calling, orchestrating complex workflows with LangGraph and LangChain, and grounding responses with hybrid vector retrieval over FAISS.\n\nFrom computer vision (YOLOv5, 3D CNN-BiLSTM) and distributed ML (Apache Spark) to serverless LLMOps on AWS, I engineer AI systems that meet production standards and scale.",
-    headline: "Building Agentic AI Systems — RAG Pipelines, LLM Agents & Production MLOps",
+    bio: "I'm a data scientist and AI/ML engineer with an M.S. in Data Science from the University of Michigan–Dearborn. My background spans the full analytics-to-AI spectrum — churn modeling and feature engineering, computer vision at production scale, and, most recently, the agentic AI systems that occupy most of my time today.\n\nThat range means I move comfortably between roles: framing a problem as a data analyst, modeling it as a data scientist, or shipping it as an ML or AI engineer. Right now my focus is squarely on applied AI — RAG pipelines, autonomous agents built with LangGraph and LangChain, and enterprise automation in Microsoft Copilot Studio — and I'm open to full-time roles across data analytics, data science, and ML/AI engineering.",
+    headline: "Data Analyst → Data Scientist → AI/ML Engineer — Currently Focused on Agentic AI",
     hobbies: {
         work: ["Deep Learning Research", "Open Source Contributing", "Cloud Architecture", "Interactive Data Viz"],
         nonWork: ["Astrophotography: Celestial Analysis", "Strategic Chess: Pattern Recognition", "Backcountry Trekking"]
@@ -175,20 +175,20 @@ export const projects = [
         id: "auto-multimodal-rag",
         title: "Automotive Multimodal RAG",
         fullTitle: "Automotive Multimodal RAG System",
-        intro: "Multimodal RAG across text, images & OBD-II diagnostics",
-        description: "An advanced multimodal RAG system designed specifically for the automotive domain. It supports document ingestion, vector search, and grounded Q&A capabilities over automotive manuals, recall documents, and OBD-II diagnostic data, processing both text and imagery.",
+        intro: "84% retrieval precision via hybrid RAG for automotive diagnostics",
+        description: "A hybrid retrieval-augmented generation system for automotive diagnostics, combining dense (FAISS) and sparse (BM25) retrieval through LangChain to ground answers in service manuals and OBD-II data. Gemini 2.0 Flash handles grounded, multimodal generation, with a local Llama 3.2 Vision fallback keeping diagnostics available offline.",
         features: [
-            "Multimodal data processing (text, images, diagrams)",
-            "Vector-based semantic search",
-            "Automotive domain specialization",
-            "OBD-II data integration",
-            "Recall and manual documentation support"
+            "Hybrid dense + sparse retrieval (FAISS + BM25) via LangChain",
+            "Gemini 2.0 Flash for grounded, multimodal generation",
+            "Offline fallback with Ollama Llama 3.2 Vision",
+            "Diagnostic query latency cut from 45s to under 8s",
+            "OBD-II and service-manual ingestion pipeline"
         ],
-        tech: ["Google GenAI", "FAISS", "FastAPI", "Python"],
+        tech: ["LangChain", "Gemini 2.0 Flash", "FAISS", "BM25", "Ollama"],
         techDetails: [
-            { name: "Google GenAI", description: "Multimodal LLM for text and image understanding." },
-            { name: "FAISS", description: "Vector database for fast document retrieval." },
-            { name: "FastAPI", description: "Fast and modern API framework." }
+            { name: "LangChain", description: "Orchestrates hybrid FAISS + BM25 retrieval and reranking." },
+            { name: "Gemini 2.0 Flash", description: "Multimodal LLM for grounded text-and-image generation." },
+            { name: "Ollama · Llama 3.2 Vision", description: "Local, offline fallback when connectivity drops." }
         ],
         github: "https://github.com/YatinKande/auto-multimodal-rag",
         image: "/projects/auto_multimodal_rag.png",
@@ -223,20 +223,20 @@ export const projects = [
         id: "dataset-concierge-bot",
         title: "Dataset Concierge Bot",
         fullTitle: "Dataset Concierge Bot",
-        intro: "Serverless AWS chatbot handling 500+ daily dataset requests",
-        description: "An intelligent conversational bot that helps users find, save, and retrieve datasets from multiple sources using natural language. Features include new-user onboarding, slot-filling for precise queries, flexible date handling, and user ID-based data management. Built as a serverless chatbot using AWS Lex, Lambda, and DynamoDB with 500+ daily requests.",
+        intro: "70% faster dataset discovery via a serverless AWS chatbot",
+        description: "A serverless conversational bot that turns natural-language requests into ranked dataset recommendations, built on AWS Lex and Lambda. A DynamoDB scoring engine learns from session history to cut repeat searches, while an S3, SQS, and SNS event pipeline replaces manual polling with real-time email alerts.",
         features: [
-            "Natural language dataset search",
-            "Multi-source dataset aggregation",
-            "User preference learning",
-            "Slot-filling conversation flow",
-            "Serverless architecture (500+ daily requests)"
+            "Natural-language dataset search with slot-filling",
+            "DynamoDB scoring engine ranked against session history",
+            "Real-time email alerts via an S3, SQS & SNS event pipeline",
+            "Cut 5-10 minute manual searches to under 10 seconds",
+            "Serving 50+ users across 6 topic domains"
         ],
-        tech: ["AWS Lex", "AWS Lambda", "DynamoDB", "JavaScript", "S3"],
+        tech: ["AWS Lex", "AWS Lambda", "DynamoDB", "SQS", "SNS"],
         techDetails: [
             { name: "AWS Lex", description: "Conversational AI for building intelligent bots." },
             { name: "AWS Lambda", description: "Serverless compute for handling requests." },
-            { name: "DynamoDB", description: "Scalable NoSQL database for management." }
+            { name: "DynamoDB", description: "Scoring engine that ranks matches against session history." }
         ],
         github: "https://github.com/YatinKande/Dataset-Concierge-Bot",
         image: "/projects/dataset-bot.png",
@@ -343,6 +343,19 @@ export const projects = [
 
 export const experience = [
     {
+        role: "Software Engineer Intern, AI/ML (Part-Time)",
+        company: "Fortisys, Inc.",
+        location: "Pleasanton, CA (Remote)",
+        period: "Jan 2026 — Present",
+        description: "",
+        bullets: [
+            "Built AI agents in Microsoft Copilot Studio and Power Platform to automate engagement, comment, and sentiment tracking across Instagram, Facebook, and X for the social media team, with LinkedIn integration in progress.",
+            "Delivered weekly, per-platform engagement and sentiment visibility to stakeholders through a SharePoint reporting pipeline, later extended with a Power Automate flow and a Power BI dashboard covering reach, impressions, and comments.",
+            "Extending the agentic AI foundation beyond social media by building a new autonomous Copilot Studio agent to identify and recruit prospective clients and care providers for the business.",
+            "Applying the same Copilot Studio and Power Platform architecture used for social-media monitoring to this new client-and-provider-recruiting agent, now in active development."
+        ]
+    },
+    {
         role: "Data Analyst Intern (AI/ML)",
         company: "DataZymes",
         location: "Bengaluru, India",
@@ -401,6 +414,11 @@ export const certifications = [
     {
         name: "Oracle Cloud Infrastructure (OCI) AI Foundations Associate",
         issuer: "Oracle",
+        year: "2025",
+    },
+    {
+        name: "LangChain for LLM Application Development",
+        issuer: "DeepLearning.AI",
         year: "2025",
     },
     {

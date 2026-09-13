@@ -6,7 +6,16 @@
 
 ## ACTIVE BUGS
 
-None currently open. All tracked bugs resolved as of 2026-05-26.
+None currently open.
+
+---
+
+## RESOLVED BUGS (2026-09-13)
+
+### [2026-09-13] BUG-R21 — Resume PDF referenced but missing from /public entirely
+- **File:** `public/YatinKande_Resume.pdf`
+- **Impact:** High. Every resume download link on the site (Hero CTA, Navbar desktop, Navbar mobile drawer) 404'd — the file simply wasn't on disk, despite TD-R07/BUG-R01 marking the download feature as shipped.
+- **Fix:** Added Yatin's current resume PDF at the exact tracked path.
 
 ---
 

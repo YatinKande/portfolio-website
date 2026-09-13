@@ -89,7 +89,7 @@ export default function Hero() {
                     <span className="text-[#F59E0B]/40 font-bold text-[12px]">·</span>
                     <span className="text-[12px] md:text-[13px] font-semibold text-slate-400 uppercase tracking-widest">3.8 GPA</span>
                     <span className="text-[#F59E0B]/40 font-bold text-[12px]">·</span>
-                    <span className="text-[12px] md:text-[13px] font-semibold text-slate-400 uppercase tracking-widest">Ex-DataZymes</span>
+                    <span className="text-[12px] md:text-[13px] font-semibold text-slate-400 uppercase tracking-widest">Fortisys AI/ML Intern</span>
                     <span className="text-[#F59E0B]/40 font-bold text-[12px]">·</span>
                     <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-[12px] font-bold text-[#F59E0B] uppercase tracking-widest">
                         <span className="size-1.5 rounded-full bg-[#F59E0B] animate-pulse" />

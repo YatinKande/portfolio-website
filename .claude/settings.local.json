@@ -24,7 +24,14 @@
       "mcp__Claude_Preview__preview_start",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/theme-preview.html)",
-      "Bash(sips -s format jpeg '/Users/yatinkande/Downloads/COnvo photos/IMG_2822.heic' --out /tmp/me_new_hero.jpg -Z 1200)"
+      "Bash(sips -s format jpeg '/Users/yatinkande/Downloads/COnvo photos/IMG_2822.heic' --out /tmp/me_new_hero.jpg -Z 1200)",
+      "Bash(git checkout *)",
+      "Bash(brew list *)",
+      "Bash(brew install *)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(/opt/homebrew/bin/gh auth *)",
+      "Bash(security find-internet-password *)"
     ]
   }
 }

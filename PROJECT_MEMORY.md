@@ -568,3 +568,53 @@ Both photos from the same graduation shoot at UMich, cherry blossom backdrop, wh
 - ProjectModal: no keyboard focus trap (Tab loops outside modal)
 - Skills proficiency labels removed in session 3 — may reconsider later
 - Session 4 changes uncommitted — commit + push pending
+
+
+### [2026-09-13] — Session 5: Repositioning + resume sync + Fortisys experience added
+**Status:** Committed and pushed to main (also carries forward Session 4's previously-uncommitted changes)
+
+**Context:** Yatin's resume now includes a current role (Fortisys, Jan 2026–Present) that was missing from the site entirely, plus updated project metrics. He also asked to broaden his positioning to Data Analyst / Data Scientist / ML Engineer / AI Engineer, while signaling his current focus is applied AI — all copy rewritten in original phrasing, not copied from the resume.
+
+#### lib/data.ts
+- `personalInfo.bio` and `.headline` rewritten around the DA/DS/ML/AI Engineer positioning
+- `experience`: added Fortisys, Inc. entry (Software Engineer Intern, AI/ML, Jan 2026–Present) as the first/most recent role
+- `certifications`: added "LangChain for LLM Application Development" (DeepLearning.AI, 2025); existing 4 certs kept
+- `projects`: rewrote `auto-multimodal-rag` (now reflects hybrid FAISS+BM25 retrieval via LangChain, Gemini 2.0 Flash, offline Llama 3.2 Vision fallback, 45s→8s latency) and `dataset-concierge-bot` (DynamoDB scoring engine, S3/SQS/SNS real-time alerts, 70% faster search across 50+ users) to match resume detail
+
+#### components/GlitchText.tsx
+- ROLES reverted from 3 to 4: Data Analyst, Data Scientist, ML Engineer, AI Engineer (intentional reversal of BUG-R09 — bio now explicitly supports the Data Analyst framing, so it's no longer a mismatch)
+
+#### components/About.tsx
+- Both narrative paragraphs rewritten: para 1 leads with credentials + Fortisys/DataZymes/SmartKnower impact; para 2 states openness to all four target roles with current focus on applied AI
+- Bullet list: Briefcase line now includes Fortisys; Zap line now states the four target roles; Bot line calls out Copilot Studio alongside LangGraph/LangChain
+- Tech pill row: swapped generic "LLM APIs" for "Copilot Studio" (Fortisys' actual stack)
+- Achievement sub-labels tightened to match updated project metrics (hybrid RAG, batched CV inference, SMOTE-balanced churn model)
+- Stats row: AI/ML Internships 2 → 3 (Fortisys added)
+
+#### components/Hero.tsx
+- Credibility line: "Ex-DataZymes" → "Fortisys AI/ML Intern" (was pointing at a past internship while a current, more relevant role existed)
+
+#### components/Skills.tsx
+- Cloud/Applications category: added "Microsoft Copilot Studio · Power Platform · Power BI" and broadened AWS-only line to "Multi-cloud: AWS, Azure & GCP" — the site previously had zero mention of the Microsoft stack that Fortisys work actually uses
+
+#### components/Certifications.tsx
+- Grid now centers a lone last card on its own row when the cert count is odd (needed once the 5th cert was added)
+
+#### app/layout.tsx
+- SEO description, OpenGraph description, Twitter description, and keywords broadened to mention Data Analyst and Agentic AI, matching the new positioning
+
+#### app/page.tsx
+- Footer status line: "Data Scientist / ML Engineer" → "Data Analyst / Scientist / ML & AI Engineer"
+
+#### public/YatinKande_Resume.pdf — BUG FOUND AND FIXED
+- **This file did not exist on disk.** Every download link (Hero CTA, Navbar desktop pill, Navbar mobile drawer) was pointing at a 404. Replaced with Yatin's latest resume PDF.
+
+#### Known limitation hit this session
+- Could not run `npm run build` or `npm run dev` locally to verify — this machine's node_modules is partially iCloud-optimized (dataless placeholders) and the automation bridge used to make these edits cannot force bulk materialization the way Finder's "Download Now" can. Individual source files were verified readable; the dependency tree could not be. **Recommend running `npm run build` once locally (or just watching the Vercel deploy) to confirm a clean build** — Vercel's own build runs in a fresh environment untouched by this local sync issue, so the push itself is not at risk from this limitation.
+
+---
+
+### OPEN ITEMS (post session 5)
+- Local `npm run build` unverified this session (see limitation note above) — Vercel deploy is the real gate
+- `/analytics` and `/dashboard` pages still not linked in nav (unchanged, out of scope this session)
+- No custom domain yet

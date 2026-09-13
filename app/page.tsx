@@ -176,7 +176,7 @@ export default function LandingPage() {
                                 <div className="flex items-center gap-3">
                                     <div className="size-2 rounded-full bg-[#F59E0B] animate-pulse" />
                                     <span className="text-[10px] font-mono text-[#F59E0B]/50 uppercase tracking-widest font-bold">
-                                        Open to Full-time · Data Scientist / ML Engineer
+                                        Open to Full-time · Data Analyst / Scientist / ML &amp; AI Engineer
                                     </span>
                                 </div>
                                 <a href="/dashboard" className="group flex items-center gap-2 text-[10px] font-mono text-white/20 hover:text-white/50 uppercase tracking-widest transition-colors" title="Interactive Portfolio Dashboard">
