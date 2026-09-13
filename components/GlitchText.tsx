@@ -3,10 +3,9 @@
 import { useState, useEffect, useCallback } from "react";
 
 const ROLES = [
-    "Data Analyst",
     "Data Scientist",
     "ML Engineer",
-    "AI Engineer"
+    "GenAI Engineer"
 ];
 
 const GLITCH_CHARS = "!<>-_\\/[]{}—=+*^?#________";

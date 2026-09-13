@@ -1,6 +1,6 @@
 # PROJECT_MEMORY.md
 > Engineering copilot memory file. Read this first before touching any code.
-> Last synced: 2026-05-26 (session 4 — amber theme + photo transition fix + loader upgrades + mobile responsive pass + About rewrite)
+> Last synced: 2026-05-21 (session 2 — 11 UX improvements + photo swap)
 
 ---
 
@@ -100,20 +100,18 @@
 
 ## 4. DESIGN SYSTEM
 
-> ⚠️ Theme changed to Amber/Gold in session 3 (2026-05-26). Mint/coral palette is retired.
-
 ```
-Primary bg:        #111318  → main background (dark charcoal)
-Alt bg:            #0d0f14  → About, Contact, BackgroundSection
-Card bg:           #1c2030  → all cards
-Footer bg:         #080a0d
-Accent (ONLY):     #F59E0B  → ALL amber accents — buttons, icons, borders, badges
-Accent rgba:       rgba(245,158,11,X) → shadows, glows
-Muted text:        #94a3b8  → slate-400, body text
-Body text:         white
+Primary (Mint):    #20c997  → buttons, accents, borders, active states
+Accent (Coral):    #ff6b6b  → secondary highlights, stats numbers, CTA hover
+Dark:              #1a2e28  → headings, dark sections bg
+Background:        #f0f8f6  → page bg, light sections
+Muted text:        #5a7069  → body text, subtitles
+Border:            #cfe5df  → card borders, dividers
+Dark sections:     #0a0f1e  → Experience/Education section
+About section:     #0f172a  → About section
 ```
 
-CSS variables defined in `globals.css` (`--primary: 38 92% 50%` HSL for Tailwind). Tailwind arbitrary values `[#F59E0B]` used throughout for amber.
+CSS variables defined in `globals.css` and consumed via Tailwind tokens.
 
 ---
 
@@ -130,7 +128,7 @@ CSS variables defined in `globals.css` (`--primary: 38 92% 50%` HSL for Tailwind
 
 **Section order:** Hero → About → Skills → BackgroundSection (Exp/Edu) → Projects → Certifications → Contact → Footer
 
-**Key UX detail:** Profile photo uses `skipPhotoAnim` lazy state in Hero.tsx. Checks `!sessionStorage.getItem('loaderSeen')` at mount — if true (loader just ran this page load), photo gets `initial={false}` (Framer Motion starts at animate values immediately, no entrance animation). Prevents the loader→hero re-animation jank. Note: `layoutId` approach was considered but not used — `skipPhotoAnim` is the actual implementation.
+**Key UX detail:** Profile photo uses `layoutId="profile-photo"` for shared layout transition from loader → hero.
 
 ### `/projects` — Projects Gallery (app/projects/page.tsx)
 - All 9 projects in a 3-col grid
@@ -253,8 +251,6 @@ User fills form → handleSubmit() → POST https://api.web3forms.com/submit
 - **Hero animation gating:** `sessionStorage.hero_revealed` — prevents hero reveal replay on back-nav
 - **Project ordering:** Featured projects on home are hardcoded by title string in `Projects.tsx` — not by the `featured: true` flag in data (inconsistency, but functionally equivalent)
 - **Bento grid layout:** CSS Grid positions are hardcoded by index (case 0-5) in `getGridClass()` — changing project order requires updating both the `featuredTitles` array and the grid logic
-- **Photo transition:** `skipPhotoAnim = !sessionStorage.getItem('loaderSeen')` in Hero.tsx lazy state. True = loader ran this page load → `initial={false}` on photo motion.div. False = direct navigation → normal spring-in animation
-- **Portfolio fade timing:** `loaderRanThisLoad` state in page.tsx. When true → portfolio-content fade delay = 1.2s (ensures loader exits first). When false → delay = 0 (immediate, no loader running)
 
 ---
 
@@ -469,152 +465,3 @@ Both photos from the same graduation shoot at UMich, cherry blossom backdrop, wh
 - `aboutPageContent` in lib/data.ts is a dead export (never consumed)
 - ProjectModal: no keyboard focus trap
 - Skills.tsx has its own hardcoded skillCategories — does not consume lib/data.ts skills (duplication)
-
----
-
-### [2026-05-26] — Session 3: Full Amber/Gold theme applied
-**Commit:** `95aceb5` — "apply Amber/Gold (#F59E0B) accent — dark charcoal + warm amber"
-
-- All teal (#2dd4bf), orange (#f97316), violet (#a78bfa), coral (#ff6b6b), mint (#20c997) accent colors removed site-wide
-- Single accent color: `#F59E0B` (amber/gold), `rgba(245,158,11,X)` for shadows/glows
-- Files updated: globals.css, ScrollProgress, GlitchText, Navbar, Hero, About, Skills, BackgroundSection, Projects, ProjectModal, Certifications, Contact, app/page.tsx, app/projects/page.tsx
-- Skills proficiency labels (Expert/Proficient/Familiar) removed — clean skill lists only
-- ProjectModal converted from light theme to dark theme (`bg-[#111318]`)
-- OG image (`app/opengraph-image.tsx`) kept white/monochromatic — no amber (intentional for social cards)
-- TypeScript: `npx tsc --noEmit` clean throughout
-
----
-
-### [2026-05-26] — Session 4a: Photo transition fix + loader upgrades
-**Status:** Uncommitted (working tree)
-
-#### Photo transition fix (components/Hero.tsx)
-- Root cause: Hero photo had `initial={{ opacity: 0, scale: 0.88, y: -8 }}` causing re-animation even when loader already showed the photo. Combined with position mismatch (loader photo at viewport center, hero photo at ~33% from top), created visible jank.
-- Fix: Added `skipPhotoAnim` lazy state — checks `!sessionStorage.getItem('loaderSeen')` at Hero mount time. If true (loader ran this session, loaderSeen not yet written), uses `initial={false}` (Framer Motion starts at animate values, no entrance animation).
-- On subsequent same-session visits: `loaderSeen` is set → `skipPhotoAnim = false` → normal spring-in animation.
-
-#### Loader upgrades (app/page.tsx)
-- Added `loaderRanThisLoad` boolean state — set true when loader actually runs (not skipped)
-- **Phase messages:** New `useEffect` watching `progress` → cycles BOOTING_SYSTEM… → LOADING_NEURAL_NETS… → CALIBRATING_ML_MODELS… → INITIALIZING_PORTFOLIO… → DEPLOYMENT_COMPLETE ✓ (amber + bold)
-- **Tech stack pills:** 6 amber pill badges (Python · PyTorch · LangChain · AWS · OpenCV · FastAPI), stagger-animate in at 1.6s, fade out with text on transition
-- Loader exit speed: `duration: 0.8` → `duration: 0.4`
-- Portfolio-content fade-in: `duration: 1.2` → `duration: 0.7, delay: loaderRanThisLoad ? 1.2 : 0` — loader fully clears before hero appears
-
----
-
-### [2026-05-26] — Session 4b: Full mobile responsive pass
-**Status:** Uncommitted (working tree)
-**Files changed:** globals.css, page.tsx, Projects.tsx, About.tsx, Navbar.tsx, Contact.tsx, ProjectModal.tsx
-
-#### globals.css
-- `background-attachment: fixed` removed — broken/flickering on iOS Safari
-- `transform` removed from `* { transition }` — was fighting Framer Motion transforms on mobile
-- `-webkit-tap-highlight-color: transparent` — removes Android blue tap flash on all elements
-- `touch-action: manipulation` on body — eliminates 300ms double-tap zoom delay on iOS/Android
-
-#### page.tsx (loader mobile spacing)
-- All loader spacing changed to `mb-4 sm:mb-original` pattern — fits on 375px × 667px (iPhone 6/SE 2nd gen)
-- Stats grid: `grid-cols-1 md:grid-cols-2` → `grid-cols-2` (was needlessly tall in 1-col on mobile)
-- Stats card padding: `p-8` → `p-4 sm:p-8`
-- Outer loader container: added `py-6 overflow-y-auto` safety net
-
-#### Projects.tsx
-- Big card title: flat `text-[36px]` on all screens → `text-[22px] sm:text-[28px] lg:text-[36px]`
-- Big card description: flat `text-[17px]` → `text-[13px] lg:text-[17px]`
-
-#### About.tsx
-- Removed redundant `px-4` from inner container (section had `px-6` already; was 40px/side on mobile)
-- React fragment key bug fixed: `.map()` used `<>` with keys on children (React ignores them) → replaced with `div className="contents"` wrapper
-
-#### Navbar.tsx
-- Added body scroll lock: `useEffect` sets `document.body.style.overflow = 'hidden'` when mobile drawer open, clears on close
-
-#### Contact.tsx
-- Info cards grid: removed `px-4` (same double-padding fix)
-- Email link: added `break-all` — `yatink@umich.edu` no longer overflows narrow screens
-- Form card: `p-8 md:p-10` → `p-5 sm:p-8 md:p-10`
-
-#### ProjectModal.tsx
-- Mobile bottom-sheet pattern: `items-end sm:items-center`, `rounded-t-[24px] sm:rounded-[32px]`, outer `p-0 sm:p-4 md:p-8`
-- Image header: `min-h-[240px]` → `min-h-[160px] sm:min-h-[220px] lg:min-h-full`
-- Content padding: `p-8 md:p-12` → `p-5 sm:p-8 md:p-10`
-- Close button: `top-8 right-8` → `top-4 right-4 sm:top-8 sm:right-8`
-- Title: added `pt-6 sm:pt-0` to clear close button on mobile, bottom actions gap responsive
-
----
-
-### [2026-05-26] — Session 4c: About section content rewrite + data.ts update
-**Status:** Uncommitted (working tree)
-
-#### components/About.tsx
-- Added `Bot` icon import from lucide-react
-- **Paragraph 1:** Fixed "pursuing MS" → "completed MS from UMich". Added: AI Agents, multimodal RAG, LLM applications, end-to-end shipping framing.
-- **Paragraph 2 (rewritten):** "Right now I'm deep in the agentic AI stack — designing LLM systems that reason, plan, and act. Multi-step AI Agents with tool-use and function calling, LangGraph and LangChain workflows, hybrid RAG + FAISS retrieval." Present tense, active, agent-focused.
-- **4th bullet added (Bot icon):** "Building agentic workflows with LangGraph & LangChain tool-use"
-- **Bullet 3 updated:** "ML · Deep Learning · GenAI · Cloud Deployment" → "RAG · AI Agents · LLMs · Computer Vision · MLOps"
-- **Current-focus tech pills row:** AI Agents · LangGraph · LangChain · RAG + FAISS · LLM APIs · AWS LLMOps · Prompt Engineering
-- **Achievement sub-labels** updated with tech context: "Agentic RAG · FAISS + LangChain", "YOLOv5 · Apache Spark CV pipeline", "XGBoost · feature-engineered churn model", "Serverless LLM bot · AWS Lex + Lambda"
-
-#### lib/data.ts
-- `personalInfo.bio` rewritten: production AI systems, autonomous agents, LangGraph/LangChain, agentic stack, hybrid vector retrieval, present-tense framing
-- `personalInfo.headline` updated: "Building Agentic AI Systems — RAG Pipelines, LLM Agents & Production MLOps"
-
----
-
-### OPEN ITEMS (post session 4)
-- `/analytics` page still not linked in nav
-- No custom domain yet
-- `aboutPageContent` in lib/data.ts is a dead export (never consumed by About.tsx)
-- ProjectModal: no keyboard focus trap (Tab loops outside modal)
-- Skills proficiency labels removed in session 3 — may reconsider later
-- Session 4 changes uncommitted — commit + push pending
-
-
-### [2026-09-13] — Session 5: Repositioning + resume sync + Fortisys experience added
-**Status:** Committed and pushed to main (also carries forward Session 4's previously-uncommitted changes)
-
-**Context:** Yatin's resume now includes a current role (Fortisys, Jan 2026–Present) that was missing from the site entirely, plus updated project metrics. He also asked to broaden his positioning to Data Analyst / Data Scientist / ML Engineer / AI Engineer, while signaling his current focus is applied AI — all copy rewritten in original phrasing, not copied from the resume.
-
-#### lib/data.ts
-- `personalInfo.bio` and `.headline` rewritten around the DA/DS/ML/AI Engineer positioning
-- `experience`: added Fortisys, Inc. entry (Software Engineer Intern, AI/ML, Jan 2026–Present) as the first/most recent role
-- `certifications`: added "LangChain for LLM Application Development" (DeepLearning.AI, 2025); existing 4 certs kept
-- `projects`: rewrote `auto-multimodal-rag` (now reflects hybrid FAISS+BM25 retrieval via LangChain, Gemini 2.0 Flash, offline Llama 3.2 Vision fallback, 45s→8s latency) and `dataset-concierge-bot` (DynamoDB scoring engine, S3/SQS/SNS real-time alerts, 70% faster search across 50+ users) to match resume detail
-
-#### components/GlitchText.tsx
-- ROLES reverted from 3 to 4: Data Analyst, Data Scientist, ML Engineer, AI Engineer (intentional reversal of BUG-R09 — bio now explicitly supports the Data Analyst framing, so it's no longer a mismatch)
-
-#### components/About.tsx
-- Both narrative paragraphs rewritten: para 1 leads with credentials + Fortisys/DataZymes/SmartKnower impact; para 2 states openness to all four target roles with current focus on applied AI
-- Bullet list: Briefcase line now includes Fortisys; Zap line now states the four target roles; Bot line calls out Copilot Studio alongside LangGraph/LangChain
-- Tech pill row: swapped generic "LLM APIs" for "Copilot Studio" (Fortisys' actual stack)
-- Achievement sub-labels tightened to match updated project metrics (hybrid RAG, batched CV inference, SMOTE-balanced churn model)
-- Stats row: AI/ML Internships 2 → 3 (Fortisys added)
-
-#### components/Hero.tsx
-- Credibility line: "Ex-DataZymes" → "Fortisys AI/ML Intern" (was pointing at a past internship while a current, more relevant role existed)
-
-#### components/Skills.tsx
-- Cloud/Applications category: added "Microsoft Copilot Studio · Power Platform · Power BI" and broadened AWS-only line to "Multi-cloud: AWS, Azure & GCP" — the site previously had zero mention of the Microsoft stack that Fortisys work actually uses
-
-#### components/Certifications.tsx
-- Grid now centers a lone last card on its own row when the cert count is odd (needed once the 5th cert was added)
-
-#### app/layout.tsx
-- SEO description, OpenGraph description, Twitter description, and keywords broadened to mention Data Analyst and Agentic AI, matching the new positioning
-
-#### app/page.tsx
-- Footer status line: "Data Scientist / ML Engineer" → "Data Analyst / Scientist / ML & AI Engineer"
-
-#### public/YatinKande_Resume.pdf — BUG FOUND AND FIXED
-- **This file did not exist on disk.** Every download link (Hero CTA, Navbar desktop pill, Navbar mobile drawer) was pointing at a 404. Replaced with Yatin's latest resume PDF.
-
-#### Known limitation hit this session
-- Could not run `npm run build` or `npm run dev` locally to verify — this machine's node_modules is partially iCloud-optimized (dataless placeholders) and the automation bridge used to make these edits cannot force bulk materialization the way Finder's "Download Now" can. Individual source files were verified readable; the dependency tree could not be. **Recommend running `npm run build` once locally (or just watching the Vercel deploy) to confirm a clean build** — Vercel's own build runs in a fresh environment untouched by this local sync issue, so the push itself is not at risk from this limitation.
-
----
-
-### OPEN ITEMS (post session 5)
-- Local `npm run build` unverified this session (see limitation note above) — Vercel deploy is the real gate
-- `/analytics` and `/dashboard` pages still not linked in nav (unchanged, out of scope this session)
-- No custom domain yet

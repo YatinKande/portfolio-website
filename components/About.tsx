@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView, useMotionValue, animate } from "framer-motion";
-import { GraduationCap, Briefcase, TrendingUp, Zap, Bot } from "lucide-react";
+import { GraduationCap, Briefcase, TrendingUp, Zap } from "lucide-react";
 import NextImage from "next/image";
 
 function CountUp({ to, decimals = 0, suffix = "" }: { to: number; decimals?: number; suffix?: string }) {
@@ -26,10 +26,10 @@ function CountUp({ to, decimals = 0, suffix = "" }: { to: number; decimals?: num
 }
 
 const achievements = [
-    { icon: TrendingUp, stat: "84%", label: "Retrieval precision", sub: "Hybrid RAG · FAISS + BM25 via LangChain" },
-    { icon: Zap, stat: "40%", label: "Latency reduction", sub: "YOLOv5 · batched CV inference" },
-    { icon: TrendingUp, stat: "81%", label: "AUC-ROC score", sub: "XGBoost · SMOTE-balanced churn model" },
-    { icon: Zap, stat: "500+", label: "Daily requests", sub: "Serverless chatbot · AWS Lex + Lambda" },
+    { icon: TrendingUp, stat: "84%", label: "Retrieval precision", sub: "Multi-modal RAG system" },
+    { icon: Zap, stat: "40%", label: "Latency reduction", sub: "YOLOv5 CV pipeline" },
+    { icon: TrendingUp, stat: "81%", label: "AUC-ROC score", sub: "XGBoost churn model" },
+    { icon: Zap, stat: "500+", label: "Daily requests", sub: "Serverless AWS chatbot" },
 ];
 
 export default function About() {
@@ -41,7 +41,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-[rgba(13,15,20,0.88)] md:hidden" />
             </div>
 
-            <div className="relative z-10 w-full max-w-6xl mx-auto py-24 md:py-32">
+            <div className="relative z-10 w-full max-w-6xl mx-auto px-4 py-24 md:py-32">
                 <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="flex flex-col items-center mb-14">
                     <h2 className="text-5xl md:text-6xl font-bold text-white mb-4 text-center">About Me</h2>
                     <div className="h-[2px] w-24 bg-[#F59E0B]/50 rounded-full" />
@@ -51,37 +51,25 @@ export default function About() {
                     {/* Left: Narrative */}
                     <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
                         <p className="text-slate-200 text-base md:text-lg leading-relaxed mb-6">
-                            I'm a data scientist and AI/ML engineer with an M.S. in Data Science from the University of Michigan (3.8 GPA). Across internships at Fortisys, DataZymes, and SmartKnower, I've cut computer-vision inference latency by 40%, hit 84% retrieval precision on a production RAG system, and scored 81% AUC-ROC on a churn model that flagged at-risk customers a month before they left.
+                            I build end-to-end ML systems — from distributed Spark pipelines to GenAI RAG architectures. Pursuing my MS in Data Science at UMich (3.8 GPA), I've shipped production ML at DataZymes and SmartKnower, cutting inference latency by 40% and achieving 81% AUC-ROC on churn prediction.
                         </p>
-                        <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6">
-                            That range is intentional — I'm just as comfortable digging into a dataset as a data analyst, building a predictive model as a data scientist, or shipping the finished system as an ML or AI engineer, and I'm open to full-time roles across all four. Right now, most of my energy is going into applied AI: designing multi-step agents with tool-use and function calling, orchestrating LangGraph and LangChain workflows, and building enterprise automation in Microsoft Copilot Studio.
+                        <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-8">
+                            Today I focus on the full stack of modern AI — classical ML, deep learning, computer vision, and large language model systems. I believe the most valuable models are the ones that actually ship.
                         </p>
-                        <ul className="space-y-3 mb-6">
+                        <ul className="space-y-3">
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
                                 <GraduationCap className="size-5 text-[#F59E0B] shrink-0" />
-                                <span>MS Data Science from UMich — 3.8 GPA</span>
+                                <span>MS Data Science at UMich — 3.8 GPA</span>
                             </li>
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
                                 <Briefcase className="size-5 text-[#F59E0B] shrink-0" />
-                                <span>AI/ML experience at Fortisys, DataZymes &amp; SmartKnower</span>
+                                <span>AI/ML Internships at DataZymes &amp; SmartKnower</span>
                             </li>
                             <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
                                 <Zap className="size-5 text-[#F59E0B] shrink-0" />
-                                <span>Open to Data Analyst, Data Scientist, ML &amp; AI Engineer roles</span>
-                            </li>
-                            <li className="flex items-center gap-3 text-white font-medium text-sm md:text-base">
-                                <Bot className="size-5 text-[#F59E0B] shrink-0" />
-                                <span>Currently building agentic AI with LangGraph, LangChain &amp; Copilot Studio</span>
+                                <span>ML · Deep Learning · GenAI · Cloud Deployment</span>
                             </li>
                         </ul>
-                        {/* Current focus tech pills */}
-                        <div className="flex flex-wrap gap-2">
-                            {['AI Agents', 'LangGraph', 'LangChain', 'RAG + FAISS', 'Copilot Studio', 'AWS LLMOps', 'Prompt Engineering'].map(tag => (
-                                <span key={tag} className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider bg-[#F59E0B]/[0.07] border border-[#F59E0B]/15 text-[#F59E0B]/60 rounded-full">
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
                     </motion.div>
 
                     {/* Right: Achievement stats */}
@@ -110,18 +98,18 @@ export default function About() {
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
                     {[
                         { value: 3.8, decimals: 1, label: "UMich GPA" },
-                        { value: 3, decimals: 0, label: "AI/ML Internships" },
+                        { value: 2, decimals: 0, label: "AI/ML Internships" },
                         { value: 10, decimals: 0, suffix: "+", label: "ML and AI Projects" },
                     ].map((stat, i) => (
-                        <div key={i} className="contents">
-                            {i > 0 && <div className="hidden md:block h-12 w-[1px] bg-white/20" />}
-                            <div className="flex flex-col items-center">
+                        <>
+                            {i > 0 && <div key={`div-${i}`} className="hidden md:block h-12 w-[1px] bg-white/20" />}
+                            <div key={`stat-${i}`} className="flex flex-col items-center">
                                 <div className="text-3xl md:text-5xl font-bold text-[#F59E0B]">
                                     <CountUp to={stat.value} decimals={stat.decimals} suffix={stat.suffix || ""} />
                                 </div>
                                 <div className="text-[10px] md:text-xs uppercase tracking-widest text-slate-300 mt-1 font-bold">{stat.label}</div>
                             </div>
-                        </div>
+                        </>
                     ))}
                 </motion.div>
             </div>

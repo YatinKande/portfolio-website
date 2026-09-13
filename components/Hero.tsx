@@ -11,11 +11,6 @@ import GlitchText from "./GlitchText";
 export default function Hero() {
     const [visibleIndices, setVisibleIndices] = useState<number[]>([]);
     const [animComplete, setAnimComplete] = useState(false);
-    // Skip photo entrance animation when coming from the loader (photo already shown there)
-    const [skipPhotoAnim] = useState<boolean>(() => {
-        if (typeof window === 'undefined') return false;
-        return !sessionStorage.getItem('loaderSeen'); // true = loader is running right now
-    });
 
     const { scrollY } = useScroll();
     const photoOpacity = useTransform(scrollY, [0, 500], [1, 0]);
@@ -61,9 +56,9 @@ export default function Hero() {
                 <motion.div style={{ opacity: photoOpacity, y: photoY, scale: photoScale }} className="relative mb-[30px]">
                     <motion.div
                         id="hero-profile-photo"
-                        initial={skipPhotoAnim ? false : { opacity: 0, scale: 0.88, y: -8 }}
+                        initial={{ opacity: 0, scale: 0.88, y: -8 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={skipPhotoAnim ? {} : { duration: 0.9, ease: [0.34, 1.2, 0.64, 1], delay: 0.15 }}
+                        transition={{ duration: 0.9, ease: [0.34, 1.2, 0.64, 1], delay: 0.15 }}
                         className="relative"
                     >
                         <div className="absolute inset-0 rounded-full bg-[#F59E0B]/15 blur-2xl animate-pulse" />
@@ -89,7 +84,7 @@ export default function Hero() {
                     <span className="text-[#F59E0B]/40 font-bold text-[12px]">·</span>
                     <span className="text-[12px] md:text-[13px] font-semibold text-slate-400 uppercase tracking-widest">3.8 GPA</span>
                     <span className="text-[#F59E0B]/40 font-bold text-[12px]">·</span>
-                    <span className="text-[12px] md:text-[13px] font-semibold text-slate-400 uppercase tracking-widest">Fortisys AI/ML Intern</span>
+                    <span className="text-[12px] md:text-[13px] font-semibold text-slate-400 uppercase tracking-widest">Ex-DataZymes</span>
                     <span className="text-[#F59E0B]/40 font-bold text-[12px]">·</span>
                     <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-[12px] font-bold text-[#F59E0B] uppercase tracking-widest">
                         <span className="size-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
